@@ -2,40 +2,9 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { usePassport } from '../context/PassportContext.jsx'
-
-// Simplified India map as SVG paths for major states
-// Coordinates are approximate and artistic — used as decorative map only
-const INDIA_STATES = [
-  { id: 'jammu-kashmir', label: 'J&K', d: 'M 160 60 L 200 55 L 215 75 L 200 95 L 170 90 Z' },
-  { id: 'himachal-pradesh', label: 'HP', d: 'M 200 75 L 225 70 L 235 90 L 215 100 Z' },
-  { id: 'punjab', label: 'PB', d: 'M 180 95 L 210 90 L 215 110 L 190 115 Z' },
-  { id: 'uttarakhand', label: 'UK', d: 'M 220 90 L 255 85 L 262 108 L 232 112 Z' },
-  { id: 'haryana', label: 'HR', d: 'M 195 115 L 220 110 L 222 132 L 198 135 Z' },
-  { id: 'rajasthan', label: 'RJ', d: 'M 155 120 L 210 115 L 215 180 L 160 185 Z' },
-  { id: 'uttar-pradesh', label: 'UP', d: 'M 220 110 L 295 108 L 300 155 L 218 158 Z' },
-  { id: 'bihar', label: 'BR', d: 'M 295 108 L 335 110 L 337 140 L 298 142 Z' },
-  { id: 'west-bengal', label: 'WB', d: 'M 335 108 L 358 115 L 355 175 L 335 180 Z' },
-  { id: 'assam', label: 'AS', d: 'M 360 115 L 410 112 L 408 135 L 358 138 Z' },
-  { id: 'gujarat', label: 'GJ', d: 'M 130 170 L 175 165 L 172 225 L 128 228 Z' },
-  { id: 'madhya-pradesh', label: 'MP', d: 'M 175 155 L 300 152 L 298 210 L 175 215 Z' },
-  { id: 'jharkhand', label: 'JH', d: 'M 298 142 L 340 138 L 342 170 L 300 172 Z' },
-  { id: 'odisha', label: 'OD', d: 'M 300 170 L 355 168 L 350 225 L 302 228 Z' },
-  { id: 'maharashtra', label: 'MH', d: 'M 160 215 L 295 210 L 290 275 L 162 278 Z' },
-  { id: 'chhattisgarh', label: 'CG', d: 'M 295 170 L 340 168 L 340 230 L 297 232 Z' },
-  { id: 'telangana', label: 'TG', d: 'M 232 275 L 300 270 L 298 315 L 232 318 Z' },
-  { id: 'andhra-pradesh', label: 'AP', d: 'M 240 315 L 330 312 L 325 355 L 242 358 Z' },
-  { id: 'karnataka', label: 'KA', d: 'M 185 295 L 255 290 L 252 365 L 183 368 Z' },
-  { id: 'goa', label: 'GA', d: 'M 178 360 L 200 358 L 198 378 L 178 376 Z' },
-  { id: 'kerala', label: 'KL', d: 'M 200 368 L 228 362 L 224 430 L 198 432 Z' },
-  { id: 'tamil-nadu', label: 'TN', d: 'M 240 360 L 285 355 L 282 428 L 240 430 Z' },
-]
+import indiaMapData from '../data/indiaMapData.js'
 
 const FEATURED_SPOTS = [
-  { id: 1, label: 'Taj Mahal', x: 232, y: 135, emoji: '🕌' },
-  { id: 2, label: 'Jaipur', x: 180, y: 148, emoji: '🏯' },
-  { id: 3, label: 'Mumbai', x: 165, y: 252, emoji: '🌆' },
-  { id: 4, label: 'Kerala', x: 210, y: 400, emoji: '🌴' },
-  { id: 5, label: 'Varanasi', x: 275, y: 138, emoji: '🪔' },
 ]
 
 export default function Landing() {
@@ -261,27 +230,32 @@ export default function Landing() {
               }} />
 
               <svg
-                viewBox="100 50 350 420"
+                viewBox={indiaMapData.viewBox}
                 aria-label="Map of India showing major states"
                 role="img"
                 style={{ width: '100%', height: 'auto', filter: 'drop-shadow(0 8px 40px rgba(255,107,43,0.25))' }}
               >
+                {/* Decorative grid lines scaled for 1000x1150 */}
+                <line x1="0" y1="400" x2="1000" y2="400" stroke="rgba(255,255,255,0.03)" strokeWidth="2" />
+                <line x1="0" y1="800" x2="1000" y2="800" stroke="rgba(255,255,255,0.03)" strokeWidth="2" />
+                <line x1="500" y1="0" x2="500" y2="1150" stroke="rgba(255,255,255,0.03)" strokeWidth="2" />
+
                 {/* State paths */}
-                {INDIA_STATES.map(({ id, label, d }) => (
+                {indiaMapData.locations.map(({ id, name, path }) => (
                   <motion.path
                     key={id}
-                    d={d}
+                    d={path}
                     fill="rgba(255,107,43,0.08)"
                     stroke="rgba(255,107,43,0.35)"
-                    strokeWidth="1"
+                    strokeWidth="2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     whileHover={{ fill: 'rgba(255,107,43,0.22)', stroke: 'rgba(255,107,43,0.7)' }}
                     transition={{ duration: 0.3 }}
                     style={{ cursor: 'default' }}
-                    aria-label={label}
+                    aria-label={name}
                   >
-                    <title>{label}</title>
+                    <title>{name}</title>
                   </motion.path>
                 ))}
 
@@ -293,24 +267,19 @@ export default function Landing() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.6 + id * 0.1, type: 'spring', stiffness: 200 }}
                   >
-                    <circle cx={x} cy={y} r="14" fill="rgba(15,14,23,0.85)" stroke="rgba(255,107,43,0.5)" strokeWidth="1.5" />
-                    <text x={x} y={y + 5} textAnchor="middle" fontSize="12">{emoji}</text>
+                    <circle cx={x} cy={y} r="35" fill="rgba(15,14,23,0.85)" stroke="rgba(255,107,43,0.5)" strokeWidth="3" />
+                    <text x={x} y={y + 12} textAnchor="middle" fontSize="30">{emoji}</text>
                     {/* Pulse ring */}
                     <motion.circle
-                      cx={x} cy={y} r="18"
+                      cx={x} cy={y} r="45"
                       fill="none"
                       stroke="rgba(255,107,43,0.4)"
-                      strokeWidth="1"
-                      animate={{ r: [18, 26, 18], opacity: [0.5, 0, 0.5] }}
+                      strokeWidth="2"
+                      animate={{ r: [45, 65, 45], opacity: [0.5, 0, 0.5] }}
                       transition={{ duration: 2.5, repeat: Infinity, delay: id * 0.4 }}
                     />
                   </motion.g>
                 ))}
-
-                {/* Decorative grid lines */}
-                <line x1="100" y1="300" x2="450" y2="300" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="100" y1="200" x2="450" y2="200" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="275" y1="50" x2="275" y2="470" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
               </svg>
             </div>
           </motion.div>

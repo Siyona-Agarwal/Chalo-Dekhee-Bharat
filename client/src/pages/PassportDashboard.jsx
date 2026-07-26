@@ -1,376 +1,490 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { usePassport, deriveLevel } from '../context/PassportContext.jsx'
+import { usePassport } from '../context/PassportContext.jsx'
 import BadgeCard from '../components/BadgeCard.jsx'
 import allBadges from '../data/badges.json'
 
 const LEVEL_COLORS = {
-  'Wanderer':     '#94a3b8',
+  'Wanderer':     '#64748b',
   'Explorer':     '#38bdf8',
-  'Adventurer':   '#a78bfa',
-  'Bharat Yatri': '#fbbf24',
+  'Adventurer':   '#8b5cf6',
+  'Bharat Yatri': '#d97706',
 }
 
-const ERA_COLORS = {
-  'ancient':  '#f59e0b',
-  'medieval': '#FF6B2B',
-  'freedom':  '#138808',
-  'modern':   '#38bdf8',
+const ERA_INK_COLORS = {
+  'ancient':  'rgba(217, 119, 6, 0.75)',
+  'medieval': 'rgba(220, 38, 38, 0.75)',
+  'freedom':  'rgba(22, 163, 74, 0.75)',
+  'modern':   'rgba(2, 132, 199, 0.75)',
 }
+
+const bioPaperBg = `
+  repeating-linear-gradient(45deg, rgba(56,189,248,0.03) 0, rgba(56,189,248,0.03) 1px, transparent 1px, transparent 10px),
+  repeating-linear-gradient(-45deg, rgba(244,114,182,0.02) 0, rgba(244,114,182,0.02) 1px, transparent 1px, transparent 10px),
+  #f8fafc
+`
+
+const visaPaperBg = `
+  linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+  #f1f5f9
+`
+
+const Watermark = ({ size, top = '50%', opacity = 0.05 }) => (
+  <img 
+    src="/emblem.svg" alt="" 
+    style={{
+      position: 'absolute', top, left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: `${size}px`, height: 'auto',
+      opacity, pointerEvents: 'none', zIndex: 0
+    }} 
+  />
+)
 
 export default function PassportDashboard() {
-  const { passport, level, removeFromWishlist } = usePassport()
-  const navigate = useNavigate()
+  const { passport, level } = usePassport()
   const xp = passport.xp || 0
-  const levelColor = LEVEL_COLORS[level.name] || '#FF6B2B'
-
+  const levelColor = LEVEL_COLORS[level.name] || '#1e3a8a'
   const earnedBadgeIds = new Set(passport.badges.map(b => b.id))
 
-  return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)', padding: '0 0 80px' }}>
+  const [currentPage, setCurrentPage] = useState(0)
+  const totalPages = 4
+  const [bookState, setBookState] = useState('closed') // 'closed', 'turned', 'open'
+  const isOpen = bookState === 'open'
 
-      {/* Hero header */}
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const updateScale = () => {
+      const availableHeight = window.innerHeight - 100
+      setScale(Math.min(1, availableHeight / 850))
+    }
+    updateScale()
+    window.addEventListener('resize', updateScale)
+    return () => window.removeEventListener('resize', updateScale)
+  }, [])
+
+  const handleOpen = () => {
+    setBookState('turned')
+    setTimeout(() => {
+      setBookState('open')
+      setCurrentPage(1)
+    }, 800)
+  }
+
+  const handleClose = () => {
+    setCurrentPage(0)
+    setBookState('turned')
+    setTimeout(() => {
+      setBookState('closed')
+    }, 800)
+  }
+
+  const handleNext = () => setCurrentPage(p => Math.min(totalPages - 1, p + 1))
+  const handlePrev = () => setCurrentPage(p => Math.max(1, p - 1))
+
+  const renderCover = () => (
+    <div style={{
+      width: '100%', height: '100%',
+      backgroundColor: '#172554',
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E")`,
+      position: 'relative'
+    }}>
       <div style={{
-        background: 'linear-gradient(135deg, rgba(255,107,43,0.1) 0%, rgba(245,158,11,0.06) 100%)',
-        borderBottom: '1px solid rgba(255,107,43,0.12)',
-        padding: '64px 24px 48px',
-        position: 'relative', overflow: 'hidden',
+        position: 'absolute', top: '50%', left: '50%',
+        width: '400px', height: '650px',
+        transform: 'translate(-50%, -50%) rotate(90deg)', // Upright when container is rotated -90
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        padding: '40px', color: '#fbbf24',
+        boxShadow: 'inset -4px 0 12px rgba(0,0,0,0.4), inset 4px 0 8px rgba(255,255,255,0.1)',
+        borderRadius: '12px 4px 4px 12px'
       }}>
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 70% 40%, rgba(255,107,43,0.12) 0%, transparent 55%)',
-        }} />
+        <div style={{ position: 'absolute', left: '12px', top: 0, bottom: 0, width: '6px', background: 'rgba(0,0,0,0.4)', borderRight: '1px solid rgba(255,255,255,0.05)' }} />
+        
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: '600', letterSpacing: '0.1em' }}>भारत गणराज्य</div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: '800', textAlign: 'center', margin: '4px 0 32px', letterSpacing: '0.05em' }}>
+          REPUBLIC OF INDIA
+        </h1>
+        
+        <div style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))', display: 'flex', justifyContent: 'center' }}>
+          <img src="/emblem.svg" alt="State Emblem of India" style={{ width: '80px', height: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(350deg) drop-shadow(0 0 2px rgba(251,191,36,0.5))' }} />
+        </div>
+        <div style={{ fontSize: '0.6rem', letterSpacing: '0.1em', marginTop: '8px', marginBottom: '32px', color: '#fbbf24' }}>सत्यमेव जयते</div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '3rem' }}>📖</span>
-            <div>
-              <h1 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
-                fontWeight: '900', color: '#fff', margin: 0,
-              }}>
-                My Digital Passport
-              </h1>
-              <p style={{
-                fontFamily: 'var(--font-body)',
-                color: 'rgba(255,255,255,0.4)', margin: '4px 0 0',
-                fontSize: '0.9rem',
-              }}>
-                Your complete India exploration record
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
-
-        {/* XP / Level Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          style={{
-            background: 'linear-gradient(135deg, rgba(255,107,43,0.12), rgba(245,158,11,0.06))',
-            border: '1px solid rgba(255,107,43,0.2)',
-            borderRadius: '20px', padding: '32px',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-            <div>
-              <div style={{
-                fontFamily: 'var(--font-body)', fontSize: '0.75rem',
-                color: 'rgba(255,255,255,0.4)',
-                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '6px',
-              }}>
-                Explorer Level
-              </div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '800', color: levelColor }}>
-                {level.name}
-              </div>
-              {level.nextName && (
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginTop: '4px' }}>
-                  Next: {level.nextName} at {level.nextMinXP} XP
-                </div>
-              )}
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{
-                fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: '900',
-                background: 'linear-gradient(135deg, #FF6B2B, #fbbf24)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text', lineHeight: 1,
-              }}>
-                {xp}
-              </div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
-                total XP
-              </div>
-            </div>
-          </div>
-
-          <div style={{ marginTop: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'rgba(255,255,255,0.35)' }}>{level.minXP} XP</span>
-              {level.nextMinXP && <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'rgba(255,255,255,0.35)' }}>{level.nextMinXP} XP</span>}
-            </div>
-            <div style={{
-              height: '8px', background: 'rgba(255,255,255,0.08)',
-              borderRadius: '999px', overflow: 'hidden',
-            }}
-              role="progressbar"
-              aria-valuenow={Math.round(level.progress)}
-              aria-valuemin={0} aria-valuemax={100}
-              aria-label={`Level progress: ${Math.round(level.progress)}%`}
-            >
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${level.progress}%` }}
-                transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-                style={{
-                  height: '100%',
-                  background: `linear-gradient(90deg, ${levelColor}, #FF6B2B)`,
-                  borderRadius: '999px',
-                }}
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Stats grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: '16px',
-          }}
-        >
-          {[
-            { label: 'Badges', value: passport.badges.length, icon: '🏅', color: '#fbbf24' },
-            { label: 'Stamps', value: passport.stamps.length, icon: '🪬', color: '#FF6B2B' },
-            { label: 'Wishlist', value: passport.wishlist.length, icon: '❤️', color: '#f472b6' },
-            { label: 'Itineraries', value: passport.plannerHistory.length, icon: '🗺️', color: '#38bdf8' },
-          ].map(({ label, value, icon, color }) => (
-            <div key={label} style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: '14px', padding: '20px', textAlign: 'center',
-            }}>
-              <div style={{ fontSize: '1.8rem', marginBottom: '8px' }}>{icon}</div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '800', color }}>{value}</div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>{label}</div>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Heritage Stamps */}
-        {passport.stamps.length > 0 && (
-          <Section title="🪬 Heritage Stamps" delay={0.15}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              {passport.stamps.map(stamp => (
-                <div key={stamp.eraId} style={{
-                  display: 'flex', alignItems: 'center', gap: '8px',
-                  background: `rgba(${stamp.eraId === 'ancient' ? '245,158,11' : stamp.eraId === 'medieval' ? '255,107,43' : stamp.eraId === 'freedom' ? '19,136,8' : '56,189,248'},0.12)`,
-                  border: `1px solid rgba(${stamp.eraId === 'ancient' ? '245,158,11' : stamp.eraId === 'medieval' ? '255,107,43' : stamp.eraId === 'freedom' ? '19,136,8' : '56,189,248'},0.3)`,
-                  borderRadius: '12px', padding: '10px 16px',
-                }}>
-                  <span style={{ fontSize: '1.4rem' }}>🪬</span>
-                  <div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: '700', color: '#fff' }}>
-                      {stamp.name}
-                    </div>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)' }}>
-                      {new Date(stamp.earnedAt).toLocaleDateString()}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* Badges */}
-        <Section title="🏅 Badges" delay={0.2}>
-          {passport.badges.length === 0 && allBadges.every(b => !earnedBadgeIds.has(b.id)) ? (
-            <EmptyState
-              icon="🏅"
-              text="Complete museum eras, play games, and explore to earn badges!"
-              action={{ label: 'Go to Museum', to: '/museum' }}
-              onAction={() => navigate('/museum')}
-            />
-          ) : (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '12px',
-            }}>
-              {allBadges.map(badge => (
-                <BadgeCard
-                  key={badge.id}
-                  badge={badge}
-                  earned={earnedBadgeIds.has(badge.id)}
-                />
-              ))}
-            </div>
-          )}
-        </Section>
-
-        {/* Wishlist */}
-        <Section title="❤️ Wishlist" delay={0.25}>
-          {passport.wishlist.length === 0 ? (
-            <EmptyState
-              icon="🤍"
-              text="Bookmark photos in the Gallery to build your travel wishlist!"
-              action={{ label: 'Open Gallery', to: '/gallery' }}
-              onAction={() => navigate('/gallery')}
-            />
-          ) : (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-              gap: '14px',
-            }}>
-              {passport.wishlist.map(item => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{
-                    borderRadius: '14px', overflow: 'hidden',
-                    border: '1px solid rgba(244,114,182,0.2)',
-                    position: 'relative',
-                  }}
-                >
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
-                    onError={e => { e.target.src = `https://placehold.co/300x200/1a1825/FF6B2B?text=${encodeURIComponent(item.title)}` }}
-                  />
-                  <div style={{
-                    padding: '10px 12px',
-                    background: 'rgba(15,14,23,0.8)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  }}>
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: '600', color: '#fff' }}>
-                        {item.title}
-                      </div>
-                      <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)' }}>
-                        {item.region}
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeFromWishlist(item.id)}
-                      aria-label={`Remove ${item.title} from wishlist`}
-                      style={{
-                        background: 'none', border: 'none',
-                        color: '#f472b6', fontSize: '1rem', cursor: 'pointer',
-                      }}
-                    >
-                      ❤️
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </Section>
-
-        {/* Planner History */}
-        <Section title="🗺️ Planner History" delay={0.3}>
-          {passport.plannerHistory.length === 0 ? (
-            <EmptyState
-              icon="🤖"
-              text="Generate your first AI itinerary in the Travel Planner!"
-              action={{ label: 'Open Planner', to: '/planner' }}
-              onAction={() => navigate('/planner')}
-            />
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {passport.plannerHistory.map(item => (
-                <div key={item.id} style={{
-                  background: 'rgba(56,189,248,0.06)',
-                  border: '1px solid rgba(56,189,248,0.15)',
-                  borderRadius: '14px', padding: '16px 20px',
-                  display: 'flex', justifyContent: 'space-between',
-                  alignItems: 'center', flexWrap: 'wrap', gap: '8px',
-                }}>
-                  <div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: '700', color: '#fff' }}>
-                      {item.destination} — {item.days} Days
-                    </div>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', marginTop: '3px' }}>
-                      {item.budget} · {item.style} · {new Date(item.generatedAt).toLocaleDateString()}
-                    </div>
-                  </div>
-                  <span style={{ fontSize: '1.5rem' }}>🗺️</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </Section>
-
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2em' }}>पासपोर्ट</div>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: '800', letterSpacing: '0.2em', margin: '4px 0 0' }}>
+          PASSPORT
+        </h2>
       </div>
     </div>
   )
-}
 
-/* ── Helpers ────────────────────────────────────────────── */
-function Section({ title, delay = 0, children }) {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-    >
-      <h2 style={{
-        fontFamily: 'var(--font-display)', fontSize: '1.1rem',
-        fontWeight: '700', color: '#fff',
-        margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: '8px',
-      }}>
-        {title}
-      </h2>
-      {children}
-    </motion.section>
-  )
-}
+  const renderTopPageContent = () => {
+    if (currentPage === 1) {
+      return (
+        <div style={{
+          width: '100%', height: '100%', background: bioPaperBg, borderBottom: '1px solid rgba(0,0,0,0.2)',
+          padding: '32px', position: 'relative', overflow: 'hidden',
+          boxShadow: 'inset 0 -10px 20px rgba(0,0,0,0.1)'
+        }}>
+          <Watermark size={100} top="40%" opacity={0.06} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px', opacity: 0.8, position: 'relative', zIndex: 1 }}>
+            <img src="/emblem.svg" alt="Emblem" style={{ width: '60px', height: 'auto', filter: 'opacity(0.8)' }} />
+            <div style={{ fontFamily: 'var(--font-body)', color: '#1e3a8a', fontSize: '0.7rem', fontWeight: '600', lineHeight: 1.6, textAlign: 'justify' }}>
+              इसके द्वारा, भारत गणराज्य के राष्ट्रपति के नाम पर, उन सब से जिनका इस बात से सरोकार हो, यह प्रार्थना एवं अपेक्षा की जाती है कि वे वाहक को बिना रोक-टोक, आजादी से आने-जाने दें, और उसे हर तरह की ऐसी सहायता और सुरक्षा प्रदान करें जिसकी उसे आवश्यकता हो ।<br/><br/>
+              THESE ARE TO REQUEST AND REQUIRE IN THE NAME OF THE PRESIDENT OF THE REPUBLIC OF INDIA ALL THOSE WHOM IT MAY CONCERN TO ALLOW THE BEARER TO PASS FREELY WITHOUT LET OR HINDRANCE, AND TO AFFORD HIM OR HER, EVERY ASSISTANCE AND PROTECTION OF WHICH HE OR SHE MAY STAND IN NEED.
+            </div>
+          </div>
+        </div>
+      )
+    }
+    
+    const title = currentPage === 2 ? 'Immigration Stamps' : 'Special Visas'
+    const content = currentPage === 2 ? renderStampsContent()[0] : renderBadgesContent()[0]
+    
+    return (
+      <div style={{ width: '100%', height: '100%', background: visaPaperBg, backgroundSize: '100px 100px', borderBottom: '1px solid rgba(0,0,0,0.15)', position: 'relative', boxShadow: 'inset 0 -10px 20px rgba(0,0,0,0.08)' }}>
+        <Watermark size={120} opacity={0.05} />
+        <div style={{ position: 'absolute', bottom: '12px', width: '100%', textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.2em' }}>
+          वीजा / VISAS
+        </div>
+        <div style={{ padding: '24px', height: '100%' }}>
+          <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: '700', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase', letterSpacing: '0.2em', textAlign: 'center' }}>
+            {title}
+          </h3>
+          {content}
+        </div>
+      </div>
+    )
+  }
 
-function EmptyState({ icon, text, action, onAction }) {
+  const renderBottomPageContent = () => {
+    if (currentPage === 1) {
+      return (
+        <div style={{
+          width: '100%', height: '100%', background: bioPaperBg, padding: '24px 32px',
+          boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.08)', position: 'relative', overflow: 'hidden'
+        }}>
+          <Watermark size={100} top="40%" opacity={0.06} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px', marginBottom: '16px', position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: '800', color: '#1e3a8a', margin: 0 }}>
+              भारत गणराज्य REPUBLIC OF INDIA
+            </h2>
+          </div>
+          
+          <div style={{ display: 'flex', gap: '24px', position: 'relative', zIndex: 1 }}>
+            <div style={{
+              width: '130px', height: '170px', border: '1px solid #94a3b8',
+              background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+              <div style={{ fontSize: '4rem', opacity: 0.2 }}>👤</div>
+            </div>
+            
+            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignContent: 'start', fontFamily: 'var(--font-body)' }}>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>टाईप / Type</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>P</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>राष्ट्र कोड / Country Code</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>IND</div></div>
+              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>उपनाम / Surname</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>EXPLORER</div></div>
+              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>दिया गया नाम / Given Name(s)</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>{level.name.toUpperCase()}</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>राष्ट्रीयता / Nationality</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>INDIAN</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>कुल एक्स.पी. / Total XP</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>{xp}</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>जारी करने का स्थान / Place of Issue</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>CHALO DEKHE BHARAT</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>जारी करने की तिथि / Date of Issue</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>{new Date().toLocaleDateString('en-GB')}</div></div>
+            </div>
+          </div>
+          
+          <div style={{
+            marginTop: '16px', fontFamily: 'monospace', fontSize: '1.1rem',
+            color: '#1e3a8a', letterSpacing: '0.15em', fontWeight: '700', lineHeight: 1.4,
+            position: 'relative', zIndex: 1
+          }}>
+            P&lt;INDEXPLORER&lt;&lt;{level.name.toUpperCase().replace(' ', '&lt;')}&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br/>
+            {xp.toString().padStart(8, '0')}&lt;4IND2607264M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06
+          </div>
+        </div>
+      )
+    }
+
+    const content = currentPage === 2 ? renderStampsContent()[1] : renderBadgesContent()[1]
+    
+    return (
+      <div style={{ width: '100%', height: '100%', background: visaPaperBg, backgroundSize: '100px 100px', position: 'relative', boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.08)' }}>
+        <Watermark size={120} opacity={0.05} />
+        <div style={{ position: 'absolute', bottom: '12px', width: '100%', textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.2em' }}>
+          वीजा / VISAS
+        </div>
+        <div style={{ padding: '24px', height: '100%' }}>
+          {content}
+        </div>
+      </div>
+    )
+  }
+
+  const renderStampsContent = () => {
+    if (passport.stamps.length === 0) return [<div key="1" style={{textAlign: 'center', color: '#94a3b8', marginTop: '40px'}}>No stamps yet.</div>, <div key="2"/>]
+    
+    const topStamps = passport.stamps.slice(0, Math.ceil(passport.stamps.length / 2))
+    const bottomStamps = passport.stamps.slice(Math.ceil(passport.stamps.length / 2))
+
+    const renderStampList = (stamps) => (
+      <div style={{ position: 'relative', width: '100%', height: 'calc(100% - 30px)' }}>
+        {stamps.map((stamp, i) => {
+          const top = `${10 + (i * 30) % 50}%`
+          const left = `${10 + (i * 40) % 70}%`
+          const rotate = `${(i * 47) % 60 - 30}deg`
+          const color = ERA_INK_COLORS[stamp.eraId] || 'rgba(15,23,42,0.7)'
+          return (
+            <motion.div
+              key={stamp.name}
+              initial={{ opacity: 0, scale: 1.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', delay: i * 0.1 }}
+              style={{
+                position: 'absolute', top, left, transform: `rotate(${rotate})`,
+                border: `2px solid ${color}`, borderRadius: '12px',
+                padding: '8px 12px', color, mixBlendMode: 'multiply',
+                display: 'inline-block', textAlign: 'center'
+              }}
+            >
+              <div style={{ fontSize: '0.55rem', fontWeight: '800', letterSpacing: '0.05em' }}>MUSEUM ENTRY</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase', margin: '4px 0', borderTop: `1px solid ${color}`, borderBottom: `1px solid ${color}` }}>{stamp.name}</div>
+              <div style={{ fontSize: '0.5rem' }}>{new Date(stamp.earnedAt).toLocaleDateString('en-GB')}</div>
+            </motion.div>
+          )
+        })}
+      </div>
+    )
+    return [renderStampList(topStamps), renderStampList(bottomStamps)]
+  }
+
+  const renderBadgesContent = () => {
+    return [
+      <div key="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginTop: '16px' }}>
+        {allBadges.slice(0, 4).map(badge => {
+          const earned = earnedBadgeIds.has(badge.id)
+          return (
+            <div key={badge.id} style={{
+              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '12px 8px',
+              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
+              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent'
+            }}>
+              <div style={{ fontSize: '1.8rem' }}>{badge.icon}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', fontWeight: '700', color: '#1e3a8a', marginTop: '4px' }}>{badge.name}</div>
+            </div>
+          )
+        })}
+      </div>,
+      <div key="2" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+        {allBadges.slice(4, 8).map(badge => {
+          const earned = earnedBadgeIds.has(badge.id)
+          return (
+            <div key={badge.id} style={{
+              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '12px 8px',
+              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
+              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent'
+            }}>
+              <div style={{ fontSize: '1.8rem' }}>{badge.icon}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', fontWeight: '700', color: '#1e3a8a', marginTop: '4px' }}>{badge.name}</div>
+            </div>
+          )
+        })}
+      </div>
+    ]
+  }
+
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.03)',
-      border: '1px dashed rgba(255,255,255,0.1)',
-      borderRadius: '14px', padding: '32px',
-      textAlign: 'center',
+      height: 'calc(100vh - 64px)', background: 'var(--color-deep-900)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      padding: '40px 24px', overflow: 'hidden', position: 'relative'
     }}>
-      <div style={{ fontSize: '2rem', marginBottom: '10px' }}>{icon}</div>
-      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', margin: '0 0 16px' }}>
-        {text}
-      </p>
-      {action && (
-        <button
-          onClick={onAction}
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%, rgba(255,107,43,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <AnimatePresence>
+        {bookState === 'closed' && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            onClick={handleOpen}
+            style={{
+              position: 'absolute', top: '50px', zIndex: 50,
+              padding: '12px 32px', background: '#FF6B2B', border: 'none', color: '#fff',
+              borderRadius: '999px', fontFamily: 'var(--font-display)', fontSize: '1rem',
+              fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 12px rgba(255,107,43,0.4)'
+            }}
+          >
+            Open Passport
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <div style={{
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
+        transition: 'transform 0.3s'
+      }}>
+        <motion.div
+          animate={{
+            rotateZ: bookState === 'closed' ? -90 : 0,
+            y: bookState === 'open' ? 200 : 0
+          }}
+          transition={{ duration: 0.6, type: 'tween', ease: 'easeInOut' }}
           style={{
-            padding: '8px 20px', borderRadius: '10px',
-            border: '1px solid rgba(255,107,43,0.4)',
-            background: 'transparent', color: '#FF6B2B',
-            fontFamily: 'var(--font-body)', fontSize: '0.87rem',
-            fontWeight: '600', cursor: 'pointer',
+            width: '650px', height: '400px',
+            position: 'relative', perspective: '2500px',
+            zIndex: 10
           }}
         >
-          {action.label}
-        </button>
-      )}
+          {/* Bottom Half (Identity / Visa Page) */}
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 1,
+            background: '#cbd5e1', padding: '0 2px 2px 2px',
+            borderRadius: '0 0 12px 12px',
+            boxShadow: bookState === 'open' ? '0 25px 50px -12px rgba(0,0,0,0.5)' : 'none',
+            transition: 'box-shadow 0.6s'
+          }}>
+            <div style={{ width: '100%', height: '100%', borderRadius: '0 0 10px 10px', overflow: 'hidden' }}>
+              <AnimatePresence mode="wait">
+                {currentPage > 0 && (
+                  <motion.div
+                    key={currentPage}
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    {renderBottomPageContent()}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Top Half (Cover / Preamble) */}
+          <motion.div
+            animate={{ rotateX: bookState === 'open' ? 180 : 0 }}
+            transition={{ duration: 0.8, type: 'tween', ease: 'easeInOut', delay: bookState === 'open' ? 0.2 : 0 }}
+            style={{
+              position: 'absolute', inset: 0, zIndex: 10,
+              transformOrigin: 'top center', transformStyle: 'preserve-3d'
+            }}
+          >
+            {/* Front Face: The Cover */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+              borderRadius: '12px 12px 12px 12px', overflow: 'hidden',
+              boxShadow: bookState === 'closed' ? '-20px 0 40px rgba(0,0,0,0.5)' : 'none',
+            }}>
+              {renderCover()}
+            </div>
+
+            {/* Back Face: The Top Page (Preamble/Visas) */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateX(180deg)',
+              background: '#cbd5e1', padding: '2px 2px 0 2px',
+              borderRadius: '12px 12px 0 0', overflow: 'hidden'
+            }}>
+              <div style={{ width: '100%', height: '100%', borderRadius: '10px 10px 0 0', overflow: 'hidden' }}>
+                <AnimatePresence mode="wait">
+                  {currentPage > 0 && (
+                    <motion.div
+                      key={currentPage}
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ width: '100%', height: '100%' }}
+                    >
+                      {renderTopPageContent()}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </motion.div>
+
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Close Button - Bottom Right */}
+            <motion.button
+              initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
+              onClick={handleClose}
+              style={{
+                position: 'absolute', bottom: '40px', right: '40px', zIndex: 50,
+                padding: '12px 24px', borderRadius: '8px',
+                background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+                color: '#fff', fontFamily: 'var(--font-display)', cursor: 'pointer',
+                backdropFilter: 'blur(10px)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                fontWeight: '600'
+              }}
+            >
+              Close
+            </motion.button>
+
+            {/* Prev Button - Middle Left */}
+            <motion.button
+              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+              onClick={handlePrev}
+              disabled={currentPage <= 1}
+              style={{
+                position: 'absolute', top: '50%', left: '40px', transform: 'translateY(-50%)', zIndex: 50,
+                padding: '16px 24px', borderRadius: '12px',
+                background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+                color: '#fff', fontFamily: 'var(--font-display)', fontSize: '1.2rem',
+                cursor: currentPage <= 1 ? 'default' : 'pointer',
+                opacity: currentPage <= 1 ? 0.3 : 1,
+                backdropFilter: 'blur(10px)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+              }}
+            >
+              ← Prev
+            </motion.button>
+
+            {/* Next Button - Middle Right */}
+            <motion.button
+              initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
+              onClick={handleNext}
+              disabled={currentPage >= totalPages - 1}
+              style={{
+                position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', zIndex: 50,
+                padding: '16px 24px', borderRadius: '12px',
+                background: currentPage < totalPages - 1 ? '#FF6B2B' : 'rgba(255,255,255,0.1)',
+                border: `1px solid ${currentPage < totalPages - 1 ? '#FF6B2B' : 'rgba(255,255,255,0.2)'}`,
+                color: '#fff', fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: '700',
+                cursor: currentPage < totalPages - 1 ? 'pointer' : 'default',
+                opacity: currentPage < totalPages - 1 ? 1 : 0.3,
+                boxShadow: currentPage < totalPages - 1 ? '0 8px 20px rgba(255,107,43,0.4)' : '0 4px 12px rgba(0,0,0,0.2)'
+              }}
+            >
+              Next →
+            </motion.button>
+
+            {/* Page Indicators - Bottom Center */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
+              style={{ 
+                position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 50,
+                display: 'flex', gap: '12px', background: 'rgba(0,0,0,0.4)', padding: '12px 24px',
+                borderRadius: '999px', backdropFilter: 'blur(10px)'
+              }}
+            >
+              {[1, 2, 3].map(page => (
+                <div key={page} style={{
+                  width: '10px', height: '10px', borderRadius: '50%',
+                  background: currentPage === page ? '#FF6B2B' : 'rgba(255,255,255,0.3)',
+                  boxShadow: currentPage === page ? '0 0 10px #FF6B2B' : 'none',
+                  transition: 'background 0.3s'
+                }} />
+              ))}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
