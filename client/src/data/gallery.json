@@ -1,0 +1,167 @@
+[
+  {
+    "id": "gal-001",
+    "category": "Heritage",
+    "title": "Taj Mahal at Dawn",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg",
+    "nightImageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/Taj_Mahal_Night_View.jpg",
+    "region": "Agra, Uttar Pradesh",
+    "description": "The iconic marble mausoleum glows pink at dawn, a testament to Mughal architectural genius and eternal love.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-002",
+    "category": "Heritage",
+    "title": "Amber Fort, Jaipur",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Amber_Fort_Jaipur.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Amber_Fort_Jaipur.jpg",
+    "nightImageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Amber_Fort_at_night.jpg",
+    "region": "Jaipur, Rajasthan",
+    "description": "Perched atop the Aravalli hills, Amber Fort's golden sandstone walls mirror the city's royal heritage.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-003",
+    "category": "Heritage",
+    "title": "Mysore Palace Illuminated",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mysore_Palace_Morning.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mysore_Palace_Morning.jpg",
+    "nightImageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Mysore_Palace_Illuminated_Dussehra.jpg",
+    "region": "Mysuru, Karnataka",
+    "description": "On Sunday evenings, over 96,000 light bulbs illuminate the Mysore Palace, creating one of India's most spectacular night sights.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-004",
+    "category": "Heritage",
+    "title": "Hampi Virupaksha Temple",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/Hampi_virupaksha_temple.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/Hampi_virupaksha_temple.jpg",
+    "nightImageUrl": null,
+    "region": "Hampi, Karnataka",
+    "description": "The ancient Virupaksha Temple has been in continuous worship since the 7th century CE, surrounded by the surreal boulder landscape of Hampi.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-005",
+    "category": "Nature",
+    "title": "Valley of Flowers, Uttarakhand",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Valley_of_Flowers_National_Park.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Valley_of_Flowers_National_Park.jpg",
+    "nightImageUrl": null,
+    "region": "Chamoli, Uttarakhand",
+    "description": "A UNESCO World Heritage Site, this remote Himalayan valley blooms with hundreds of wild alpine flower species every monsoon.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-006",
+    "category": "Nature",
+    "title": "Dal Lake Sunrise, Kashmir",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Dal_Lake_Sunrise.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Dal_Lake_Sunrise.jpg",
+    "nightImageUrl": null,
+    "region": "Srinagar, Jammu & Kashmir",
+    "description": "Shikara boats glide through the still morning waters of Dal Lake as the Zabarwan mountains catch the first light of day.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-007",
+    "category": "Nature",
+    "title": "Munnar Tea Gardens",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Munnar_hillstation_kerala.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Munnar_hillstation_kerala.jpg",
+    "nightImageUrl": null,
+    "region": "Munnar, Kerala",
+    "description": "Rolling emerald hills blanketed in tea bushes at 1,600 metres elevation — Munnar's tea estates produce some of India's finest teas.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-008",
+    "category": "Wildlife",
+    "title": "Bengal Tiger, Ranthambore",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/Tiger_in_Ranthambhore.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/Tiger_in_Ranthambhore.jpg",
+    "nightImageUrl": null,
+    "region": "Sawai Madhopur, Rajasthan",
+    "description": "Ranthambore National Park is one of India's best places to spot the Bengal tiger in the wild, often seen near the historic fort ruins.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-009",
+    "category": "Wildlife",
+    "title": "Flamingos at Thol Lake",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Lesser_Flamingos_in_Navi_Mumbai.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Lesser_Flamingos_in_Navi_Mumbai.jpg",
+    "nightImageUrl": null,
+    "region": "Thol, Gujarat",
+    "description": "Every winter, thousands of lesser flamingos turn the wetlands of Gujarat a brilliant pink, one of India's most iconic wildlife spectacles.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-010",
+    "category": "Food",
+    "title": "Hyderabadi Biryani",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/Hyderabadi_Biryani.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/Hyderabadi_Biryani.jpg",
+    "nightImageUrl": null,
+    "region": "Hyderabad, Telangana",
+    "description": "Dum-cooked over slow coal fire, Hyderabadi Biryani is a UNESCO-recognized intangible cultural heritage — layers of saffron rice, tender meat, and kewra water.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-011",
+    "category": "Food",
+    "title": "Chole Bhature, Delhi Streets",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Chole_Bhature.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Chole_Bhature.jpg",
+    "nightImageUrl": null,
+    "region": "Old Delhi, Delhi",
+    "description": "Puffed golden bhatura paired with spiced chickpea curry — a Delhi street-food institution served since the 1950s at Sitaram Diwan Chand.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-012",
+    "category": "Food",
+    "title": "Kerala Sadya on Banana Leaf",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Onam_Sadhya.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Onam_Sadhya.jpg",
+    "nightImageUrl": null,
+    "region": "Thrissur, Kerala",
+    "description": "A traditional Onam Sadya is a 26-course feast served on a fresh banana leaf — each dish placed in a specific position according to centuries-old tradition.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-013",
+    "category": "Festivals",
+    "title": "Holi — Festival of Colours",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Holi_Festival_of_Colors.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Holi_Festival_of_Colors.jpg",
+    "nightImageUrl": null,
+    "region": "Mathura, Uttar Pradesh",
+    "description": "Celebrated in Mathura and Vrindavan with particular intensity, Holi marks the triumph of good over evil and the arrival of spring with clouds of vibrant colour powder.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-014",
+    "category": "Festivals",
+    "title": "Diwali — Varanasi Ghats",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Dev_Deepawali_Varanasi.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Dev_Deepawali_Varanasi.jpg",
+    "nightImageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Dev_Deepawali_Varanasi.jpg",
+    "region": "Varanasi, Uttar Pradesh",
+    "description": "During Dev Deepawali (Diwali of the Gods), the 84 ghats of Varanasi are lit by over a million earthen lamps reflected in the Ganges — a vision of timeless devotion.",
+    "hasDayNight": false
+  },
+  {
+    "id": "gal-015",
+    "category": "Festivals",
+    "title": "Durga Puja Pandal, Kolkata",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Durga_Puja_Kolkata.jpg",
+    "dayImageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Durga_Puja_Kolkata.jpg",
+    "nightImageUrl": null,
+    "region": "Kolkata, West Bengal",
+    "description": "Kolkata's Durga Puja transforms the city into the world's largest open-air art installation — thousands of themed pandals (pavilions) compete for the most spectacular installation.",
+    "hasDayNight": false
+  }
+]
