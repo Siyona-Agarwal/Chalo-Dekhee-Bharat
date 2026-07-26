@@ -436,7 +436,7 @@ export default function Landing() {
           textAlign: 'center',
         }}>
           {[
-            { value: '28+', label: 'States to Discover' },
+            { value: '28', label: 'States to Discover' },
             { value: '60+', label: 'Historical Artifacts' },
             { value: '3', label: 'Mini-Games' },
             { value: '∞', label: 'AI Itineraries' },

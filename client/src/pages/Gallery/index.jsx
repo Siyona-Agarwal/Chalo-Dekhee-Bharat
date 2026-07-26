@@ -49,24 +49,17 @@ export default function Gallery() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }}>
-      <div
-        style={{
-          position: 'relative',
-          padding: '72px 24px 48px',
-          textAlign: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            background:
-              'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.09) 0%, transparent 55%), radial-gradient(ellipse at 70% 70%, rgba(56,189,248,0.07) 0%, transparent 50%)',
-          }}
-        />
+    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }} className="indian-motif-bg">
+
+      {/* Hero */}
+      <div style={{
+        position: 'relative', padding: '72px 24px 48px',
+        textAlign: 'center', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.09) 0%, transparent 55%), radial-gradient(ellipse at 70% 70%, rgba(56,189,248,0.07) 0%, transparent 50%)',
+        }} />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -155,10 +148,9 @@ export default function Gallery() {
                 padding: '7px 18px',
                 borderRadius: '10px',
                 border: 'none',
-                background:
-                  activeCategory === category
-                    ? 'linear-gradient(135deg, #FF6B2B, #f59e0b)'
-                    : 'rgba(255,255,255,0.06)',
+                background: activeCategory === category
+                  ? 'linear-gradient(135deg, var(--color-terracotta-500), var(--color-saffron-500))'
+                  : 'rgba(255,255,255,0.06)',
                 color: activeCategory === category ? '#fff' : 'rgba(255,255,255,0.55)',
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.87rem',
@@ -262,7 +254,7 @@ function LegacyPhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
             transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{ width: '100%', display: 'block', objectFit: 'cover' }}
             onError={(e) => {
-              e.target.src = `https://placehold.co/400x300/1a1825/FF6B2B?text=${encodeURIComponent(photo.title)}`
+              e.target.src = `https://placehold.co/400x300/1a1825/cc4e36?text=${encodeURIComponent(photo.title)}`
             }}
           />
           <div

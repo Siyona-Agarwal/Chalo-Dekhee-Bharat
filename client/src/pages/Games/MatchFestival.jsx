@@ -1,12 +1,8 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useXP } from '../../hooks/useXP.js'
 import festivalsData from '../../data/festivals.json'
-import statesData from '../../data/states.json'
 import { GameShell, GameComplete } from './GuessMonument.jsx'
-
-// Build a clean pairing set: {festival, state} — pick 6 pairs
-const PAIR_COUNT = 6
 
 function shuffle(arr) {
   const a = [...arr]
@@ -20,8 +16,12 @@ function shuffle(arr) {
 export default function MatchFestival({ onBack, onComplete }) {
   const { addXP } = useXP()
 
-  // Pick PAIR_COUNT festival-state pairs with UNIQUE states
+  const [difficulty, setDifficulty] = useState(null)
+  
+  const PAIR_COUNT = difficulty === 'hard' ? 8 : difficulty === 'medium' ? 6 : 4;
+
   const pairs = useMemo(() => {
+    if (!difficulty) return []
     const shuffled = shuffle(festivalsData)
     const uniquePairs = []
     const usedStates = new Set()
@@ -38,18 +38,33 @@ export default function MatchFestival({ onBack, onComplete }) {
       }
     }
     return uniquePairs
-  }, [])
+  }, [difficulty, PAIR_COUNT])
 
-  // Build left (festivals) and right (states) columns
   const leftItems = useMemo(() => shuffle(pairs.map(p => ({ id: p.festivalId, label: p.festivalName, type: 'festival' }))), [pairs])
   const rightItems = useMemo(() => shuffle(pairs.map(p => ({ id: p.stateId, label: p.stateLabel, type: 'state' }))), [pairs])
 
-  const [selectedLeft, setSelectedLeft] = useState(null)   // festival id
-  const [selectedRight, setSelectedRight] = useState(null) // state id
-  const [matched, setMatched] = useState(new Set())         // festivalIds that are correctly matched
-  const [wrongPair, setWrongPair] = useState(null)          // {left, right} that flashed wrong
+  const [selectedLeft, setSelectedLeft] = useState(null)   
+  const [selectedRight, setSelectedRight] = useState(null) 
+  const [matched, setMatched] = useState(new Set())         
+  const [wrongPair, setWrongPair] = useState(null)          
   const [finished, setFinished] = useState(false)
   const [score, setScore] = useState(0)
+
+  // Timer logic for Hard mode
+  const [timeLeft, setTimeLeft] = useState(45)
+
+  useEffect(() => {
+    if (difficulty === 'hard' && !finished && timeLeft > 0) {
+      const timerId = setInterval(() => {
+        setTimeLeft(prev => prev - 1)
+      }, 1000)
+      return () => clearInterval(timerId)
+    } else if (difficulty === 'hard' && timeLeft === 0 && !finished) {
+      // Time up!
+      setFinished(true)
+      onComplete(score, PAIR_COUNT, difficulty)
+    }
+  }, [difficulty, finished, timeLeft, onComplete, score, PAIR_COUNT])
 
   const handleLeft = useCallback((id) => {
     if (matched.has(id)) return
@@ -60,12 +75,10 @@ export default function MatchFestival({ onBack, onComplete }) {
 
   const handleRight = useCallback((stateId) => {
     if (!selectedLeft) return
-    // Find the pair for selectedLeft
     const pair = pairs.find(p => p.festivalId === selectedLeft)
     if (!pair) return
 
     if (pair.stateId === stateId) {
-      // Correct!
       addXP(15, `Matched: ${pair.festivalName}`)
       setScore(s => s + 1)
       const newMatched = new Set([...matched, selectedLeft])
@@ -76,17 +89,16 @@ export default function MatchFestival({ onBack, onComplete }) {
       if (newMatched.size >= PAIR_COUNT) {
         setTimeout(() => {
           setFinished(true)
-          onComplete(PAIR_COUNT, PAIR_COUNT)
+          onComplete(PAIR_COUNT, PAIR_COUNT, difficulty)
         }, 600)
       }
     } else {
-      // Wrong!
       setWrongPair({ left: selectedLeft, right: stateId })
       setSelectedLeft(null)
       setSelectedRight(null)
       setTimeout(() => setWrongPair(null), 800)
     }
-  }, [selectedLeft, pairs, matched, addXP, onComplete])
+  }, [selectedLeft, pairs, matched, addXP, onComplete, difficulty, PAIR_COUNT])
 
   const getLeftBg = (id) => {
     if (matched.has(id)) return { bg: 'rgba(19,136,8,0.15)', border: 'rgba(19,136,8,0.4)', color: '#4ade80' }
@@ -96,7 +108,6 @@ export default function MatchFestival({ onBack, onComplete }) {
   }
 
   const getRightBg = (id) => {
-    // Find if any matched pair maps to this state
     const isMatched = [...matched].some(festId => {
       const p = pairs.find(pp => pp.festivalId === festId)
       return p?.stateId === id
@@ -107,13 +118,86 @@ export default function MatchFestival({ onBack, onComplete }) {
     return { bg: 'rgba(255,255,255,0.04)', border: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)' }
   }
 
+  if (!difficulty) {
+    return (
+      <GameShell title="Match Festivals to States" emoji="🎊" onBack={onBack} progress={0} total={6} score={0}>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{ textAlign: 'center', padding: '20px 0' }}
+        >
+          <h2 style={{ fontFamily: 'var(--font-display)', color: '#fff', marginBottom: '10px' }}>Select Difficulty</h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '30px' }}>Link the vibrant festivals of India to their home states.</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px', margin: '0 auto' }}>
+            <DifficultyButton
+              title="Easy: Casual"
+              desc="Match 4 pairs. No rush."
+              onClick={() => setDifficulty('easy')}
+              color="#a78bfa"
+            />
+            <DifficultyButton
+              title="Medium: Standard"
+              desc="Match 6 pairs. Take your time."
+              onClick={() => setDifficulty('medium')}
+              color="#38bdf8"
+            />
+            <DifficultyButton
+              title="Hard: Expert"
+              desc="Match 8 pairs within 45 seconds!"
+              onClick={() => {
+                setDifficulty('hard')
+                setTimeLeft(45)
+              }}
+              color="#f472b6"
+            />
+          </div>
+        </motion.div>
+      </GameShell>
+    )
+  }
+
   if (finished) {
-    return <GameComplete title="Match Festivals" score={score} total={PAIR_COUNT} onBack={onBack} onReplay={() => window.location.reload()} emoji="🎊" />
+    return <GameComplete title="Match Festivals" score={score} total={PAIR_COUNT} onBack={onBack} onReplay={() => {
+      setDifficulty(null)
+      setFinished(false)
+      setScore(0)
+      setMatched(new Set())
+      setSelectedLeft(null)
+      setSelectedRight(null)
+      setTimeLeft(45)
+    }} emoji="🎊" />
   }
 
   return (
     <GameShell title="Match Festivals to States" emoji="🎊" onBack={onBack}
       progress={matched.size} total={PAIR_COUNT} score={matched.size}>
+
+      {difficulty === 'hard' && (
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <div style={{
+            display: 'inline-block',
+            padding: '8px 16px',
+            background: timeLeft <= 10 ? 'rgba(239,68,68,0.2)' : 'rgba(244,114,182,0.1)',
+            border: `1px solid ${timeLeft <= 10 ? '#ef4444' : 'rgba(244,114,182,0.3)'}`,
+            borderRadius: '20px',
+            color: timeLeft <= 10 ? '#f87171' : '#f472b6',
+            fontFamily: 'var(--font-display)',
+            fontWeight: '700',
+            fontSize: '1.2rem',
+            animation: timeLeft <= 10 ? 'pulse 1s infinite' : 'none'
+          }}>
+            ⏱️ {timeLeft}s
+          </div>
+          <style>{`
+            @keyframes pulse {
+              0% { opacity: 1; }
+              50% { opacity: 0.5; }
+              100% { opacity: 1; }
+            }
+          `}</style>
+        </div>
+      )}
 
       <div style={{ marginBottom: '20px', textAlign: 'center' }}>
         <p style={{
@@ -141,94 +225,86 @@ export default function MatchFestival({ onBack, onComplete }) {
         </motion.div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-        {/* Left: Festivals */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        {/* Left Col (Festivals) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#f472b6', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px', textAlign: 'center' }}>
-            🎊 Festivals
-          </div>
-          {leftItems.map(item => {
-            const { bg, border, color } = getLeftBg(item.id)
-            const isMatched = matched.has(item.id)
+          {leftItems.map((item) => {
+            const st = getLeftBg(item.id)
             return (
               <motion.button
-                key={item.id}
+                key={`left-${item.id}`}
+                whileHover={!matched.has(item.id) ? { scale: 1.02 } : {}}
+                whileTap={!matched.has(item.id) ? { scale: 0.98 } : {}}
+                onClick={() => handleLeft(item.id)}
+                style={{
+                  padding: '14px 16px',
+                  background: st.bg, border: `1px solid ${st.border}`, color: st.color,
+                  borderRadius: '10px', textAlign: 'left',
+                  fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: '500',
+                  cursor: matched.has(item.id) ? 'default' : 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                }}
+              >
+                {item.label}
+                {matched.has(item.id) && <span>✓</span>}
+              </motion.button>
+            )
+          })}
+        </div>
+
+        {/* Right Col (States) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {rightItems.map((item) => {
+            const st = getRightBg(item.id)
+            const isMatched = st.color === '#4ade80' // dirty check based on color logic above
+            return (
+              <motion.button
+                key={`right-${item.id}`}
                 whileHover={!isMatched ? { scale: 1.02 } : {}}
-                whileTap={!isMatched ? { scale: 0.97 } : {}}
-                onClick={() => !isMatched && handleLeft(item.id)}
-                animate={{ x: wrongPair?.left === item.id ? [-4, 4, -4, 0] : 0 }}
-                transition={{ duration: 0.3 }}
-                aria-pressed={selectedLeft === item.id}
-                aria-label={`Festival: ${item.label}`}
+                whileTap={!isMatched ? { scale: 0.98 } : {}}
+                onClick={() => handleRight(item.id)}
                 style={{
-                  padding: '10px 12px',
-                  borderRadius: '10px',
-                  border: `1px solid ${border}`,
-                  background: bg, color,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.82rem', fontWeight: '500',
+                  padding: '14px 16px',
+                  background: st.bg, border: `1px solid ${st.border}`, color: st.color,
+                  borderRadius: '10px', textAlign: 'left',
+                  fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: '500',
                   cursor: isMatched ? 'default' : 'pointer',
-                  textAlign: 'left',
                   transition: 'all 0.2s',
-                  lineHeight: 1.3,
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                 }}
               >
-                {isMatched && '✓ '}{item.label}
+                {item.label}
+                {isMatched && <span>✓</span>}
               </motion.button>
             )
           })}
         </div>
-
-        {/* Right: States */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px', textAlign: 'center' }}>
-            🗺️ States
-          </div>
-          {rightItems.map(item => {
-            const isMatchedRight = [...matched].some(festId => {
-              const p = pairs.find(pp => pp.festivalId === festId)
-              return p?.stateId === item.id
-            })
-            const { bg, border, color } = getRightBg(item.id)
-            return (
-              <motion.button
-                key={item.id}
-                whileHover={!isMatchedRight && selectedLeft ? { scale: 1.02 } : {}}
-                whileTap={!isMatchedRight && selectedLeft ? { scale: 0.97 } : {}}
-                onClick={() => !isMatchedRight && selectedLeft && handleRight(item.id)}
-                animate={{ x: wrongPair?.right === item.id ? [-4, 4, -4, 0] : 0 }}
-                transition={{ duration: 0.3 }}
-                aria-label={`State: ${item.label}`}
-                style={{
-                  padding: '10px 12px',
-                  borderRadius: '10px',
-                  border: `1px solid ${border}`,
-                  background: bg, color,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.82rem', fontWeight: '500',
-                  cursor: isMatchedRight || !selectedLeft ? 'default' : 'pointer',
-                  textAlign: 'left',
-                  transition: 'all 0.2s',
-                  lineHeight: 1.3,
-                  opacity: !selectedLeft && !isMatchedRight ? 0.6 : 1,
-                }}
-              >
-                {isMatchedRight && '✓ '}{item.label}
-              </motion.button>
-            )
-          })}
-        </div>
-      </div>
-
-      {/* Progress */}
-      <div style={{
-        marginTop: '20px', textAlign: 'center',
-        fontFamily: 'var(--font-body)', fontSize: '0.82rem',
-        color: 'rgba(255,255,255,0.4)',
-      }}>
-        {matched.size}/{PAIR_COUNT} pairs matched
-        {matched.size === PAIR_COUNT && <span style={{ color: '#4ade80', marginLeft: '8px' }}>🎉 All matched!</span>}
       </div>
     </GameShell>
+  )
+}
+
+function DifficultyButton({ title, desc, onClick, color }) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={onClick}
+      style={{
+        background: `rgba(255,255,255,0.03)`,
+        border: `1px solid rgba(255,255,255,0.1)`,
+        padding: '16px', borderRadius: '12px',
+        textAlign: 'left', cursor: 'pointer',
+        display: 'flex', flexDirection: 'column', gap: '4px'
+      }}
+    >
+      <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: '700', color: color }}>
+        {title}
+      </div>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
+        {desc}
+      </div>
+    </motion.button>
   )
 }

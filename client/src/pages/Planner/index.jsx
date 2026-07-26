@@ -11,6 +11,12 @@ const STYLES = ['Cultural', 'Adventure', 'Relaxation', 'Food & Culinary', 'Wildl
 const BUDGETS = ['Budget', 'Comfort', 'Luxury']
 const INTERESTS = ['History', 'Architecture', 'Food', 'Nature', 'Wildlife', 'Festivals', 'Art & Craft', 'Yoga & Wellness', 'Photography', 'Adventure Sports']
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Not sure yet']
+const TRAVELERS = ['Solo', 'Couple', 'Family', 'Friends group']
+const ACCOMMODATIONS = ['Hotel', 'Homestay', 'Hostel', 'Resort']
+const DIETS = ['Veg', 'Non-veg', 'Jain', 'Vegan', 'No preference']
+const PACES = ['Relaxed', 'Balanced', 'Packed']
+
 const BUDGET_EMOJI = { Budget: '💰', Comfort: '✈️', Luxury: '💎' }
 
 export default function Planner() {
@@ -18,11 +24,17 @@ export default function Planner() {
   const { addXP } = useXP()
 
   const [form, setForm] = useState({
+    origin: '',
     destination: '',
+    month: 'Not sure yet',
     days: 3,
+    travelers: 'Solo',
     budget: 'Comfort',
     style: ['Cultural'],
     interests: [],
+    accommodation: 'Hotel',
+    diet: 'No preference',
+    pace: 'Balanced',
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -74,11 +86,17 @@ export default function Planner() {
 
       // Input sanitised in api.js and server-side
       const data = await generateItinerary({
+        origin: form.origin.trim().slice(0, 50),
         destination: form.destination.trim().slice(0, 100),
+        month: form.month,
         days: Number(form.days),
+        travelers: form.travelers,
         budget: form.budget,
         style: form.style,
         interests: form.interests.slice(0, 10),
+        accommodation: form.accommodation,
+        diet: form.diet,
+        pace: form.pace,
         passportContext,
       })
 
@@ -120,14 +138,14 @@ export default function Planner() {
     <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }}>
       {/* Hero */}
       <div style={{ position: 'relative', padding: '72px 24px 56px', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse at 40% 50%, rgba(56,189,248,0.10) 0%, transparent 55%)' }} />
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse at 40% 50%, rgba(226,114,91,0.10) 0%, transparent 55%)' }} />
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-          <span style={{ fontSize: '3rem', display: 'block', marginBottom: '12px' }}>🤖</span>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: '900', color: '#fff', margin: '0 0 12px' }}>
+          <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '12px' }}>🧭</span>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: '400', color: '#fff', margin: '0 0 12px' }}>
             AI Travel Planner
           </h1>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(255,255,255,0.5)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.7 }}>
-            Your <span style={{ color: '#38bdf8', fontWeight: '600' }}>Passport history</span> personalises the AI — stamps, wishlist, and XP all bias your itinerary.
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(255,255,255,0.6)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.7 }}>
+            Your <span style={{ color: 'var(--color-saffron-500)', fontWeight: '600' }}>Passport history</span> personalises the AI — stamps, wishlist, and XP all bias your itinerary.
           </p>
         </motion.div>
       </div>
@@ -140,22 +158,27 @@ export default function Planner() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
-              background: 'rgba(56,189,248,0.06)',
-              border: '1px solid rgba(56,189,248,0.18)',
-              borderRadius: '14px', padding: '16px 20px',
+              background: 'var(--color-deep-800)',
+              borderTop: '2px dashed rgba(255,255,255,0.1)',
+              borderBottom: '2px dashed rgba(255,255,255,0.1)',
+              padding: '16px 0',
+              overflowX: 'auto',
+              whiteSpace: 'nowrap',
+              margin: '0 -24px 24px', // Bleed to edges on mobile
             }}
+            className="indian-motif-bg"
           >
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--color-terracotta-400)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px', padding: '0 24px' }}>
               🎒 Your Passport influences this itinerary
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ display: 'inline-flex', gap: '8px', padding: '0 24px' }}>
               {passport.stamps.map(s => (
-                <span key={s.eraId} style={{ padding: '3px 10px', borderRadius: '999px', background: 'rgba(255,107,43,0.12)', border: '1px solid rgba(255,107,43,0.2)', fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#FF6B2B' }}>
+                <span key={s.eraId} style={{ padding: '4px 12px', borderRadius: '4px', background: 'rgba(255,107,43,0.12)', border: '1px solid rgba(255,107,43,0.2)', fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-saffron-500)' }}>
                   🪬 {s.name}
                 </span>
               ))}
               {passport.wishlist.map(w => (
-                <span key={w.id} style={{ padding: '3px 10px', borderRadius: '999px', background: 'rgba(244,114,182,0.1)', border: '1px solid rgba(244,114,182,0.2)', fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#f472b6' }}>
+                <span key={w.id} style={{ padding: '4px 12px', borderRadius: '4px', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.2)', fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-gold-400)' }}>
                   ❤️ {w.title}
                 </span>
               ))}
@@ -169,56 +192,72 @@ export default function Planner() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: 'rgba(255,255,255,0.02)',
             border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '20px', padding: '32px',
+            borderRadius: '12px', padding: '32px',
             display: 'flex', flexDirection: 'column', gap: '22px',
           }}
+          className="indian-motif-bg"
         >
-          {/* Destination */}
-          <div>
-            <label htmlFor="planner-destination" style={labelStyle}>📍 Destination</label>
-            <input
-              id="planner-destination"
-              type="text"
-              placeholder="e.g. Jaipur, Kerala, Varanasi..."
-              value={form.destination}
-              onChange={e => setForm(f => ({ ...f, destination: e.target.value.slice(0, 100) }))}
-              maxLength={100}
-              autoComplete="off"
-              style={inputStyle}
-            />
-            {/* Suggest from destinations list */}
-            {form.destination.length > 1 && (
-              <div style={{ marginTop: '6px', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {destinations
-                  .filter(d => d.name.toLowerCase().startsWith(form.destination.toLowerCase()) && d.name.toLowerCase() !== form.destination.toLowerCase())
-                  .slice(0, 5)
-                  .map(d => (
-                    <button
-                      key={d.id}
-                      onClick={() => setForm(f => ({ ...f, destination: d.name }))}
-                      style={{
-                        padding: '3px 10px', borderRadius: '999px',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        background: 'rgba(255,255,255,0.04)',
-                        color: 'rgba(255,255,255,0.6)',
-                        fontFamily: 'var(--font-body)', fontSize: '0.78rem',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {d.name}
-                    </button>
-                  ))
-                }
-              </div>
-            )}
-          </div>
-
-          {/* Days + Budget row */}
+          {/* Origin and Destination */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div>
-              <label htmlFor="planner-days" style={labelStyle}>📅 Number of Days</label>
+              <label htmlFor="planner-origin" style={labelStyle}>🏠 Starting City</label>
+              <input
+                id="planner-origin"
+                type="text"
+                placeholder="e.g. Delhi, Mumbai..."
+                value={form.origin}
+                onChange={e => setForm(f => ({ ...f, origin: e.target.value.slice(0, 100) }))}
+                maxLength={100}
+                autoComplete="off"
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <label htmlFor="planner-destination" style={labelStyle}>📍 Destination</label>
+              <input
+                id="planner-destination"
+                type="text"
+                placeholder="e.g. Jaipur, Kerala..."
+                value={form.destination}
+                onChange={e => setForm(f => ({ ...f, destination: e.target.value.slice(0, 100) }))}
+                maxLength={100}
+                autoComplete="off"
+                style={inputStyle}
+              />
+              {/* Suggest from destinations list */}
+              {form.destination.length > 1 && (
+                <div style={{ marginTop: '6px', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {destinations
+                    .filter(d => d.name.toLowerCase().startsWith(form.destination.toLowerCase()) && d.name.toLowerCase() !== form.destination.toLowerCase())
+                    .slice(0, 3)
+                    .map(d => (
+                      <button
+                        key={d.id}
+                        onClick={() => setForm(f => ({ ...f, destination: d.name }))}
+                        style={{
+                          padding: '3px 10px', borderRadius: '4px',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          background: 'rgba(255,255,255,0.04)',
+                          color: 'rgba(255,255,255,0.6)',
+                          fontFamily: 'var(--font-body)', fontSize: '0.78rem',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {d.name}
+                      </button>
+                    ))
+                  }
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Days, Month, Travelers row */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+            <div>
+              <label htmlFor="planner-days" style={labelStyle}>📅 Days</label>
               <input
                 id="planner-days"
                 type="number"
@@ -229,32 +268,74 @@ export default function Planner() {
               />
             </div>
             <div>
-              <label style={labelStyle}>💰 Budget Level</label>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '6px' }}>
-                {BUDGETS.map(b => (
-                  <button
-                    key={b}
-                    onClick={() => setForm(f => ({ ...f, budget: b }))}
-                    aria-pressed={form.budget === b}
-                    style={{
-                      padding: '8px 14px', borderRadius: '8px',
-                      border: `1px solid ${form.budget === b ? 'rgba(255,107,43,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                      background: form.budget === b ? 'rgba(255,107,43,0.1)' : 'transparent',
-                      color: form.budget === b ? '#FF6B2B' : 'rgba(255,255,255,0.55)',
-                      fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-                      cursor: 'pointer', textAlign: 'left',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    {BUDGET_EMOJI[b]} {b}
-                    {destInfo && destInfo.avgBudgetPerDay?.[b] && (
-                      <span style={{ marginLeft: '8px', opacity: 0.5, fontSize: '0.72rem' }}>
-                        ~{formatINR(destInfo.avgBudgetPerDay[b])}/day
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
+              <label htmlFor="planner-month" style={labelStyle}>🌤️ Month</label>
+              <select
+                id="planner-month"
+                value={form.month}
+                onChange={e => setForm(f => ({ ...f, month: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {MONTHS.map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="planner-travelers" style={labelStyle}>👥 Travelers</label>
+              <select
+                id="planner-travelers"
+                value={form.travelers}
+                onChange={e => setForm(f => ({ ...f, travelers: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {TRAVELERS.map(t => <option key={t} value={t} style={{ color: '#000' }}>{t}</option>)}
+              </select>
+            </div>
+          </div>
+
+          {/* Accommodation, Diet, Pace, Budget rows */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div>
+              <label htmlFor="planner-accommodation" style={labelStyle}>🏨 Accommodation</label>
+              <select
+                id="planner-accommodation"
+                value={form.accommodation}
+                onChange={e => setForm(f => ({ ...f, accommodation: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {ACCOMMODATIONS.map(a => <option key={a} value={a} style={{ color: '#000' }}>{a}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="planner-diet" style={labelStyle}>🥗 Diet</label>
+              <select
+                id="planner-diet"
+                value={form.diet}
+                onChange={e => setForm(f => ({ ...f, diet: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {DIETS.map(d => <option key={d} value={d} style={{ color: '#000' }}>{d}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="planner-pace" style={labelStyle}>🏃 Pace</label>
+              <select
+                id="planner-pace"
+                value={form.pace}
+                onChange={e => setForm(f => ({ ...f, pace: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {PACES.map(p => <option key={p} value={p} style={{ color: '#000' }}>{p}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="planner-budget" style={labelStyle}>💰 Budget</label>
+              <select
+                id="planner-budget"
+                value={form.budget}
+                onChange={e => setForm(f => ({ ...f, budget: e.target.value }))}
+                style={{ ...inputStyle, appearance: 'none', background: 'rgba(255,255,255,0.05) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/></svg>") no-repeat right 8px center' }}
+              >
+                {BUDGETS.map(b => <option key={b} value={b} style={{ color: '#000' }}>{BUDGET_EMOJI[b]} {b}</option>)}
+              </select>
             </div>
           </div>
 
@@ -273,10 +354,10 @@ export default function Planner() {
                     onClick={() => handleStyleToggle(s)}
                     aria-pressed={isSelected}
                     style={{
-                      padding: '6px 14px', borderRadius: '999px',
-                      border: `1px solid ${isSelected ? 'rgba(56,189,248,0.5)' : 'rgba(255,255,255,0.1)'}`,
-                      background: isSelected ? 'rgba(56,189,248,0.12)' : 'rgba(255,255,255,0.04)',
-                      color: isSelected ? '#38bdf8' : 'rgba(255,255,255,0.55)',
+                      padding: '6px 14px', borderRadius: '4px',
+                      border: `1px solid ${isSelected ? 'var(--color-terracotta-500)' : 'rgba(255,255,255,0.1)'}`,
+                      background: isSelected ? 'var(--color-terracotta-500)' : 'rgba(255,255,255,0.04)',
+                      color: isSelected ? '#fff' : 'rgba(255,255,255,0.55)',
                       fontFamily: 'var(--font-body)', fontSize: '0.82rem',
                       cursor: 'pointer', transition: 'all 0.2s',
                     }}
@@ -335,12 +416,13 @@ export default function Planner() {
             aria-busy={loading}
             aria-label="Generate AI travel itinerary"
             style={{
-              padding: '15px 32px', borderRadius: '14px', border: 'none',
-              background: loading ? 'rgba(255,107,43,0.3)' : 'linear-gradient(135deg, #FF6B2B, #f59e0b)',
+              padding: '15px 32px', borderRadius: '8px', border: 'none',
+              background: loading ? 'var(--color-terracotta-400)' : 'var(--color-terracotta-500)',
               color: '#fff', fontFamily: 'var(--font-display)',
-              fontSize: '1.05rem', fontWeight: '700',
+              fontSize: '1.15rem', fontWeight: '400',
               cursor: loading ? 'not-allowed' : 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+              marginTop: '12px'
             }}
           >
             {loading ? (
@@ -392,10 +474,10 @@ function ItineraryResult({ result, form, destInfo }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Header */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(56,189,248,0.10), rgba(255,107,43,0.06))',
-        border: '1px solid rgba(56,189,248,0.2)',
+        background: 'linear-gradient(135deg, rgba(226,114,91,0.15), rgba(204,78,54,0.08))',
+        border: '1px solid rgba(226,114,91,0.2)',
         borderRadius: '20px', padding: '28px',
-      }}>
+      }} className="indian-motif-bg">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: '800', color: '#fff', margin: '0 0 6px' }}>
@@ -420,8 +502,8 @@ function ItineraryResult({ result, form, destInfo }) {
         {result.personalizedNote && (
           <div style={{
             marginTop: '16px', padding: '12px 16px', borderRadius: '10px',
-            background: 'rgba(56,189,248,0.08)', border: '1px solid rgba(56,189,248,0.15)',
-            fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#38bdf8',
+            background: 'rgba(226,114,91,0.08)', border: '1px solid rgba(226,114,91,0.15)',
+            fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--color-terracotta-400)',
             lineHeight: 1.5,
           }}>
             🎒 {result.personalizedNote}
@@ -442,7 +524,7 @@ function ItineraryResult({ result, form, destInfo }) {
                 transition={{ duration: 1, ease: 'easeOut' }}
                 style={{
                   height: '100%',
-                  background: form.budget === 'Budget' ? '#4ade80' : form.budget === 'Comfort' ? '#38bdf8' : '#fbbf24',
+                  background: form.budget === 'Budget' ? '#4ade80' : form.budget === 'Comfort' ? 'var(--color-terracotta-400)' : '#fbbf24',
                   borderRadius: '999px',
                 }}
               />
@@ -484,19 +566,19 @@ function ItineraryResult({ result, form, destInfo }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{
                     width: '32px', height: '32px', borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #FF6B2B, #f59e0b)',
+                    background: 'linear-gradient(135deg, var(--color-terracotta-400), var(--color-terracotta-500))',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: '800', color: '#fff',
+                    fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: '400', color: '#fff',
                     flexShrink: 0,
                   }}>
                     {i + 1}
                   </div>
                   <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: '700', color: '#fff' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: '400', color: '#fff' }}>
                       {day.title || `Day ${i + 1}`}
                     </div>
                     {day.theme && (
-                      <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#FF6B2B' }}>{day.theme}</div>
+                      <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-saffron-500)' }}>{day.theme}</div>
                     )}
                   </div>
                 </div>
@@ -557,10 +639,10 @@ function ItineraryResult({ result, form, destInfo }) {
       {result.weatherNote && (
         <div style={{
           padding: '14px 18px', borderRadius: '12px',
-          background: 'rgba(56,189,248,0.06)', border: '1px solid rgba(56,189,248,0.15)',
+          background: 'rgba(226,114,91,0.06)', border: '1px solid rgba(226,114,91,0.15)',
           fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6,
         }}>
-          🌤️ <strong style={{ color: '#38bdf8' }}>Weather Tip:</strong> {result.weatherNote}
+          🌤️ <strong style={{ color: 'var(--color-terracotta-400)' }}>Weather Tip:</strong> {result.weatherNote}
         </div>
       )}
 

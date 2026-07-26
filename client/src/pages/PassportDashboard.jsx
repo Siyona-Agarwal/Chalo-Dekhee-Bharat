@@ -26,7 +26,6 @@ function getDefaultBloodType(userKey = '') {
   if (seed % 17 === 0) return 'ALIEN'
   return PLAYFUL_BLOOD_TYPES[seed % 3]
 }
-
 const bioPaperBg = `
   repeating-linear-gradient(45deg, rgba(56,189,248,0.03) 0, rgba(56,189,248,0.03) 1px, transparent 1px, transparent 10px),
   repeating-linear-gradient(-45deg, rgba(244,114,182,0.02) 0, rgba(244,114,182,0.02) 1px, transparent 1px, transparent 10px),
@@ -75,7 +74,8 @@ export default function PassportDashboard() {
   useEffect(() => {
     const updateScale = () => {
       const availableHeight = window.innerHeight - 100
-      setScale(Math.min(1, availableHeight / 850))
+      // Scale based on the 800px height of the open book container, plus padding
+      setScale(Math.min(1, availableHeight / 900))
     }
     updateScale()
     window.addEventListener('resize', updateScale)
@@ -157,8 +157,8 @@ export default function PassportDashboard() {
       )
     }
     
-    const title = currentPage === 2 ? 'Immigration Stamps' : 'Special Visas'
-    const content = currentPage === 2 ? renderStampsContent()[0] : renderBadgesContent()[0]
+    const title = currentPage === 2 ? 'Favourite Destinations' : 'Special Visas'
+    const content = currentPage === 2 ? renderWishlistContent()[0] : renderBadgesContent()[0]
     
     return (
       <div style={{ width: '100%', height: '100%', background: visaPaperBg, backgroundSize: '100px 100px', borderBottom: '1px solid rgba(0,0,0,0.15)', position: 'relative', boxShadow: 'inset 0 -10px 20px rgba(0,0,0,0.08)' }}>
@@ -166,7 +166,7 @@ export default function PassportDashboard() {
         <div style={{ position: 'absolute', bottom: '12px', width: '100%', textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.2em' }}>
           वीजा / VISAS
         </div>
-        <div style={{ padding: '24px', height: '100%' }}>
+        <div style={{ padding: '24px', height: '100%', position: 'relative', zIndex: 1 }}>
           <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: '700', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase', letterSpacing: '0.2em', textAlign: 'center' }}>
             {title}
           </h3>
@@ -223,7 +223,7 @@ export default function PassportDashboard() {
       )
     }
 
-    const content = currentPage === 2 ? renderStampsContent()[1] : renderBadgesContent()[1]
+    const content = currentPage === 2 ? renderWishlistContent()[1] : renderBadgesContent()[1]
     
     return (
       <div style={{ width: '100%', height: '100%', background: visaPaperBg, backgroundSize: '100px 100px', position: 'relative', boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.08)' }}>
@@ -231,87 +231,69 @@ export default function PassportDashboard() {
         <div style={{ position: 'absolute', bottom: '12px', width: '100%', textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.2em' }}>
           वीजा / VISAS
         </div>
-        <div style={{ padding: '24px', height: '100%' }}>
+        <div style={{ padding: '24px', height: '100%', position: 'relative', zIndex: 1 }}>
           {content}
         </div>
       </div>
     )
   }
 
-  const renderStampsContent = () => {
-    if (passport.stamps.length === 0) return [<div key="1" style={{textAlign: 'center', color: '#94a3b8', marginTop: '40px'}}>No stamps yet.</div>, <div key="2"/>]
+  const renderWishlistContent = () => {
+    if (!passport.wishlist || passport.wishlist.length === 0) {
+      return [<div key="1" style={{textAlign: 'center', color: '#94a3b8', marginTop: '40px'}}>No favourites yet. Add destinations to your wishlist!</div>, <div key="2"/>]
+    }
     
-    const topStamps = passport.stamps.slice(0, Math.ceil(passport.stamps.length / 2))
-    const bottomStamps = passport.stamps.slice(Math.ceil(passport.stamps.length / 2))
+    const topWishlist = passport.wishlist.slice(0, 4)
+    const bottomWishlist = passport.wishlist.slice(4, 8)
 
-    const renderStampList = (stamps) => (
-      <div style={{ position: 'relative', width: '100%', height: 'calc(100% - 30px)' }}>
-        {stamps.map((stamp, i) => {
-          const top = `${10 + (i * 30) % 50}%`
-          const left = `${10 + (i * 40) % 70}%`
-          const rotate = `${(i * 47) % 60 - 30}deg`
-          const color = ERA_INK_COLORS[stamp.eraId] || 'rgba(15,23,42,0.7)'
+    const renderList = (items) => (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginTop: '16px' }}>
+        {items.map((item, i) => (
+          <div key={item.id} style={{
+            background: '#fff', padding: '8px', paddingBottom: '24px', borderRadius: '4px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
+            transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (2 + Math.random() * 3)}deg)`,
+            display: 'flex', flexDirection: 'column', alignItems: 'center'
+          }}>
+            <div style={{ 
+              width: '100%', height: '90px', background: '#e2e8f0', 
+              backgroundImage: `url(${item.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', 
+              borderRadius: '2px', border: '1px solid rgba(0,0,0,0.05)'
+            }} />
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.8rem', fontWeight: '700', color: '#1e3a8a', marginTop: '12px', textAlign: 'center' }}>
+              {item.title}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+    return [renderList(topWishlist), renderList(bottomWishlist)]
+  }
+
+  const renderBadgesContent = () => {
+    const renderList = (badgesChunk) => (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginTop: '16px' }}>
+        {badgesChunk.map(badge => {
+          const earned = earnedBadgeIds.has(badge.id)
           return (
-            <motion.div
-              key={stamp.name}
-              initial={{ opacity: 0, scale: 1.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: 'spring', delay: i * 0.1 }}
-              style={{
-                position: 'absolute', top, left, transform: `rotate(${rotate})`,
-                border: `2px solid ${color}`, borderRadius: '12px',
-                padding: '8px 12px', color, mixBlendMode: 'multiply',
-                display: 'inline-block', textAlign: 'center'
-              }}
-            >
-              <div style={{ fontSize: '0.55rem', fontWeight: '800', letterSpacing: '0.05em' }}>MUSEUM ENTRY</div>
-              <div style={{ fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase', margin: '4px 0', borderTop: `1px solid ${color}`, borderBottom: `1px solid ${color}` }}>{stamp.name}</div>
-              <div style={{ fontSize: '0.5rem' }}>{new Date(stamp.earnedAt).toLocaleDateString('en-GB')}</div>
-            </motion.div>
+            <div key={badge.id} style={{
+              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '16px 8px',
+              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
+              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+            }}>
+              <div style={{ fontSize: '2.4rem' }}>{badge.icon}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '700', color: '#1e3a8a', marginTop: '8px', lineHeight: 1.2 }}>{badge.name}</div>
+            </div>
           )
         })}
       </div>
     )
-    return [renderStampList(topStamps), renderStampList(bottomStamps)]
-  }
-
-  const renderBadgesContent = () => {
-    return [
-      <div key="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginTop: '16px' }}>
-        {allBadges.slice(0, 4).map(badge => {
-          const earned = earnedBadgeIds.has(badge.id)
-          return (
-            <div key={badge.id} style={{
-              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '12px 8px',
-              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
-              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent'
-            }}>
-              <div style={{ fontSize: '1.8rem' }}>{badge.icon}</div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', fontWeight: '700', color: '#1e3a8a', marginTop: '4px' }}>{badge.name}</div>
-            </div>
-          )
-        })}
-      </div>,
-      <div key="2" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-        {allBadges.slice(4, 8).map(badge => {
-          const earned = earnedBadgeIds.has(badge.id)
-          return (
-            <div key={badge.id} style={{
-              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '12px 8px',
-              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
-              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent'
-            }}>
-              <div style={{ fontSize: '1.8rem' }}>{badge.icon}</div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', fontWeight: '700', color: '#1e3a8a', marginTop: '4px' }}>{badge.name}</div>
-            </div>
-          )
-        })}
-      </div>
-    ]
+    return [renderList(allBadges.slice(0, 6)), renderList(allBadges.slice(6, 12))]
   }
 
   return (
-    <div style={{
+    <div className="indian-motif-bg" style={{
       height: 'calc(100vh - 64px)', background: 'var(--color-deep-900)',
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
       padding: '40px 24px', overflow: 'hidden', position: 'relative'
@@ -325,9 +307,9 @@ export default function PassportDashboard() {
             onClick={handleOpen}
             style={{
               position: 'absolute', top: '50px', zIndex: 50,
-              padding: '12px 32px', background: '#FF6B2B', border: 'none', color: '#fff',
+              padding: '12px 32px', background: 'var(--color-terracotta-500)', border: 'none', color: '#fff',
               borderRadius: '999px', fontFamily: 'var(--font-display)', fontSize: '1rem',
-              fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 12px rgba(255,107,43,0.4)'
+              fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 12px rgba(204,78,54,0.4)'
             }}
           >
             Open Passport
@@ -336,11 +318,14 @@ export default function PassportDashboard() {
       </AnimatePresence>
 
       <div style={{
+        position: 'relative', width: '800px', height: '800px',
         display: 'flex', justifyContent: 'center', alignItems: 'center',
         transform: `scale(${scale})`,
         transformOrigin: 'center center',
         transition: 'transform 0.3s'
       }}>
+        
+        {/* The 3D Book */}
         <motion.div
           animate={{
             rotateZ: bookState === 'closed' ? -90 : 0,
@@ -422,12 +407,35 @@ export default function PassportDashboard() {
           </motion.div>
 
         </motion.div>
+
+        {/* Page Indicators positioned precisely at the bottom of the 800x800 bounding box */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
+              style={{ 
+                position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%)', zIndex: 50,
+                display: 'flex', gap: '12px', background: 'rgba(0,0,0,0.4)', padding: '12px 24px',
+                borderRadius: '999px', backdropFilter: 'blur(10px)'
+              }}
+            >
+              {[1, 2, 3].map(page => (
+                <div key={page} style={{
+                  width: '10px', height: '10px', borderRadius: '50%',
+                  background: currentPage === page ? '#FF6B2B' : 'rgba(255,255,255,0.3)',
+                  boxShadow: currentPage === page ? '0 0 10px #FF6B2B' : 'none',
+                  transition: 'background 0.3s'
+                }} />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Close Button - Bottom Right */}
             <motion.button
               initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
               onClick={handleClose}
@@ -443,7 +451,6 @@ export default function PassportDashboard() {
               Close
             </motion.button>
 
-            {/* Prev Button - Middle Left */}
             <motion.button
               initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
               onClick={handlePrev}
@@ -461,7 +468,6 @@ export default function PassportDashboard() {
               ← Prev
             </motion.button>
 
-            {/* Next Button - Middle Right */}
             <motion.button
               initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
               onClick={handleNext}
@@ -469,35 +475,16 @@ export default function PassportDashboard() {
               style={{
                 position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', zIndex: 50,
                 padding: '16px 24px', borderRadius: '12px',
-                background: currentPage < totalPages - 1 ? '#FF6B2B' : 'rgba(255,255,255,0.1)',
-                border: `1px solid ${currentPage < totalPages - 1 ? '#FF6B2B' : 'rgba(255,255,255,0.2)'}`,
+                background: currentPage < totalPages - 1 ? 'var(--color-terracotta-500)' : 'rgba(255,255,255,0.1)',
+                border: `1px solid ${currentPage < totalPages - 1 ? 'var(--color-terracotta-500)' : 'rgba(255,255,255,0.2)'}`,
                 color: '#fff', fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: '700',
                 cursor: currentPage < totalPages - 1 ? 'pointer' : 'default',
                 opacity: currentPage < totalPages - 1 ? 1 : 0.3,
-                boxShadow: currentPage < totalPages - 1 ? '0 8px 20px rgba(255,107,43,0.4)' : '0 4px 12px rgba(0,0,0,0.2)'
+                boxShadow: currentPage < totalPages - 1 ? '0 8px 20px rgba(204,78,54,0.4)' : '0 4px 12px rgba(0,0,0,0.2)'
               }}
             >
               Next →
             </motion.button>
-
-            {/* Page Indicators - Bottom Center */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
-              style={{ 
-                position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 50,
-                display: 'flex', gap: '12px', background: 'rgba(0,0,0,0.4)', padding: '12px 24px',
-                borderRadius: '999px', backdropFilter: 'blur(10px)'
-              }}
-            >
-              {[1, 2, 3].map(page => (
-                <div key={page} style={{
-                  width: '10px', height: '10px', borderRadius: '50%',
-                  background: currentPage === page ? '#FF6B2B' : 'rgba(255,255,255,0.3)',
-                  boxShadow: currentPage === page ? '0 0 10px #FF6B2B' : 'none',
-                  transition: 'background 0.3s'
-                }} />
-              ))}
-            </motion.div>
           </>
         )}
       </AnimatePresence>

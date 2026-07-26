@@ -53,13 +53,16 @@
   --color-ivory-400: #f9f6ee;
   --color-ivory-500: #F5F0E8;
 
-  --color-deep-900: #0F0E17;
-  --color-deep-800: #1a1825;
-  --color-deep-700: #252336;
-  --color-deep-600: #2d2b42;
+  --color-terracotta-400: #e2725b;
+  --color-terracotta-500: #cc4e36;
+
+  --color-deep-900: #0a0f1d;
+  --color-deep-800: #131b2e;
+  --color-deep-700: #1d2843;
+  --color-deep-600: #273656;
 
   /* ── Typography ── */
-  --font-display: 'Outfit', sans-serif;
+  --font-display: 'Rozha One', serif;
   --font-body: 'Inter', sans-serif;
 
   /* ── Custom shadows ── */
@@ -126,4 +129,10 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
   box-shadow: inset 0 0 80px rgba(0,0,0,0.6);
   color: #fbbf24;
+}
+
+/* ── Motif Utility ── */
+.indian-motif-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 3.33333L23.3333 16.6667L36.6667 20L23.3333 23.3333L20 36.6667L16.6667 23.3333L3.33333 20L16.6667 16.6667L20 3.33333ZM20 8.86667L18.1333 18.1333L8.86667 20L18.1333 21.8667L20 31.1333L21.8667 21.8667L31.1333 20L21.8667 18.1333L20 8.86667Z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
 }

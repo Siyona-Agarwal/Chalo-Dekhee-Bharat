@@ -52,13 +52,20 @@ export default function Games() {
 
   const earnedBadgeIds = new Set(passport.badges.map(b => b.id))
 
-  const handleGameComplete = (gameId, score, total) => {
+  const handleGameComplete = (gameId, score, total, difficulty = null) => {
     const game = GAMES.find(g => g.id === gameId)
     if (!game) return
 
-    // Award completion badge if not already earned
-    if (game.badgeId && !earnedBadgeIds.has(game.badgeId)) {
-      const badge = badges.find(b => b.id === game.badgeId)
+    let targetBadgeId = game.badgeId
+    if (difficulty) {
+      if (gameId === 'guess-monument') targetBadgeId = `badge-006-${difficulty}`
+      else if (gameId === 'find-state') targetBadgeId = `badge-007-${difficulty}`
+      else if (gameId === 'match-festival') targetBadgeId = `badge-008-${difficulty}`
+    }
+
+    // Award completion badge if not already earned and score is 100%
+    if (targetBadgeId && !earnedBadgeIds.has(targetBadgeId) && score === total) {
+      const badge = badges.find(b => b.id === targetBadgeId)
       if (badge) {
         addBadge(badge)
         addXP(badge.xpReward, `Badge: ${badge.name}`)
@@ -67,17 +74,17 @@ export default function Games() {
   }
 
   if (activeGame === 'guess-monument') {
-    return <GuessMonument onBack={() => setActiveGame(null)} onComplete={(s, t) => handleGameComplete('guess-monument', s, t)} />
+    return <GuessMonument onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('guess-monument', s, t, diff)} />
   }
   if (activeGame === 'find-state') {
-    return <FindState onBack={() => setActiveGame(null)} onComplete={(s, t) => handleGameComplete('find-state', s, t)} />
+    return <FindState onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('find-state', s, t, diff)} />
   }
   if (activeGame === 'match-festival') {
-    return <MatchFestival onBack={() => setActiveGame(null)} onComplete={(s, t) => handleGameComplete('match-festival', s, t)} />
+    return <MatchFestival onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('match-festival', s, t, diff)} />
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }} className="indian-motif-bg">
       {/* Hero */}
       <div style={{
         position: 'relative', padding: '72px 24px 56px', textAlign: 'center', overflow: 'hidden',

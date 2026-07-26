@@ -113,7 +113,7 @@ export default function Museum() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }} className="indian-motif-bg">
       {/* Hero banner */}
       <div style={{
         position: 'relative',
@@ -150,30 +150,15 @@ export default function Museum() {
           </p>
 
           {/* Stamps collected indicator */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            {ERAS.map(era => (
-              <div key={era.id} style={{
-                display: 'flex', alignItems: 'center', gap: '5px',
-                background: hasStamp(era.id) ? `rgba(${era.color === '#f59e0b' ? '245,158,11' : era.color === '#FF6B2B' ? '255,107,43' : era.color === '#138808' ? '19,136,8' : '56,189,248'},0.15)` : 'rgba(255,255,255,0.05)',
-                border: `1px solid ${hasStamp(era.id) ? era.border : 'rgba(255,255,255,0.08)'}`,
-                borderRadius: '999px', padding: '4px 12px',
-                fontSize: '0.78rem', fontFamily: 'var(--font-body)',
-                color: hasStamp(era.id) ? era.color : 'rgba(255,255,255,0.4)',
-              }}>
-                <span>{era.emoji}</span>
-                <span>{hasStamp(era.id) ? '✓' : '○'}</span>
-                <span>{era.label}</span>
-              </div>
-            ))}
-          </div>
+
         </motion.div>
       </div>
 
       {/* Era selection grid */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px 80px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px 80px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: '24px',
         }}>
           {ERAS.map((era, i) => {

@@ -68,14 +68,21 @@ function validateItineraryInput(body) {
     ? body.interests.filter(i => VALID_INTERESTS.includes(i)).slice(0, 5)
     : []
 
+  const origin = sanitizeString(body.origin, 50) || 'Unknown'
+  const month = sanitizeString(body.month, 20) || 'Not sure yet'
+  const travelers = sanitizeString(body.travelers, 30) || 'Solo'
+  const accommodation = sanitizeString(body.accommodation, 30) || 'Hotel'
+  const diet = sanitizeString(body.diet, 30) || 'No preference'
+  const pace = sanitizeString(body.pace, 20) || 'Balanced'
+
   // Passport context — optional, used for personalization
   const passportContext = body.passportContext || {}
 
-  return { errors, destination, days, budget, style, interests, passportContext }
+  return { errors, destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext }
 }
 
 // ── Build personalized prompt ─────────────────────────────────────────────
-function buildSystemPrompt(destination, days, budget, style, interests, passportContext) {
+function buildSystemPrompt(destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext) {
   const { stamps = [], wishlist = [], visitedStates = [] } = passportContext
 
   const stampNames = stamps.map(s => s.name || s.eraId).filter(Boolean)
@@ -93,6 +100,14 @@ function buildSystemPrompt(destination, days, budget, style, interests, passport
   }
 
   return `You are an expert Indian travel planner and cultural guide. Generate a detailed, realistic, day-by-day travel itinerary for the given destination.
+
+USER PREFERENCES:
+- Origin City: ${origin} (Base transport recommendations on this origin)
+- Travel Month/Season: ${month} (Tailor the packingList and weather note to this month)
+- Travelers & Trip Type: ${travelers} (Match activities to this group type)
+- Accommodation Preference: ${accommodation} (Recommend accommodation types matching this)
+- Dietary Preference: ${diet} (Provide food suggestions respecting this diet)
+- Pace: ${pace} (Match daily activities and downtime to this pace)
 
 PERSONALIZATION CONTEXT (use this to bias your suggestions):${personalizationNote || '\n- No prior exploration data available; generate a general recommendation.'}
 
@@ -126,19 +141,19 @@ The personalizedNote field MUST explain how the user's exploration history (muse
 
 // ── POST /api/itinerary ───────────────────────────────────────────────────
 router.post('/itinerary', async (req, res) => {
-  const { errors, destination, days, budget, style, interests, passportContext } =
+  const { errors, destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext } =
     validateItineraryInput(req.body)
 
   if (errors.length > 0) {
     return res.status(400).json({ error: `Validation failed: ${errors.join('; ')}` })
   }
 
-  const systemPrompt = buildSystemPrompt(destination, days, budget, style, interests, passportContext)
+  const systemPrompt = buildSystemPrompt(destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext)
   const userMessage = `Generate a ${days}-day ${budget} ${style} travel itinerary for ${destination}, India.${interests.length > 0 ? ` Focus on: ${interests.join(', ')}.` : ''}`
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "meta/llama-3.3-70b-instruct",
+      model: "meta/llama-3.1-8b-instruct",
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userMessage },

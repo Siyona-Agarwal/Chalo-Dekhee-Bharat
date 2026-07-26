@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg",
+    "answer": "Taj Mahal",
+    "options": ["Taj Mahal", "Humayun's Tomb", "Itmad-ud-Daulah", "Bibi Ka Maqbara"],
+    "hint": "Built by Shah Jahan for his wife Mumtaz Mahal in Agra.",
+    "fact": "The Taj Mahal took 20 years and 20,000 artisans to build (1632–1653 CE)."
+  },
+  {
+    "id": 2,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Qutb_Minar_in_Delhi.jpg",
+    "answer": "Qutb Minar",
+    "options": ["Qutb Minar", "Charminar", "Jantar Mantar", "Fatehpur Sikri"],
+    "hint": "World's tallest brick minaret, located in Delhi.",
+    "fact": "At 72.5 metres, the Qutb Minar was begun in 1193 CE and took nearly 200 years to complete."
+  },
+  {
+    "id": 3,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Hawa_Mahal_2006.jpg",
+    "answer": "Hawa Mahal",
+    "options": ["Hawa Mahal", "City Palace", "Amber Fort", "Umaid Bhawan"],
+    "hint": "The 'Palace of Winds' in Jaipur has 953 small windows.",
+    "fact": "Hawa Mahal was built in 1799 by Maharaja Sawai Pratap Singh so royal ladies could observe street festivals unseen."
+  },
+  {
+    "id": 4,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Golden_Temple_India.jpg",
+    "answer": "Golden Temple",
+    "options": ["Golden Temple", "Akshardham", "Lotus Temple", "Somnath Temple"],
+    "hint": "The holiest Sikh shrine, located in Amritsar, Punjab.",
+    "fact": "The Golden Temple feeds over 100,000 people daily for free — the world's largest community kitchen."
+  },
+  {
+    "id": 5,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Charminar_Hyderabad_1.jpg",
+    "answer": "Charminar",
+    "options": ["Charminar", "Gateway of India", "India Gate", "Mysore Palace"],
+    "hint": "A 16th-century mosque and monument with four minarets in Hyderabad.",
+    "fact": "Charminar was built in 1591 CE by Muhammad Quli Qutb Shah to commemorate the end of a deadly plague."
+  },
+  {
+    "id": 6,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/Gateway_of_India_2015.jpg",
+    "answer": "Gateway of India",
+    "options": ["Gateway of India", "Chhatrapati Shivaji Terminus", "Flora Fountain", "Bandra-Worli Sea Link"],
+    "hint": "A basalt arch monument in Mumbai built to welcome King George V.",
+    "fact": "Paradoxically, it was the site from which the last British troops left India in 1948."
+  },
+  {
+    "id": 7,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/29/India_Gate_in_New_Delhi_03-2016.jpg",
+    "answer": "India Gate",
+    "options": ["India Gate", "Victory Tower", "Buland Darwaza", "Rashtrapati Bhavan"],
+    "hint": "A war memorial on Rajpath, New Delhi, honouring 84,000 Indian soldiers.",
+    "fact": "The Amar Jawan Jyoti (Flame of the Immortal Soldier) was added in 1971."
+  },
+  {
+    "id": 8,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Hampi_virupaksha_temple.jpg",
+    "answer": "Hampi",
+    "options": ["Hampi", "Khajuraho", "Konark", "Mahabalipuram"],
+    "hint": "Ancient ruins of the Vijayanagara Empire in Karnataka.",
+    "fact": "Hampi was the second-largest medieval-era city in the world after Beijing."
+  },
+  {
+    "id": 9,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/67/Konark_Sun_Temple_2019.jpg",
+    "answer": "Konark Sun Temple",
+    "options": ["Konark Sun Temple", "Jagannath Temple", "Meenakshi Temple", "Somnath Temple"],
+    "hint": "A 13th-century CE sun temple at Konark, Odisha, built as a giant chariot.",
+    "fact": "The temple has 24 intricately carved stone wheels and is led by 7 stone horses."
+  },
+  {
+    "id": 10,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Victoria_Memorial_Kolkata.jpg",
+    "answer": "Victoria Memorial",
+    "options": ["Victoria Memorial", "Howrah Bridge", "Indian Museum", "Writers' Building"],
+    "hint": "A large marble building in Kolkata, West Bengal.",
+    "fact": "It was built between 1906 and 1921 dedicated to the memory of Queen Victoria."
+  },
+  {
+    "id": 11,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Red_Fort_in_Delhi_03-2016.jpg",
+    "answer": "Red Fort",
+    "options": ["Red Fort", "Agra Fort", "Golconda Fort", "Gwalior Fort"],
+    "hint": "Historic fort in Old Delhi built by Shah Jahan in 1639.",
+    "fact": "The Prime Minister hoists the Indian flag here every Independence Day."
+  },
+  {
+    "id": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/47/Meenakshi_Amman_Temple_Madurai.jpg",
+    "answer": "Meenakshi Temple",
+    "options": ["Meenakshi Temple", "Brihadisvara Temple", "Ramanathaswamy Temple", "Kanchipuram Temple"],
+    "hint": "Historic Hindu temple located on the southern bank of the Vaigai River in Madurai.",
+    "fact": "The temple complex has 14 gopurams (gateway towers), the tallest being 170 feet high."
+  },
+  {
+    "id": 13,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/22/Khajuraho_Lakshmana_Temple.jpg",
+    "answer": "Khajuraho",
+    "options": ["Khajuraho", "Ajanta Caves", "Ellora Caves", "Elephanta Caves"],
+    "hint": "Group of Hindu and Jain temples in Madhya Pradesh famous for their nagara-style architectural symbolism.",
+    "fact": "Most Khajuraho temples were built between 950 and 1050 by the Chandela dynasty."
+  },
+  {
+    "id": 14,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Sanchi_Stupa_from_the_Eastern_gateway.jpg",
+    "answer": "Sanchi Stupa",
+    "options": ["Sanchi Stupa", "Dhamek Stupa", "Kesariya Stupa", "Mahabodhi Temple"],
+    "hint": "A Buddhist complex, famous for its Great Stupa, on a hilltop at Sanchi in Madhya Pradesh.",
+    "fact": "It is one of the oldest stone structures in India, originally commissioned by Ashoka."
+  },
+  {
+    "id": 15,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/52/Mysore_Palace_Morning.jpg",
+    "answer": "Mysore Palace",
+    "options": ["Mysore Palace", "Bangalore Palace", "Umaid Bhawan", "City Palace"],
+    "hint": "A historical palace and a royal residence at Mysore in Karnataka.",
+    "fact": "It is one of the most famous tourist attractions in India, after the Taj Mahal."
+  },
+  {
+    "id": 16,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Ajanta_Caves_overall_view.jpg",
+    "answer": "Ajanta Caves",
+    "options": ["Ajanta Caves", "Ellora Caves", "Elephanta Caves", "Badami Caves"],
+    "hint": "Rock-cut Buddhist cave monuments dating from the 2nd century BCE to about 480 CE in Maharashtra.",
+    "fact": "The caves include paintings and rock-cut sculptures described as among the finest surviving examples of ancient Indian art."
+  },
+  {
+    "id": 17,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Bara_Imambara_Lucknow_India.jpg",
+    "answer": "Bara Imambara",
+    "options": ["Bara Imambara", "Chota Imambara", "Rumi Darwaza", "Jama Masjid"],
+    "hint": "An imambara complex in Lucknow, Uttar Pradesh, built by Asaf-ud-Daula.",
+    "fact": "It is famous for the incredible Bhulbhulaiya (labyrinth) located on the upper floor."
+  },
+  {
+    "id": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/91/Gol_Gumbaz_Bijapur_Karnataka_India.jpg",
+    "answer": "Gol Gumbaz",
+    "options": ["Gol Gumbaz", "Charminar", "Taj Mahal", "Humayun's Tomb"],
+    "hint": "The mausoleum of King Mohammed Adil Shah in Bijapur, Karnataka.",
+    "fact": "Its dome is the second largest in the world, and it has an amazing whispering gallery."
+  },
+  {
+    "id": 19,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Golconda_Fort.jpg",
+    "answer": "Golconda Fort",
+    "options": ["Golconda Fort", "Agra Fort", "Red Fort", "Gwalior Fort"],
+    "hint": "A fortified citadel and an early capital city of the Qutb Shahi dynasty in Hyderabad.",
+    "fact": "It is famous for its acoustic effects; a hand clap at the entrance can be heard at the highest pavilion."
+  },
+  {
+    "id": 20,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Tawang_Monastery.jpg",
+    "answer": "Tawang Monastery",
+    "options": ["Tawang Monastery", "Hemis Monastery", "Thiksey Monastery", "Rumtek Monastery"],
+    "hint": "Located in Arunachal Pradesh, it is the largest monastery in India.",
+    "fact": "Founded in 1680-1681, it is the second largest monastery in the world after the Potala Palace."
+  },
+  {
+    "id": 21,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Gwalior_Fort_View.jpg",
+    "answer": "Gwalior Fort",
+    "options": ["Gwalior Fort", "Chittorgarh Fort", "Kumbhalgarh", "Amber Fort"],
+    "hint": "An 8th-century hill fort near Gwalior, Madhya Pradesh.",
+    "fact": "Emperor Babur described it as 'the pearl amongst fortresses in India'."
+  },
+  {
+    "id": 22,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Chittorgarh_Fort_View.jpg",
+    "answer": "Chittorgarh Fort",
+    "options": ["Chittorgarh Fort", "Kumbhalgarh", "Mehrangarh Fort", "Gwalior Fort"],
+    "hint": "One of the largest forts in India, located in Rajasthan, known for the tales of Rani Padmini.",
+    "fact": "It sprawls over a hill 180 m in height spread over an area of 691.9 acres."
+  },
+  {
+    "id": 23,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Sun_Temple_Modhera_Gujarat.jpg",
+    "answer": "Modhera Sun Temple",
+    "options": ["Modhera Sun Temple", "Konark Sun Temple", "Somnath Temple", "Dwarkadhish Temple"],
+    "hint": "A Hindu temple dedicated to the solar deity Surya located in Gujarat.",
+    "fact": "It was built after 1026-27 CE during the reign of Bhima I of the Chaulukya dynasty."
+  },
+  {
+    "id": 24,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Brihadeeswarar_Temple_Thanjavur.jpg",
+    "answer": "Brihadisvara Temple",
+    "options": ["Brihadisvara Temple", "Meenakshi Temple", "Airavatesvara Temple", "Ramanathaswamy Temple"],
+    "hint": "A Hindu temple dedicated to Shiva located in Thanjavur, Tamil Nadu.",
+    "fact": "Built by Raja Raja Chola I between 1003 and 1010 CE, it is one of the largest South Indian temples."
+  },
+  {
+    "id": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Rani_ki_Vav_Patan.jpg",
+    "answer": "Rani ki Vav",
+    "options": ["Rani ki Vav", "Adalaj Stepwell", "Chand Baori", "Agrasen ki Baoli"],
+    "hint": "An intricately constructed stepwell situated in the town of Patan in Gujarat.",
+    "fact": "It is designed as an inverted temple highlighting the sanctity of water."
+  },
+  {
+    "id": 26,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Humayun%27s_Tomb_Delhi.jpg",
+    "answer": "Humayun's Tomb",
+    "options": ["Humayun's Tomb", "Safdarjung Tomb", "Taj Mahal", "Bibi Ka Maqbara"],
+    "hint": "The tomb of the Mughal Emperor Humayun in Delhi.",
+    "fact": "Built in 1570, it was the first garden-tomb on the Indian subcontinent."
+  },
+  {
+    "id": 27,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/05/Mahabodhi_Temple_Bodh_Gaya.jpg",
+    "answer": "Mahabodhi Temple",
+    "options": ["Mahabodhi Temple", "Sanchi Stupa", "Dhamek Stupa", "Kesariya Stupa"],
+    "hint": "An ancient, but much rebuilt and restored, Buddhist temple in Bodh Gaya.",
+    "fact": "It marks the location where the Buddha is said to have attained enlightenment."
+  }
+]
