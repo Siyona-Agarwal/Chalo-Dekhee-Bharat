@@ -48,11 +48,13 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
         src={nightUrl}
         alt={`${alt} at night`}
         loading="lazy"
+        draggable={false}
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%', objectFit: 'cover',
           opacity: mode === 'day' ? 0 : 1,
           transition: mode !== 'slider' ? 'opacity 0.5s ease' : 'none',
+          pointerEvents: 'none',
         }}
         onError={e => { e.target.src = dayUrl }}
       />
@@ -62,6 +64,7 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
         src={dayUrl}
         alt={`${alt} during day`}
         loading="lazy"
+        draggable={false}
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%', objectFit: 'cover',
@@ -69,6 +72,7 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
             ? `inset(0 ${100 - sliderPos}% 0 0)`
             : mode === 'day' ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
           transition: mode !== 'slider' ? 'clip-path 0.5s ease' : 'none',
+          pointerEvents: 'none',
         }}
       />
 
