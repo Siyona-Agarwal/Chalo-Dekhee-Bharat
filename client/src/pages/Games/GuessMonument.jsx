@@ -6,7 +6,7 @@ import { useXP } from '../../hooks/useXP.js'
 const ALL_QUESTIONS = [
   {
     id: 1,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg',
+    image: '/games/monument-1.jpg',
     answer: 'Taj Mahal',
     options: ['Taj Mahal', 'Humayun\'s Tomb', 'Itmad-ud-Daulah', 'Bibi Ka Maqbara'],
     hint: 'Built by Shah Jahan for his wife Mumtaz Mahal in Agra.',
@@ -14,7 +14,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 2,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Qutb_Minar_2009.jpg',
+    image: '/games/monument-2.jpg',
     answer: 'Qutb Minar',
     options: ['Qutb Minar', 'Charminar', 'Jantar Mantar', 'Fatehpur Sikri'],
     hint: 'World\'s tallest brick minaret, located in Delhi.',
@@ -22,7 +22,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 3,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Hawa_Mahal_Jaipur.jpg',
+    image: '/games/monument-3.jpg',
     answer: 'Hawa Mahal',
     options: ['Hawa Mahal', 'City Palace', 'Amber Fort', 'Umaid Bhawan'],
     hint: 'The "Palace of Winds" in Jaipur has 953 small windows.',
@@ -30,7 +30,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 4,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Golden_Temple%2C_Amritsar.jpg',
+    image: '/games/monument-4.jpg',
     answer: 'Golden Temple',
     options: ['Golden Temple', 'Akshardham', 'Lotus Temple', 'Somnath Temple'],
     hint: 'The holiest Sikh shrine, located in Amritsar, Punjab.',
@@ -38,7 +38,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 5,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Charminar_atnight.jpg',
+    image: '/games/monument-5.jpg',
     answer: 'Charminar',
     options: ['Charminar', 'Gateway of India', 'India Gate', 'Mysore Palace'],
     hint: 'A 16th-century mosque and monument with four minarets in Hyderabad.',
@@ -46,7 +46,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 6,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg',
+    image: '/games/monument-6.jpg',
     answer: 'Gateway of India',
     options: ['Gateway of India', 'Chhatrapati Shivaji Terminus', 'Flora Fountain', 'Bandra-Worli Sea Link'],
     hint: 'A basalt arch monument in Mumbai built to welcome King George V.',
@@ -54,7 +54,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 7,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/61/India_gate_on_a_cloudy_day.jpg',
+    image: '/games/monument-7.jpg',
     answer: 'India Gate',
     options: ['India Gate', 'Victory Tower', 'Buland Darwaza', 'Rashtrapati Bhavan'],
     hint: 'A war memorial on Rajpath, New Delhi, honouring 84,000 Indian soldiers.',
@@ -62,7 +62,7 @@ const ALL_QUESTIONS = [
   },
   {
     id: 8,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/74/Hampi_virupaksha_temple.jpg',
+    image: '/games/monument-8.jpg',
     answer: 'Virupaksha Temple, Hampi',
     options: ['Virupaksha Temple, Hampi', 'Brihadeeswarar Temple', 'Meenakshi Temple', 'Kailasa Temple, Ellora'],
     hint: 'A 7th-century Shiva temple in the ruins of Vijayanagara Empire, Karnataka.',
