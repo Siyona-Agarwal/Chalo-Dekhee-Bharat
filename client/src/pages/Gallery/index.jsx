@@ -1,102 +1,119 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import galleryData from '../../data/gallery.json'
 import DayNightSlider from './DayNightSlider.jsx'
+import PhotoCard from './PhotoCard.jsx'
 
 const CATEGORIES = ['All', 'Heritage', 'Nature', 'Wildlife', 'Food', 'Festivals']
 
 // Ambient sound URLs (royalty-free / silent placeholder)
-// NOTE: Using silent audio data URIs as placeholder. Replace with real royalty-free
-// audio files in /client/src/assets/audio/ before production.
-// A real implementation would crossfade Howler.js instances per category.
+// NOTE: Replace with real royalty-free audio files before production.
 const AMBIENT_SOUNDS = {
-  Heritage:  null, // e.g. '/assets/audio/ambient-heritage.mp3'
-  Nature:    null,
-  Wildlife:  null,
-  Food:      null,
+  Heritage: null,
+  Nature: null,
+  Wildlife: null,
+  Food: null,
   Festivals: null,
 }
 
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [bookmarkedId, setBookmarkedId] = useState(null)
-  const [isMuted, setIsMuted] = useState(true) // Default muted per good UX practice
+  const [isMuted, setIsMuted] = useState(true)
   const { passport, addToWishlist, removeFromWishlist } = usePassport()
 
-  const audioRef = useRef(null)
-
-  // Filter photos
   const photos = activeCategory === 'All'
     ? galleryData
-    : galleryData.filter(p => p.category === activeCategory)
+    : galleryData.filter((photo) => photo.category === activeCategory)
 
-  // Crossfade ambient audio on category change
   useEffect(() => {
     const src = AMBIENT_SOUNDS[activeCategory]
     if (!src || isMuted) return
-    // NOTE: With real audio files, use Howler.js for smooth crossfade.
-    // Current implementation: placeholder for when assets are available.
   }, [activeCategory, isMuted])
 
-  const isWishlisted = (photo) => passport.wishlist.some(w => w.id === photo.id)
+  const isWishlisted = (photo) => passport.wishlist.some((item) => item.id === photo.id)
 
   const toggleWishlist = (photo) => {
     if (isWishlisted(photo)) {
       removeFromWishlist(photo.id)
-    } else {
-      addToWishlist({
-        id: photo.id,
-        title: photo.title,
-        imageUrl: photo.imageUrl,
-        region: photo.region,
-        category: photo.category,
-      })
+      return
     }
+
+    addToWishlist({
+      id: photo.id,
+      title: photo.title,
+      imageUrl: photo.imageUrl,
+      region: photo.region,
+      category: photo.category,
+    })
   }
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }}>
+      <div
+        style={{
+          position: 'relative',
+          padding: '72px 24px 48px',
+          textAlign: 'center',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            background:
+              'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.09) 0%, transparent 55%), radial-gradient(ellipse at 70% 70%, rgba(56,189,248,0.07) 0%, transparent 50%)',
+          }}
+        />
 
-      {/* Hero */}
-      <div style={{
-        position: 'relative', padding: '72px 24px 48px',
-        textAlign: 'center', overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.09) 0%, transparent 55%), radial-gradient(ellipse at 70% 70%, rgba(56,189,248,0.07) 0%, transparent 50%)',
-        }} />
-
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <span style={{ fontSize: '3rem', display: 'block', marginBottom: '12px' }}>🖼️</span>
-          <h1 style={{
-            fontFamily: 'var(--font-display)', fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
-            fontWeight: '900', color: '#fff', margin: '0 0 12px',
-          }}>
+          <h1
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
+              fontWeight: '900',
+              color: '#fff',
+              margin: '0 0 12px',
+            }}
+          >
             Interactive Photo Gallery
           </h1>
-          <p style={{
-            fontFamily: 'var(--font-body)', fontSize: '1rem',
-            color: 'rgba(255,255,255,0.5)', maxWidth: '480px',
-            margin: '0 auto 24px', lineHeight: 1.7,
-          }}>
-            Discover India's visual soul — Heritage, Nature, Wildlife, Food, and Festivals.
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '1rem',
+              color: 'rgba(255,255,255,0.5)',
+              maxWidth: '480px',
+              margin: '0 auto 24px',
+              lineHeight: 1.7,
+            }}
+          >
+            Discover India&apos;s visual soul - Heritage, Nature, Wildlife, Food, and Festivals.
             Toggle <span style={{ color: '#fbbf24', fontWeight: '600' }}>Day/Night</span> views, and
             <span style={{ color: '#f472b6', fontWeight: '600' }}> bookmark</span> destinations to your Passport.
           </p>
 
-          {/* Audio control */}
           <button
-            onClick={() => setIsMuted(m => !m)}
+            onClick={() => setIsMuted((muted) => !muted)}
             aria-label={isMuted ? 'Unmute ambient sound' : 'Mute ambient sound'}
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '999px', padding: '6px 16px',
+              borderRadius: '999px',
+              padding: '6px 16px',
               color: 'rgba(255,255,255,0.5)',
-              fontFamily: 'var(--font-body)', fontSize: '0.82rem',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.82rem',
               cursor: 'pointer',
             }}
           >
@@ -105,55 +122,64 @@ export default function Gallery() {
         </motion.div>
       </div>
 
-      {/* Category tabs */}
-      <div style={{
-        position: 'sticky', top: '64px', zIndex: 100,
-        background: 'rgba(15,14,23,0.9)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
-        padding: '0 24px',
-      }}>
-        <div style={{
-          maxWidth: '1100px', margin: '0 auto',
-          display: 'flex', gap: '4px',
-          overflowX: 'auto', padding: '12px 0',
-          scrollbarWidth: 'none',
-        }}>
-          {CATEGORIES.map(cat => (
+      <div
+        style={{
+          position: 'sticky',
+          top: '64px',
+          zIndex: 100,
+          background: 'rgba(15,14,23,0.9)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          padding: '0 24px',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '1100px',
+            margin: '0 auto',
+            display: 'flex',
+            gap: '4px',
+            overflowX: 'auto',
+            padding: '12px 0',
+            scrollbarWidth: 'none',
+          }}
+        >
+          {CATEGORIES.map((category) => (
             <motion.button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={category}
+              onClick={() => setActiveCategory(category)}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              aria-pressed={activeCategory === cat}
+              aria-pressed={activeCategory === category}
               style={{
                 padding: '7px 18px',
                 borderRadius: '10px',
                 border: 'none',
-                background: activeCategory === cat
-                  ? 'linear-gradient(135deg, #FF6B2B, #f59e0b)'
-                  : 'rgba(255,255,255,0.06)',
-                color: activeCategory === cat ? '#fff' : 'rgba(255,255,255,0.55)',
+                background:
+                  activeCategory === category
+                    ? 'linear-gradient(135deg, #FF6B2B, #f59e0b)'
+                    : 'rgba(255,255,255,0.06)',
+                color: activeCategory === category ? '#fff' : 'rgba(255,255,255,0.55)',
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.87rem',
-                fontWeight: activeCategory === cat ? '700' : '400',
+                fontWeight: activeCategory === category ? '700' : '400',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.2s',
               }}
             >
-              {cat === 'All' && '✨ '}
-              {cat === 'Heritage' && '🏛️ '}
-              {cat === 'Nature' && '🌿 '}
-              {cat === 'Wildlife' && '🐯 '}
-              {cat === 'Food' && '🍛 '}
-              {cat === 'Festivals' && '🎊 '}
-              {cat}
+              {category === 'All' && '✨ '}
+              {category === 'Heritage' && '🏛️ '}
+              {category === 'Nature' && '🌿 '}
+              {category === 'Wildlife' && '🐯 '}
+              {category === 'Food' && '🍛 '}
+              {category === 'Festivals' && '🎊 '}
+              {category}
             </motion.button>
           ))}
         </div>
       </div>
 
-      {/* Photo masonry grid */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
         <AnimatePresence mode="wait">
           <motion.div
@@ -167,11 +193,11 @@ export default function Gallery() {
               columnGap: '20px',
             }}
           >
-            {photos.map((photo, i) => (
+            {photos.map((photo, index) => (
               <PhotoCard
                 key={photo.id}
                 photo={photo}
-                index={i}
+                index={index}
                 isWishlisted={isWishlisted(photo)}
                 onToggleWishlist={() => toggleWishlist(photo)}
               />
@@ -189,8 +215,7 @@ export default function Gallery() {
   )
 }
 
-/* ── PhotoCard ─────────────────────────────────────────────────── */
-function PhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
+function LegacyPhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -211,8 +236,10 @@ function PhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      tabIndex={0}
     >
-      {/* Day/Night slider (only for photos with both images) */}
       {photo.hasDayNight && photo.nightImageUrl ? (
         <DayNightSlider
           dayUrl={photo.dayImageUrl}
@@ -220,11 +247,13 @@ function PhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
           alt={photo.title}
         />
       ) : (
-        /* Regular image with zoom on hover */
-        <div style={{
-          width: '100%', overflow: 'hidden',
-          position: 'relative',
-        }}>
+        <div
+          style={{
+            width: '100%',
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
           <motion.img
             src={photo.imageUrl}
             alt={photo.title}
@@ -232,91 +261,97 @@ function PhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
             animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{ width: '100%', display: 'block', objectFit: 'cover' }}
-            onError={e => {
+            onError={(e) => {
               e.target.src = `https://placehold.co/400x300/1a1825/FF6B2B?text=${encodeURIComponent(photo.title)}`
             }}
           />
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(to top, rgba(15,14,23,0.75) 0%, transparent 55%)',
-          }} />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(15,14,23,0.75) 0%, transparent 55%)',
+            }}
+          />
         </div>
       )}
 
-      {/* Caption overlay — appears on hover */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.2 }}
+      <motion.div
+        aria-hidden="true"
+        animate={{ opacity: hovered ? 1 : 0.78 }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: '52%',
+          background:
+            'linear-gradient(to top, rgba(9,8,14,0.9) 0%, rgba(9,8,14,0.42) 52%, transparent 100%)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
+
+      <motion.div
+        animate={{
+          y: hovered && photo.description ? -42 : 0,
+          backgroundColor: hovered ? 'rgba(15,14,23,0.66)' : 'rgba(15,14,23,0.58)',
+        }}
+        transition={{ duration: 0.24, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          left: '12px',
+          right: '12px',
+          bottom: '12px',
+          minHeight: '54px',
+          padding: '9px 10px 9px 12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '10px',
+          background: 'rgba(15,14,23,0.58)',
+          borderRadius: '12px',
+          border: '1px solid rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(8px)',
+          overflow: 'hidden',
+          zIndex: 3,
+        }}
+      >
+        <div style={{ minWidth: 0 }}>
+          <div
             style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(15,14,23,0.92) 0%, rgba(15,14,23,0.3) 60%, transparent 100%)',
-              display: 'flex', flexDirection: 'column',
-              justifyContent: 'flex-end',
-              padding: '16px',
-              pointerEvents: 'none',
+              fontFamily: 'var(--font-display)',
+              fontSize: '0.92rem',
+              fontWeight: '600',
+              color: '#fff',
             }}
           >
-            <div style={{
-              fontFamily: 'var(--font-display)', fontSize: '1rem',
-              fontWeight: '700', color: '#fff', marginBottom: '4px',
-            }}>
-              {photo.title}
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-body)', fontSize: '0.78rem',
-              color: 'rgba(255,255,255,0.55)',
-            }}>
-              📍 {photo.region}
-            </div>
-            {photo.description && (
-              <div style={{
-                fontFamily: 'var(--font-body)', fontSize: '0.78rem',
-                color: 'rgba(255,255,255,0.45)', marginTop: '6px',
-                lineHeight: 1.5,
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-              }}>
-                {photo.description}
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Always-visible bottom info bar */}
-      <div style={{
-        padding: '14px 16px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        gap: '8px',
-        background: 'rgba(15,14,23,0.6)',
-      }}>
-        <div>
-          <div style={{
-            fontFamily: 'var(--font-display)', fontSize: '0.92rem',
-            fontWeight: '600', color: '#fff',
-          }}>
             {photo.title}
           </div>
-          <div style={{
-            fontFamily: 'var(--font-body)', fontSize: '0.72rem',
-            color: 'rgba(255,255,255,0.4)', marginTop: '2px',
-          }}>
+          <div
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.72rem',
+              color: 'rgba(255,255,255,0.4)',
+              marginTop: '2px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
             {photo.region}
           </div>
         </div>
 
-        {/* Bookmark button */}
         <motion.button
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.85 }}
           onClick={onToggleWishlist}
-          aria-label={isWishlisted ? `Remove ${photo.title} from wishlist` : `Add ${photo.title} to wishlist`}
+          aria-label={
+            isWishlisted
+              ? `Remove ${photo.title} from wishlist`
+              : `Add ${photo.title} to wishlist`
+          }
           aria-pressed={isWishlisted}
           style={{
             background: isWishlisted ? 'rgba(244,114,182,0.15)' : 'rgba(255,255,255,0.06)',
@@ -332,7 +367,39 @@ function PhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
         >
           {isWishlisted ? '❤️' : '🤍'}
         </motion.button>
-      </div>
+      </motion.div>
+
+      {photo.description && (
+        <motion.p
+          initial={false}
+          animate={{
+            opacity: hovered ? 1 : 0,
+            y: hovered ? 0 : 6,
+          }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            left: '24px',
+            right: '24px',
+            bottom: '15px',
+            height: '34px',
+            margin: 0,
+            fontFamily: 'var(--font-body)',
+            fontSize: '0.72rem',
+            color: 'rgba(255,255,255,0.76)',
+            lineHeight: 1.45,
+            textShadow: '0 1px 8px rgba(0,0,0,0.9)',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            pointerEvents: 'none',
+            zIndex: 2,
+          }}
+        >
+          {photo.description}
+        </motion.p>
+      )}
     </motion.div>
   )
 }
