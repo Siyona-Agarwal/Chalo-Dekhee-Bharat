@@ -4,6 +4,8 @@ import { ClerkProvider } from '@clerk/react'
 import App from './App.jsx'
 import './index.css'
 
+import { ui } from '@clerk/ui'
+
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!publishableKey) {
@@ -12,7 +14,7 @@ if (!publishableKey) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={publishableKey} afterSignOutUrl="/">
+    <ClerkProvider publishableKey={publishableKey} afterSignOutUrl="/" ui={ui}>
       <App />
     </ClerkProvider>
   </React.StrictMode>,

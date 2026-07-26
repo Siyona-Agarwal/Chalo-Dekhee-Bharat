@@ -23,6 +23,7 @@ export default function XPToast() {
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
+            layout
             key={toast.id}
             role="status"
             aria-atomic="true"

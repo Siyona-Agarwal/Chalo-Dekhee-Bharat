@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { usePassport } from '../context/PassportContext.jsx'
 import BadgeCard from '../components/BadgeCard.jsx'
+import PassportStamp from '../components/PassportStamp.jsx'
 import allBadges from '../data/badges.json'
 
 const LEVEL_COLORS = {
@@ -271,25 +272,22 @@ export default function PassportDashboard() {
   }
 
   const renderBadgesContent = () => {
-    const renderList = (badgesChunk) => (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginTop: '16px' }}>
-        {badgesChunk.map(badge => {
+    const renderList = (badgesChunk, startIndex) => (
+      <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '300px' }}>
+        {badgesChunk.map((badge, i) => {
           const earned = earnedBadgeIds.has(badge.id)
           return (
-            <div key={badge.id} style={{
-              border: `1px dashed ${earned ? '#1e3a8a' : '#cbd5e1'}`, borderRadius: '6px', padding: '16px 8px',
-              textAlign: 'center', opacity: earned ? 1 : 0.4, filter: earned ? 'none' : 'grayscale(1)',
-              background: earned ? 'rgba(30,58,138,0.03)' : 'transparent',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <div style={{ fontSize: '2.4rem' }}>{badge.icon}</div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '700', color: '#1e3a8a', marginTop: '8px', lineHeight: 1.2 }}>{badge.name}</div>
-            </div>
+            <PassportStamp 
+              key={badge.id} 
+              badge={badge} 
+              index={startIndex + i} 
+              earned={earned} 
+            />
           )
         })}
       </div>
     )
-    return [renderList(allBadges.slice(0, 6)), renderList(allBadges.slice(6, 12))]
+    return [renderList(allBadges.slice(0, 6), 0), renderList(allBadges.slice(6, 12), 6)]
   }
 
   return (

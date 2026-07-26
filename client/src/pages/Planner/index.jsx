@@ -200,7 +200,7 @@ export default function Planner() {
           className="indian-motif-bg"
         >
           {/* Origin and Destination */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
             <div>
               <label htmlFor="planner-origin" style={labelStyle}>🏠 Starting City</label>
               <input
@@ -255,7 +255,7 @@ export default function Planner() {
           </div>
 
           {/* Days, Month, Travelers row */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
             <div>
               <label htmlFor="planner-days" style={labelStyle}>📅 Days</label>
               <input
@@ -292,7 +292,7 @@ export default function Planner() {
           </div>
 
           {/* Accommodation, Diet, Pace, Budget rows */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
             <div>
               <label htmlFor="planner-accommodation" style={labelStyle}>🏨 Accommodation</label>
               <select

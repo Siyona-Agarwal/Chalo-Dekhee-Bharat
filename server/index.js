@@ -99,8 +99,8 @@ app.use((req, res) => {
 // ── Global error handler ─────────────────────────────────────────────────────
 // NOTE(security): Never expose stack traces or internal errors to the client.
 app.use((err, req, res, _next) => {
-  console.error('[Server Error]', err.message)
-  res.status(500).json({ error: 'An internal error occurred. Please try again.' })
+  console.error('[Server Error]', err)
+  res.status(500).json({ error: 'An internal error occurred. Please try again.', details: err.message })
 })
 
 // ── Start server ─────────────────────────────────────────────────────────────

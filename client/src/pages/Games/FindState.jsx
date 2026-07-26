@@ -160,15 +160,16 @@ export default function FindState({ onBack, onComplete }) {
             </div>
           </div>
 
-          {/* Map Area */}
+          {/* Map Area - Scrollable on mobile for better touch targets */}
           <div style={{
-            width: '100%', maxWidth: '400px', height: 'auto',
+            width: '100%', maxWidth: '600px', height: '400px',
             background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '16px', overflow: 'hidden', padding: '10px'
+            borderRadius: '16px', overflow: 'auto', padding: '10px',
+            WebkitOverflowScrolling: 'touch', // Smooth scroll on iOS
           }}>
             <svg 
               viewBox={indiaMapData.viewBox} 
-              style={{ width: '100%', height: 'auto', filter: 'drop-shadow(0px 4px 10px rgba(0,0,0,0.3))' }}
+              style={{ width: '100%', minWidth: '500px', height: 'auto', filter: 'drop-shadow(0px 4px 10px rgba(0,0,0,0.3))' }}
             >
               {indiaMapData.locations.map((loc) => {
                 const isTarget = loc.id === target.id;

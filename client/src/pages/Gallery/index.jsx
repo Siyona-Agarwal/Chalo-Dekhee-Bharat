@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { Howl, Howler } from 'howler'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import galleryData from '../../data/gallery.json'
@@ -7,14 +8,12 @@ import PhotoCard from './PhotoCard.jsx'
 
 const CATEGORIES = ['All', 'Heritage', 'Nature', 'Wildlife', 'Food', 'Festivals']
 
-// Ambient sound URLs (royalty-free / silent placeholder)
-// NOTE: Replace with real royalty-free audio files before production.
 const AMBIENT_SOUNDS = {
-  Heritage: null,
-  Nature: null,
-  Wildlife: null,
-  Food: null,
-  Festivals: null,
+  Heritage: 'https://actions.google.com/sounds/v1/ambiences/warm_afternoon_outdoors.ogg',
+  Nature: 'https://actions.google.com/sounds/v1/water/waves_crashing_on_rock_beach.ogg',
+  Wildlife: 'https://actions.google.com/sounds/v1/ambiences/jungle_atmosphere_morning.ogg',
+  Food: 'https://actions.google.com/sounds/v1/ambiences/small_outdoor_marketplace.ogg',
+  Festivals: 'https://actions.google.com/sounds/v1/ambiences/carnival_atmosphere.ogg',
 }
 
 export default function Gallery() {
@@ -26,10 +25,52 @@ export default function Gallery() {
     ? galleryData
     : galleryData.filter((photo) => photo.category === activeCategory)
 
+  const currentHowlRef = useRef(null)
+
+  // Mute/Unmute toggle
+  useEffect(() => {
+    Howler.mute(isMuted)
+  }, [isMuted])
+
+  // Handle category change crossfade
   useEffect(() => {
     const src = AMBIENT_SOUNDS[activeCategory]
-    if (!src || isMuted) return
-  }, [activeCategory, isMuted])
+    const oldHowl = currentHowlRef.current
+
+    // Don't re-trigger if same sound
+    if (oldHowl && oldHowl._src === src) return
+
+    const newHowl = src ? new Howl({
+      src: [src],
+      loop: true,
+      volume: 0,
+      html5: true, // Use HTML5 Audio to avoid preloading entire ambient tracks
+    }) : null
+
+    // Crossfade out the old sound
+    if (oldHowl) {
+      oldHowl.fade(1.0, 0, 1000)
+      setTimeout(() => oldHowl.unload(), 1000)
+    }
+
+    // Crossfade in the new sound
+    if (newHowl) {
+      // Need to save the original src in case we want to check it later, 
+      // though _src is an internal Howler property, we can assign it securely:
+      newHowl._src = src 
+      newHowl.play()
+      newHowl.fade(0, 1.0, 1000)
+    }
+
+    currentHowlRef.current = newHowl
+  }, [activeCategory])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      Howler.unload() // Stop and unload all sounds when leaving Gallery
+    }
+  }, [])
 
   const isWishlisted = (photo) => passport.wishlist.some((item) => item.id === photo.id)
 
