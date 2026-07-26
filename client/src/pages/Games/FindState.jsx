@@ -1,47 +1,11 @@
 import React, { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useXP } from '../../hooks/useXP.js'
-import statesData from '../../data/states.json'
+import indiaMapData from '../../data/indiaMapData.js'
 import { GameShell, GameComplete } from './GuessMonument.jsx'
 
-const QUIZ_STATES = [
-  'rajasthan', 'kerala', 'west-bengal', 'gujarat', 'karnataka',
-  'maharashtra', 'tamil-nadu', 'uttar-pradesh', 'punjab', 'assam',
-]
-
-// Approximate coordinates on a 400x450 scale based on a standard India map
-const STATE_COORDS = [
-  { id: 'jammu-kashmir',    label: 'J&K',    cx: 155, cy: 55  },
-  { id: 'himachal-pradesh', label: 'HP',     cx: 184, cy: 65  },
-  { id: 'punjab',           label: 'PB',     cx: 168, cy: 85  },
-  { id: 'uttarakhand',      label: 'UK',     cx: 208, cy: 85  },
-  { id: 'haryana',          label: 'HR',     cx: 184, cy: 100 },
-  { id: 'delhi',            label: 'DL',     cx: 195, cy: 105 },
-  { id: 'rajasthan',        label: 'RJ',     cx: 142, cy: 135 },
-  { id: 'uttar-pradesh',    label: 'UP',     cx: 227, cy: 125 },
-  { id: 'bihar',            label: 'BR',     cx: 285, cy: 125 },
-  { id: 'sikkim',           label: 'SK',     cx: 317, cy: 95  },
-  { id: 'arunachal-pradesh',label: 'AR',     cx: 373, cy: 87  },
-  { id: 'nagaland',         label: 'NL',     cx: 380, cy: 105 },
-  { id: 'manipur',          label: 'MN',     cx: 380, cy: 125 },
-  { id: 'mizoram',          label: 'MZ',     cx: 368, cy: 140 },
-  { id: 'tripura',          label: 'TR',     cx: 350, cy: 140 },
-  { id: 'meghalaya',        label: 'ML',     cx: 338, cy: 115 },
-  { id: 'assam',            label: 'AS',     cx: 348, cy: 105 },
-  { id: 'west-bengal',      label: 'WB',     cx: 317, cy: 152 },
-  { id: 'jharkhand',        label: 'JH',     cx: 288, cy: 155 },
-  { id: 'odisha',           label: 'OD',     cx: 290, cy: 192 },
-  { id: 'chhattisgarh',     label: 'CG',     cx: 250, cy: 186 },
-  { id: 'madhya-pradesh',   label: 'MP',     cx: 200, cy: 168 },
-  { id: 'gujarat',          label: 'GJ',     cx: 102, cy: 170 },
-  { id: 'maharashtra',      label: 'MH',     cx: 173, cy: 218 },
-  { id: 'goa',              label: 'GA',     cx: 145, cy: 268 },
-  { id: 'karnataka',        label: 'KA',     cx: 172, cy: 290 },
-  { id: 'telangana',        label: 'TG',     cx: 220, cy: 232 },
-  { id: 'andhra-pradesh',   label: 'AP',     cx: 235, cy: 273 },
-  { id: 'tamil-nadu',       label: 'TN',     cx: 218, cy: 343 },
-  { id: 'kerala',           label: 'KL',     cx: 177, cy: 350 },
-]
+const QUIZ_STATES = ['rj', 'kl', 'wb', 'gj', 'ka', 'mh', 'tn', 'up', 'pb', 'as']
+const TOTAL_ROUNDS = 8
 
 function shuffle(arr) {
   const a = [...arr]
@@ -52,14 +16,12 @@ function shuffle(arr) {
   return a
 }
 
-const TOTAL_ROUNDS = 8
-
 export default function FindState({ onBack, onComplete }) {
   const { addXP } = useXP()
 
   const rounds = useMemo(() => {
-    const pool = statesData.filter(s => QUIZ_STATES.includes(s.id))
-    return shuffle(pool).slice(0, TOTAL_ROUNDS)
+    const pool = indiaMapData.locations.filter(l => QUIZ_STATES.includes(l.id))
+    return shuffle(pool).map(l => ({ id: l.id, label: l.name })).slice(0, TOTAL_ROUNDS)
   }, [])
 
   const [current, setCurrent] = useState(0)
@@ -120,67 +82,56 @@ export default function FindState({ onBack, onComplete }) {
 
           {/* Map Area */}
           <div style={{
-            position: 'relative', width: '100%', maxWidth: '400px', height: '450px',
+            width: '100%', maxWidth: '400px', height: 'auto',
             background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '16px', overflow: 'hidden'
+            borderRadius: '16px', overflow: 'hidden', padding: '10px'
           }}>
-            {/* Base Map Image - A minimalist blank map of India */}
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/d/dc/India_location_map.svg" 
-              alt="Map of India"
-              style={{ width: '100%', height: '100%', objectFit: 'contain', opacity: 0.6 }} 
-              draggable={false}
-            />
+            <svg 
+              viewBox={indiaMapData.viewBox} 
+              style={{ width: '100%', height: 'auto', filter: 'drop-shadow(0px 4px 10px rgba(0,0,0,0.3))' }}
+            >
+              {indiaMapData.locations.map((loc) => {
+                const isTarget = loc.id === target.id;
+                const isClicked = clicked === loc.id;
+                const isCorrect = isClicked && isTarget;
+                const isWrong = isClicked && !isTarget;
+                
+                let fill = 'rgba(255,255,255,0.15)'; // base state color
+                let stroke = 'rgba(255,255,255,0.3)'; // base border
 
-            {/* Clickable Overlay Pins */}
-            {STATE_COORDS.map((state) => {
-              const isTarget = state.id === target.id;
-              const isClicked = clicked === state.id;
-              const isCorrect = isClicked && isTarget;
-              const isWrong = isClicked && !isTarget;
-              
-              let bg = 'rgba(255,255,255,0.15)';
-              let borderColor = 'rgba(255,255,255,0.3)';
-              
-              if (clicked) {
-                if (isTarget) {
-                  bg = '#4ade80';
-                  borderColor = '#fff';
-                } else if (isWrong) {
-                  bg = '#f87171';
-                  borderColor = '#fff';
-                } else {
-                  bg = 'transparent';
-                  borderColor = 'transparent';
+                // Show correct/wrong after click
+                if (clicked) {
+                  if (isTarget) {
+                    fill = '#4ade80'; // Target lights up green
+                    stroke = '#22c55e';
+                  } else if (isWrong) {
+                    fill = '#f87171'; // Wrong click lights up red
+                    stroke = '#ef4444';
+                  } else {
+                    fill = 'rgba(255,255,255,0.05)'; // Fade out others
+                    stroke = 'rgba(255,255,255,0.1)';
+                  }
                 }
-              }
 
-              return (
-                <motion.button
-                  key={state.id}
-                  onClick={() => handleClick(state.id)}
-                  disabled={clicked !== null}
-                  whileHover={!clicked ? { scale: 1.5, background: 'rgba(167,139,250,0.8)' } : {}}
-                  whileTap={!clicked ? { scale: 0.9 } : {}}
-                  title={state.label}
-                  style={{
-                    position: 'absolute',
-                    left: `${(state.cx / 400) * 100}%`,
-                    top: `${(state.cy / 450) * 100}%`,
-                    width: '16px', height: '16px',
-                    marginLeft: '-8px', marginTop: '-8px', // Center the dot
-                    borderRadius: '50%',
-                    background: bg,
-                    border: `2px solid ${borderColor}`,
-                    cursor: clicked ? 'default' : 'pointer',
-                    outline: 'none',
-                    padding: 0,
-                    transition: 'all 0.2s',
-                    zIndex: isTarget && clicked ? 10 : 1,
-                  }}
-                />
-              )
-            })}
+                return (
+                  <motion.path
+                    key={loc.id}
+                    d={loc.path}
+                    fill={fill}
+                    stroke={stroke}
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                    onClick={() => handleClick(loc.id)}
+                    whileHover={!clicked ? { fill: 'rgba(167,139,250,0.8)', stroke: '#fff', cursor: 'pointer' } : {}}
+                    whileTap={!clicked ? { scale: 0.98 } : {}}
+                    style={{
+                      transition: 'fill 0.2s, stroke 0.2s',
+                      outline: 'none',
+                    }}
+                  />
+                )
+              })}
+            </svg>
           </div>
 
           {/* Feedback */}
