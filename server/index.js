@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
+const { clerkMiddleware, getAuth } = require('@clerk/express')
 const plannerRouter = require('./routes/planner')
 
 const app = express()
@@ -21,9 +22,14 @@ app.use(cors({
     return callback(new Error(`CORS: Origin ${origin} not allowed`))
   },
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  // Authorization is required for Clerk bearer tokens on protected API calls.
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: false,
 }))
+
+// Clerk parses incoming session cookies and bearer tokens. Public routes stay public;
+// individual routes below explicitly decide whether authentication is required.
+app.use(clerkMiddleware())
 
 // ── Body parsing ────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '50kb' })) // Limit body size to prevent DoS
@@ -70,6 +76,17 @@ function rateLimiter(req, res, next) {
 // ── Routes ──────────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
+// Minimal protected endpoint for the account page and future user-specific features.
+app.get('/api/account/me', (req, res) => {
+  const { isAuthenticated, userId } = getAuth(req)
+
+  if (!isAuthenticated || !userId) {
+    return res.status(401).json({ error: 'Authentication is required.' })
+  }
+
+  return res.json({ userId })
 })
 
 app.use('/api', rateLimiter, plannerRouter)

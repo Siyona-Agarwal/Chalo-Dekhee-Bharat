@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Show, UserButton } from '@clerk/react'
 import PassportWidget from './PassportWidget.jsx'
 
 const NAV_LINKS = [
@@ -112,6 +113,25 @@ export default function Navbar() {
         <PassportWidget />
       </div>
 
+      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }} className="hidden-mobile">
+        <Show when="signed-out">
+          <Link
+            to="/sign-in"
+            style={{
+              color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-body)',
+              fontSize: '0.85rem', fontWeight: '600', padding: '8px 13px',
+              border: '1px solid rgba(255,107,43,0.55)', borderRadius: '9px',
+              background: 'rgba(255,107,43,0.1)',
+            }}
+          >
+            Sign in
+          </Link>
+        </Show>
+        <Show when="signed-in">
+          <UserButton afterSignOutUrl="/" />
+        </Show>
+      </div>
+
       {/* Mobile Hamburger */}
       <button
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -184,6 +204,34 @@ export default function Navbar() {
             <div style={{ paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
               <PassportWidget />
             </div>
+            <Show when="signed-out">
+              <Link
+                to="/sign-in"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  textDecoration: 'none', padding: '10px 16px', borderRadius: '10px',
+                  fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: '600',
+                  color: '#fff', background: 'rgba(255,107,43,0.14)',
+                  border: '1px solid rgba(255,107,43,0.32)', textAlign: 'center',
+                }}
+              >
+                Sign in to your journey
+              </Link>
+            </Show>
+            <Show when="signed-in">
+              <Link
+                to="/account"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  textDecoration: 'none', padding: '10px 16px', borderRadius: '10px',
+                  fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: '600',
+                  color: '#fff', background: 'rgba(255,107,43,0.14)',
+                  border: '1px solid rgba(255,107,43,0.32)', textAlign: 'center',
+                }}
+              >
+                My account
+              </Link>
+            </Show>
           </motion.div>
         )}
       </AnimatePresence>

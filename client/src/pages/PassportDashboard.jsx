@@ -19,6 +19,14 @@ const ERA_INK_COLORS = {
   'modern':   'rgba(2, 132, 199, 0.75)',
 }
 
+const PLAYFUL_BLOOD_TYPES = ['UNICORN', 'SHREK', 'TITAN', 'ALIEN']
+
+function getDefaultBloodType(userKey = '') {
+  const seed = Array.from(userKey).reduce((sum, char) => sum + char.charCodeAt(0), 0)
+  if (seed % 17 === 0) return 'ALIEN'
+  return PLAYFUL_BLOOD_TYPES[seed % 3]
+}
+
 const bioPaperBg = `
   repeating-linear-gradient(45deg, rgba(56,189,248,0.03) 0, rgba(56,189,248,0.03) 1px, transparent 1px, transparent 10px),
   repeating-linear-gradient(-45deg, rgba(244,114,182,0.02) 0, rgba(244,114,182,0.02) 1px, transparent 1px, transparent 10px),
@@ -46,6 +54,14 @@ const Watermark = ({ size, top = '50%', opacity = 0.05 }) => (
 export default function PassportDashboard() {
   const { passport, level } = usePassport()
   const xp = passport.xp || 0
+  const identity = passport.identity || {}
+  const passportFirstName = identity.firstName?.trim() || level.name
+  const passportLastName = identity.lastName?.trim() || 'Wanderer'
+  const passportBloodType = identity.bloodType?.trim().toUpperCase() || getDefaultBloodType(identity.clerkUserId)
+  const passportCountryCode = identity.countryCode?.trim().toUpperCase() || (passportBloodType === 'ALIEN' ? 'SPC' : 'ERT')
+  const mrzFirstName = passportFirstName.toUpperCase().replace(/[^A-Z0-9]/g, '<')
+  const mrzLastName = passportLastName.toUpperCase().replace(/[^A-Z0-9]/g, '<')
+  const mrzCountry = passportCountryCode.replace(/[^A-Z0-9]/g, '').slice(0, 3).padEnd(3, '<')
   const levelColor = LEVEL_COLORS[level.name] || '#1e3a8a'
   const earnedBadgeIds = new Set(passport.badges.map(b => b.id))
 
@@ -184,10 +200,10 @@ export default function PassportDashboard() {
             </div>
             
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignContent: 'start', fontFamily: 'var(--font-body)' }}>
-              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>टाईप / Type</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>P</div></div>
-              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>राष्ट्र कोड / Country Code</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>IND</div></div>
-              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>उपनाम / Surname</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>EXPLORER</div></div>
-              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>दिया गया नाम / Given Name(s)</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>{level.name.toUpperCase()}</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>टाईप / Type</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>{passportBloodType}</div></div>
+              <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>राष्ट्र कोड / Country Code</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>{passportCountryCode}</div></div>
+              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>उपनाम / Surname</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>{passportLastName.toUpperCase()}</div></div>
+              <div style={{ gridColumn: '1 / -1' }}><div style={{ fontSize: '0.6rem', color: '#64748b' }}>दिया गया नाम / Given Name(s)</div><div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#1e3a8a' }}>{passportFirstName.toUpperCase()}</div></div>
               <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>राष्ट्रीयता / Nationality</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>INDIAN</div></div>
               <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>कुल एक्स.पी. / Total XP</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>{xp}</div></div>
               <div><div style={{ fontSize: '0.6rem', color: '#64748b' }}>जारी करने का स्थान / Place of Issue</div><div style={{ fontWeight: '700', color: '#1e3a8a' }}>CHALO DEKHE BHARAT</div></div>
@@ -200,8 +216,8 @@ export default function PassportDashboard() {
             color: '#1e3a8a', letterSpacing: '0.15em', fontWeight: '700', lineHeight: 1.4,
             position: 'relative', zIndex: 1
           }}>
-            P&lt;INDEXPLORER&lt;&lt;{level.name.toUpperCase().replace(' ', '&lt;')}&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br/>
-            {xp.toString().padStart(8, '0')}&lt;4IND2607264M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06
+            P&lt;{mrzCountry}{mrzLastName}&lt;&lt;{mrzFirstName}&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br/>
+            {xp.toString().padStart(8, '0')}&lt;4{mrzCountry}2607264M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06
           </div>
         </div>
       )

@@ -29,6 +29,14 @@ export function deriveLevel(xp) {
 
 // ── Default Passport State ───────────────────────────────────────────────────
 const DEFAULT_PASSPORT = {
+  identity: {
+    clerkUserId: '',
+    firstName: '',
+    lastName: '',
+    bloodType: '',
+    countryCode: '',
+    completedAt: null,
+  },
   xp: 0,
   badges: [],       // [{ id, name, icon, earnedAt }]
   stamps: [],       // [{ eraId, name, earnedAt }]
@@ -118,6 +126,21 @@ export function PassportProvider({ children }) {
     })
   }, [setPassport])
 
+  const updateIdentity = useCallback((identity) => {
+    setPassport(prev => ({
+      ...prev,
+      identity: {
+        ...(prev.identity || DEFAULT_PASSPORT.identity),
+        clerkUserId: identity.clerkUserId || '',
+        firstName: identity.firstName?.trim() || '',
+        lastName: identity.lastName?.trim() || '',
+        bloodType: identity.bloodType?.trim() || '',
+        countryCode: identity.countryCode?.trim().toUpperCase() || '',
+        completedAt: new Date().toISOString(),
+      },
+    }))
+  }, [setPassport])
+
   const resetPassport = useCallback(() => {
     setPassport(DEFAULT_PASSPORT)
     pushToast('🔄 Passport Reset')
@@ -137,6 +160,7 @@ export function PassportProvider({ children }) {
     removeFromWishlist,
     savePlannerResult,
     markStateVisited,
+    updateIdentity,
     resetPassport,
   }
 
