@@ -21,7 +21,7 @@ export default function Planner() {
     destination: '',
     days: 3,
     budget: 'Comfort',
-    style: 'Cultural',
+    style: ['Cultural'],
     interests: [],
   })
   const [loading, setLoading] = useState(false)
@@ -32,6 +32,19 @@ export default function Planner() {
   const destInfo = destinations.find(d =>
     d.name.toLowerCase() === form.destination.toLowerCase()
   )
+
+  const handleStyleToggle = (styleName) => {
+    setForm(f => {
+      const current = Array.isArray(f.style) ? f.style : [f.style]
+      const exists = current.includes(styleName)
+      if (exists) {
+        if (current.length === 1) return f // Keep at least one selected
+        return { ...f, style: current.filter(s => s !== styleName) }
+      } else {
+        return { ...f, style: [...current, styleName] }
+      }
+    })
+  }
 
   const handleInterestToggle = (interest) => {
     setForm(f => ({
@@ -77,7 +90,7 @@ export default function Planner() {
         destination: form.destination.trim(),
         days: Number(form.days),
         budget: form.budget,
-        style: form.style,
+        style: Array.isArray(form.style) ? form.style.join(', ') : form.style,
         generatedAt: new Date().toISOString(),
         summary: data.summary || '',
       })
@@ -247,25 +260,31 @@ export default function Planner() {
 
           {/* Travel Style */}
           <div>
-            <label style={labelStyle}>🎨 Travel Style</label>
+            <label style={labelStyle}>🎨 Travel Style (pick one or more)</label>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
-              {STYLES.map(s => (
-                <button
-                  key={s}
-                  onClick={() => setForm(f => ({ ...f, style: s }))}
-                  aria-pressed={form.style === s}
-                  style={{
-                    padding: '6px 14px', borderRadius: '999px',
-                    border: `1px solid ${form.style === s ? 'rgba(56,189,248,0.5)' : 'rgba(255,255,255,0.1)'}`,
-                    background: form.style === s ? 'rgba(56,189,248,0.12)' : 'rgba(255,255,255,0.04)',
-                    color: form.style === s ? '#38bdf8' : 'rgba(255,255,255,0.55)',
-                    fontFamily: 'var(--font-body)', fontSize: '0.82rem',
-                    cursor: 'pointer', transition: 'all 0.2s',
-                  }}
-                >
-                  {s}
-                </button>
-              ))}
+              {STYLES.map(s => {
+                const isSelected = Array.isArray(form.style)
+                  ? form.style.includes(s)
+                  : form.style === s
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => handleStyleToggle(s)}
+                    aria-pressed={isSelected}
+                    style={{
+                      padding: '6px 14px', borderRadius: '999px',
+                      border: `1px solid ${isSelected ? 'rgba(56,189,248,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                      background: isSelected ? 'rgba(56,189,248,0.12)' : 'rgba(255,255,255,0.04)',
+                      color: isSelected ? '#38bdf8' : 'rgba(255,255,255,0.55)',
+                      fontFamily: 'var(--font-body)', fontSize: '0.82rem',
+                      cursor: 'pointer', transition: 'all 0.2s',
+                    }}
+                  >
+                    {isSelected ? '✓ ' : ''}{s}
+                  </button>
+                )
+              })}
             </div>
           </div>
 

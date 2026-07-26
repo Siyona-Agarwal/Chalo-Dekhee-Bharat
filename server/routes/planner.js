@@ -47,10 +47,22 @@ function validateItineraryInput(body) {
     errors.push(`budget must be one of: ${VALID_BUDGETS.join(', ')}`)
   }
 
-  const style = body.style
-  if (!VALID_STYLES.includes(style)) {
-    errors.push(`style must be one of: ${VALID_STYLES.join(', ')}`)
+  // Allow single string or array of styles for multi-select support
+  let selectedStyles = []
+  if (Array.isArray(body.style)) {
+    selectedStyles = body.style.filter(s => VALID_STYLES.includes(s))
+  } else if (typeof body.style === 'string') {
+    selectedStyles = body.style
+      .split(',')
+      .map(s => s.trim())
+      .filter(s => VALID_STYLES.includes(s))
   }
+
+  if (selectedStyles.length === 0) {
+    errors.push(`style must contain at least one valid style: ${VALID_STYLES.join(', ')}`)
+  }
+
+  const style = selectedStyles.join(', ')
 
   const interests = Array.isArray(body.interests)
     ? body.interests.filter(i => VALID_INTERESTS.includes(i)).slice(0, 5)
