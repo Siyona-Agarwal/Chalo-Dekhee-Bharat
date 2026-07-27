@@ -16,6 +16,7 @@ import AccountPage from './pages/Account.jsx'
 import PassportSetup from './pages/PassportSetup.jsx'
 import RequireAuth from './components/auth/RequireAuth.jsx'
 import RequirePassportIdentity from './components/auth/RequirePassportIdentity.jsx'
+import StateDetail from './pages/StateDetail/index.jsx'
 
 const AUTH_PATHS = ['/sign-in', '/sign-up']
 
@@ -29,6 +30,7 @@ function AppRoutes() {
       <main id="main-content">
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/state/:stateId" element={<StateDetail />} />
           <Route path="/museum" element={<Museum />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/games" element={<Games />} />

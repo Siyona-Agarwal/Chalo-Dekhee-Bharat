@@ -1,0 +1,363 @@
+[
+  {
+    "id": "assam",
+    "name": "Assam",
+    "tagline": "Where the Brahmaputra River meets the rolling hills of the Eastern Himalayas",
+    "topAttractions": [
+      {
+        "name": "Kaziranga National Park",
+        "city": "Kaziranga",
+        "description": "A UNESCO World Heritage Site and home to the one-horned rhinoceros, Kaziranga National Park is a must-visit for wildlife enthusiasts."
+      },
+      {
+        "name": "Majuli Island",
+        "city": "Jorhat",
+        "description": "The largest river island in the world, Majuli Island is a haven for nature lovers and those seeking a peaceful retreat."
+      },
+      {
+        "name": "Umananda Island",
+        "city": "Guwahati",
+        "description": "A sacred island in the Brahmaputra River, Umananda Island is home to the Umananda Temple, a 17th-century temple dedicated to Lord Shiva."
+      }
+    ],
+    "bestTimeToVisit": "October to April",
+    "signatureFood": [
+      "Masor Tenga",
+      "Aloo Pitika",
+      "Pitha"
+    ],
+    "culturalFact": "Assam is the birthplace of the unique Sattriya dance, a classical form introduced in the 15th century by the great Vaishnavite saint Srimanta Sankardev.",
+    "hiddenGem": {
+      "name": "Biswanath Chariali",
+      "description": "A scenic town surrounded by tea gardens and the Brahmaputra River, Biswanath Chariali is a hidden gem for those seeking a peaceful retreat."
+    },
+    "relatedFestival": "Bihu Festival",
+    "passportTieIn": "If you have stamps from Kaziranga National Park or the Brahmaputra River, you might be interested in visiting the nearby state of Meghalaya, which is home to the stunning Mawsynram Falls and the beautiful Mawlynnong Village.",
+    "heroImage": "/images/states/assam.png"
+  },
+  {
+    "id": "goa",
+    "name": "Goa",
+    "tagline": "Where the sun meets the sea",
+    "topAttractions": [
+      {
+        "name": "Fort Aguada",
+        "city": "Panaji",
+        "description": "A 17th-century Portuguese fort that now serves as a popular tourist spot and a former prison"
+      },
+      {
+        "name": "Basilica of Bom Jesus",
+        "city": "Old Goa",
+        "description": "A UNESCO World Heritage Site and one of the most famous churches in India, housing the remains of St. Francis Xavier"
+      },
+      {
+        "name": "Palolem Beach",
+        "city": "Canacona",
+        "description": "A picturesque beach known for its crystal-clear waters, white sand, and vibrant nightlife"
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Bebinca",
+      "Prawn Balchao",
+      "Goan Fish Curry"
+    ],
+    "culturalFact": "Goa's unique cultural blend is showcased in its Azulejos—hand-painted tin-glazed ceramic tiles brought by the Portuguese—that still adorn many historic homes and churches.",
+    "hiddenGem": {
+      "name": "Divar Island",
+      "description": "A tranquil island steeped in history and natural beauty, accessible only by ferry and offering a glimpse into old-world Goan village life."
+    },
+    "relatedFestival": "Shigmo",
+    "passportTieIn": "If you have stamps from the Portuguese colonial era or a wishlist item for a colonial-era fort, they will appear here!",
+    "heroImage": "/images/states/goa.png"
+  },
+  {
+    "id": "gujarat",
+    "name": "Gujarat",
+    "tagline": "Where Tradition Meets Modernity",
+    "topAttractions": [
+      {
+        "name": "Somnath Temple",
+        "city": "Veraval",
+        "description": "One of the twelve Jyotirlingas in Hinduism, this ancient temple is a sacred site for devotees and a must-visit for its stunning architecture and spiritual significance."
+      },
+      {
+        "name": "Dholavira",
+        "city": "Bhachau",
+        "description": "A UNESCO World Heritage Site, Dholavira is an ancient Indus Valley Civilization city that offers a glimpse into the region's rich history and cultural heritage."
+      },
+      {
+        "name": "Gir Forest National Park",
+        "city": "Junagadh",
+        "description": "Home to the majestic Asiatic lion, this national park is a wildlife enthusiast's paradise and a great place for trekking and birdwatching."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Gujarati Thali",
+      "Handvo",
+      "Khaman"
+    ],
+    "culturalFact": "Gujarat is the birthplace of the intricate Patola silk sarees of Patan, which can take up to a year to weave and are dyed using a complex double ikat technique.",
+    "hiddenGem": {
+      "name": "Little Rann of Kutch",
+      "description": "A unique salt marsh that is home to the endangered Indian Wild Ass, offering breathtaking sunset views and stark, beautiful landscapes."
+    },
+    "relatedFestival": "Navratri",
+    "passportTieIn": "If you have stamps or wishlist items for Gujarat, you might also be interested in visiting the nearby state of Maharashtra, which is home to the iconic Ajanta and Ellora Caves, a UNESCO World Heritage Site.",
+    "heroImage": "/images/states/gujarat.png"
+  },
+  {
+    "id": "karnataka",
+    "name": "Karnataka",
+    "tagline": "Where ancient history meets vibrant culture",
+    "topAttractions": [
+      {
+        "name": "Lalbagh Botanical Garden",
+        "city": "Bangalore",
+        "description": "A 240-acre botanical garden featuring over 1,800 species of plants and trees, including the famous Lalbagh Glass House."
+      },
+      {
+        "name": "Mysore Palace",
+        "city": "Mysore",
+        "description": "A majestic palace built in the Indo-Saracenic style, featuring stunning architecture and beautiful gardens."
+      },
+      {
+        "name": "Hampi",
+        "city": "Hampi",
+        "description": "A UNESCO World Heritage Site and ancient capital of the Vijayanagara Empire, featuring stunning ruins and temples."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Bisi Bele Bath",
+      "Mysore Pak",
+      "Neer Dosa"
+    ],
+    "culturalFact": "Karnataka was the seat of the mighty Vijayanagara Empire, whose capital Hampi was one of the largest and wealthiest cities in the world during the 14th to 16th centuries.",
+    "hiddenGem": {
+      "name": "Aihole",
+      "description": "A small village famous for its ancient temples and ruins, often referred to as the 'cradle of Indian architecture'."
+    },
+    "relatedFestival": "The Dasara Festival",
+    "passportTieIn": "If you have stamps or wishlist items for Hampi, Mysore Palace, or Bandipur National Park, they will appear here!",
+    "heroImage": "/images/states/karnataka.png"
+  },
+  {
+    "id": "kerala",
+    "name": "Kerala",
+    "tagline": "God's Own Country",
+    "topAttractions": [
+      {
+        "name": "Backwaters of Alleppey",
+        "city": "Alleppey",
+        "description": "Experience the serene beauty of Kerala's backwaters by taking a houseboat ride through the tranquil canals and lagoons."
+      },
+      {
+        "name": "Munnar Tea Plantations",
+        "city": "Munnar",
+        "description": "Visit the picturesque tea plantations of Munnar, surrounded by rolling hills and lush greenery, and enjoy a cup of freshly brewed tea."
+      },
+      {
+        "name": "Padmanabhaswamy Temple",
+        "city": "Thiruvananthapuram",
+        "description": "Explore the ancient and mysterious Padmanabhaswamy Temple, and marvel at its intricate carvings and architecture."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Sadya",
+      "Idiyappam",
+      "Puttu"
+    ],
+    "culturalFact": "Kerala is renowned for Kathakali, a highly stylized classical Indian dance-drama recognized by its vibrant makeup and elaborate costumes.",
+    "hiddenGem": {
+      "name": "Kumarakom Bird Sanctuary",
+      "description": "A peaceful and serene bird sanctuary located on the banks of Vembanad Lake, home to a wide variety of bird species and offering stunning views of the surrounding landscape."
+    },
+    "relatedFestival": "Onam",
+    "passportTieIn": "If you have stamps from the Periyar Wildlife Sanctuary or the Athirappilly Waterfalls, you might want to consider visiting the nearby Munnar Tea Plantations or the Backwaters of Alleppey for a similar experience!",
+    "heroImage": "/images/states/kerala.png"
+  },
+  {
+    "id": "maharashtra",
+    "name": "Maharashtra",
+    "tagline": "The land of vibrant culture and breathtaking landscapes",
+    "topAttractions": [
+      {
+        "name": "Gateway of India",
+        "city": "Mumbai",
+        "description": "A 20th-century monument that symbolizes India's independence and a popular tourist spot in Mumbai."
+      },
+      {
+        "name": "Ajanta and Ellora Caves",
+        "city": "Aurangabad",
+        "description": "Ancient rock-cut Buddhist, Hindu, and Jain caves that are a UNESCO World Heritage Site."
+      },
+      {
+        "name": "Mahabaleshwar",
+        "city": "Satara",
+        "description": "A hill station famous for its strawberries, scenic views, and trekking trails."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Vada Pav",
+      "Misal Pav",
+      "Pav Bhaji"
+    ],
+    "culturalFact": "Maharashtra has a rich tradition of folk theatre and dance, most notably Lavani, which is known for its powerful rhythm and energetic movements.",
+    "hiddenGem": {
+      "name": "Kanheri Caves",
+      "description": "A lesser-known Buddhist cave complex near Mumbai, featuring ancient sculptures and carvings."
+    },
+    "relatedFestival": "Ganesh Chaturthi",
+    "passportTieIn": "If you have stamps or wishlist items for Maharashtra, they will appear here!",
+    "heroImage": "/images/states/maharashtra.png"
+  },
+  {
+    "id": "rajasthan",
+    "name": "Rajasthan",
+    "tagline": "The Land of Kings, Where Royalty Meets Adventure",
+    "topAttractions": [
+      {
+        "name": "Hawa Mahal",
+        "city": "Jaipur",
+        "description": "A stunning example of Rajput architecture, this palace of winds is famous for its intricate latticework and stunning views of the city."
+      },
+      {
+        "name": "Jaisalmer Fort",
+        "city": "Jaisalmer",
+        "description": "A majestic fort built in the 12th century, this UNESCO World Heritage Site is a testament to the engineering skills of the Rajput era."
+      },
+      {
+        "name": "Lake Pichola",
+        "city": "Udaipur",
+        "description": "A serene and picturesque lake surrounded by majestic hills and beautiful palaces, offering breathtaking views and tranquil boat rides."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Dal Baati Churma",
+      "Ghevar",
+      "Ker Sangri"
+    ],
+    "culturalFact": "Rajasthan's cultural heritage includes the intricate art of blue pottery, which uniquely uses a dough of quartz stone powder instead of clay.",
+    "hiddenGem": {
+      "name": "Bishnoi Village",
+      "description": "A small village in the Jodhpur district, known for its unique culture and stunning natural beauty, where visitors can experience the traditional way of life of the Bishnoi community."
+    },
+    "relatedFestival": "The Desert Festival",
+    "passportTieIn": "If you have stamps or wishlist items for the Taj Mahal, you might be interested in visiting the stunning City Palace in Jaipur, which has a similar blend of Mughal and Rajput architecture.",
+    "heroImage": "/images/states/rajasthan.png"
+  },
+  {
+    "id": "tamilnadu",
+    "name": "Tamil Nadu",
+    "tagline": "Where ancient temples meet modern charm",
+    "topAttractions": [
+      {
+        "name": "Brihadeeswara Temple",
+        "city": "Thanjavur",
+        "description": "A UNESCO World Heritage Site and one of the largest temples in the world, built in the 11th century by the Chola dynasty."
+      },
+      {
+        "name": "Meenakshi Amman Temple",
+        "city": "Madurai",
+        "description": "A vibrant and colorful temple dedicated to the goddess Parvati, known for its intricate carvings and stunning architecture."
+      },
+      {
+        "name": "Marina Beach",
+        "city": "Chennai",
+        "description": "One of the longest urban beaches in the world, stretching over 13 kilometers and offering stunning views of the Bay of Bengal."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Tamil Nadu is from October to February",
+    "signatureFood": [
+      "Idli",
+      "Dosa",
+      "Sambhar",
+      "Vada"
+    ],
+    "culturalFact": "Tamil Nadu is home to the ancient Tamil script, which dates back to the 2nd century BCE and is one of the oldest surviving scripts in the world.",
+    "hiddenGem": {
+      "name": "Kumbakonam",
+      "description": "A charming town on the Coromandel Coast, known for its beautiful temples, scenic canals, and traditional Tamil culture."
+    },
+    "relatedFestival": "The Pongal festival",
+    "passportTieIn": "If you have stamps from the Brihadeeswara Temple or the Meenakshi Amman Temple, you might be interested in visiting the other UNESCO World Heritage Sites in India, such as the Taj Mahal in Agra or the Hampi ruins in Karnataka.",
+    "heroImage": "/images/states/tamilnadu.png"
+  },
+  {
+    "id": "up",
+    "name": "Uttar Pradesh",
+    "tagline": "The Heart of India's Rich Heritage",
+    "topAttractions": [
+      {
+        "name": "Taj Mahal",
+        "city": "Agra",
+        "description": "A stunning white marble mausoleum built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal."
+      },
+      {
+        "name": "Varanasi Ghats",
+        "city": "Varanasi",
+        "description": "A series of ancient riverfront steps and temples along the Ganges River, a sacred site for Hindus."
+      },
+      {
+        "name": "Agra Fort",
+        "city": "Agra",
+        "description": "A 16th-century Mughal fort and palace complex that served as the imperial residence of the Mughal emperors."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Uttar Pradesh is from October to March",
+    "signatureFood": [
+      "Tunday Kebab",
+      "Kulfi",
+      "Bedai"
+    ],
+    "culturalFact": "Uttar Pradesh is the birthplace of Kathak, one of the eight major forms of Indian classical dance.",
+    "hiddenGem": {
+      "name": "Chitrakoot",
+      "description": "A scenic town in the Bundelkhand region, known for its natural beauty, ancient temples, and spiritual significance."
+    },
+    "relatedFestival": "The Kumbh Mela festival",
+    "passportTieIn": "If you have stamps or wishlist items for the Taj Mahal, Varanasi, or the Red Fort, you might want to consider visiting Uttar Pradesh next!",
+    "heroImage": "/images/states/up.png"
+  },
+  {
+    "id": "westbengal",
+    "name": "West Bengal",
+    "tagline": "Where the Ganges meets the Bay of Bengal",
+    "topAttractions": [
+      {
+        "name": "Victoria Memorial",
+        "city": "Kolkata",
+        "description": "A stunning white marble building that serves as a museum and a tribute to Queen Victoria's legacy in India."
+      },
+      {
+        "name": "Darjeeling Himalayan Railway",
+        "city": "Darjeeling",
+        "description": "A UNESCO World Heritage Site and a scenic train ride that passes through the picturesque Himalayan foothills."
+      },
+      {
+        "name": "Sundarbans National Park",
+        "city": "South 24 Parganas",
+        "description": "The largest mangrove forest in the world, home to the Bengal tiger and a variety of other wildlife."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Kosha Mangsho",
+      "Jhal Muri",
+      "Mishti Doi"
+    ],
+    "culturalFact": "West Bengal is home to the famous Bengali renaissance movement, which saw the emergence of influential thinkers and writers like Rabindranath Tagore and Bankim Chandra Chattopadhyay.",
+    "hiddenGem": {
+      "name": "Mayapur",
+      "description": "A small town in Nadia district, known for its beautiful temples and the International Society for Krishna Consciousness (ISKCON) headquarters."
+    },
+    "relatedFestival": "Durga Puja",
+    "passportTieIn": "If you have stamps or wishlist items for Darjeeling, the Himalayan foothills, or the Sundarbans, you might want to consider visiting West Bengal next!",
+    "heroImage": "/images/states/westbengal.png"
+  }
+]

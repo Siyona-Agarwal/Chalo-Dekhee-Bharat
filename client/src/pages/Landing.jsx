@@ -250,9 +250,19 @@ export default function Landing() {
                     strokeWidth="2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    whileHover={{ fill: 'rgba(255,107,43,0.22)', stroke: 'rgba(255,107,43,0.7)' }}
-                    transition={{ duration: 0.3 }}
-                    style={{ cursor: 'default' }}
+                    whileHover={{ 
+                      fill: 'rgba(255,107,43,0.6)', 
+                      stroke: 'rgba(255,255,255,1)',
+                      strokeWidth: 3,
+                      y: -12,
+                      x: -8,
+                      rotateX: 10,
+                      rotateY: -10,
+                      filter: 'drop-shadow(12px 20px 10px rgba(0,0,0,0.6)) drop-shadow(0px 0px 8px rgba(255,107,43,0.8))'
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    onClick={() => navigate(`/state/${encodeURIComponent(name.toLowerCase())}`)}
+                    style={{ cursor: 'pointer', transformOrigin: 'center center' }}
                     aria-label={name}
                   >
                     <title>{name}</title>
