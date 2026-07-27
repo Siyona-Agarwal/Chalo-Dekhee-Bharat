@@ -88,6 +88,83 @@
     "hasDayNight": true
   },
   {
+    "id": "gal-020",
+    "category": "Heritage",
+    "title": "Khajuraho Temples",
+    "imageUrl": "/gallery/heritage-khajuraho-temples-day.png",
+    "dayImageUrl": "/gallery/heritage-khajuraho-temples-day.png",
+    "nightImageUrl": "/gallery/heritage-khajuraho-temples-night.png",
+    "region": "Khajuraho, Madhya Pradesh",
+    "description": "The Chandela-era temples of Khajuraho are celebrated for soaring shikharas and remarkably detailed sandstone carvings.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-021",
+    "category": "Heritage",
+    "title": "Meenakshi Amman Temple",
+    "imageUrl": "/gallery/heritage-meenakshi-amman-temple-day.png",
+    "dayImageUrl": "/gallery/heritage-meenakshi-amman-temple-day.png",
+    "nightImageUrl": "/gallery/heritage-meenakshi-amman-temple-night.png",
+    "region": "Madurai, Tamil Nadu",
+    "description": "A living temple complex in Madurai, known for its towering, vividly sculpted gopurams and richly layered Dravidian artistry.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-022",
+    "category": "Heritage",
+    "title": "Ramappa Temple",
+    "imageUrl": "/gallery/heritage-ramappa-temple-day.png",
+    "dayImageUrl": "/gallery/heritage-ramappa-temple-day.png",
+    "nightImageUrl": "/gallery/heritage-ramappa-temple-night.png",
+    "region": "Palampet, Telangana",
+    "description": "The Kakatiya-era Ramappa Temple is admired for its intricate stonework, sculpted pillars, and distinctive floating-brick construction.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-023",
+    "category": "Heritage",
+    "title": "Hawa Mahal",
+    "imageUrl": "/gallery/heritage-hawa-mahal-day.png",
+    "dayImageUrl": "/gallery/heritage-hawa-mahal-day.png",
+    "nightImageUrl": "/gallery/heritage-hawa-mahal-night.png",
+    "region": "Jaipur, Rajasthan",
+    "description": "Jaipur's Palace of Winds is an ornate rose-pink facade of jharokhas, latticework, and graceful Rajput-era symmetry.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-025",
+    "category": "Heritage",
+    "title": "Qutub Minar",
+    "imageUrl": "/gallery/heritage-qutub-minar-day.png",
+    "dayImageUrl": "/gallery/heritage-qutub-minar-day.png",
+    "nightImageUrl": "/gallery/heritage-qutub-minar-night.png",
+    "region": "New Delhi, Delhi",
+    "description": "The Qutub Minar rises above the historic complex in bands of red sandstone and marble, richly carved with inscriptions and ornament.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-026",
+    "category": "Heritage",
+    "title": "Humayun's Tomb",
+    "imageUrl": "/gallery/heritage-humayuns-tomb-day.png",
+    "dayImageUrl": "/gallery/heritage-humayuns-tomb-day.png",
+    "nightImageUrl": "/gallery/heritage-humayuns-tomb-night.png",
+    "region": "New Delhi, Delhi",
+    "description": "Set along a symmetrical Charbagh garden, Humayun's Tomb is a landmark of Mughal architecture in red sandstone and white marble.",
+    "hasDayNight": true
+  },
+  {
+    "id": "gal-027",
+    "category": "Heritage",
+    "title": "Hampi Stone Chariot",
+    "imageUrl": "/gallery/heritage-hampi-stone-chariot-day.png",
+    "dayImageUrl": "/gallery/heritage-hampi-stone-chariot-day.png",
+    "nightImageUrl": "/gallery/heritage-hampi-stone-chariot-night.png",
+    "region": "Hampi, Karnataka",
+    "description": "The iconic Stone Chariot at Vittala Temple is a masterwork of Vijayanagara stone carving, framed by Hampi's granite landscape.",
+    "hasDayNight": true
+  },
+  {
     "id": "gal-005",
     "category": "Nature",
     "title": "Himalayan Valleys",

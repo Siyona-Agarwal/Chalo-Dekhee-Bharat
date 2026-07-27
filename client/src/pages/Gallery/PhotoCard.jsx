@@ -18,8 +18,6 @@ export default function PhotoCard({ photo, index, isWishlisted, onToggleWishlist
       viewport={{ once: true, margin: '-60px' }}
       transition={{ delay: (index % 6) * 0.07, duration: reduceMotion ? 0 : 0.5 }}
       style={{
-        breakInside: 'avoid',
-        marginBottom: '20px',
         position: 'relative',
         aspectRatio: '16 / 10',
         perspective: '1200px',

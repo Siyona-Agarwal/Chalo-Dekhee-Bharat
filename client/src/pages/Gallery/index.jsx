@@ -222,8 +222,10 @@ export default function Gallery() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3 }}
             style={{
-              columns: 'auto 300px',
-              columnGap: '20px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px',
+              alignItems: 'stretch',
             }}
           >
             {photos.map((photo, index) => (

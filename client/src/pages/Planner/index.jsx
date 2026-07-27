@@ -79,8 +79,8 @@ export default function Planner() {
       const passportContext = {
         xp: passport.xp,
         badges: passport.badges.map(b => b.name),
-        stamps: passport.stamps.map(s => s.name),
-        wishlist: passport.wishlist.map(w => w.title),
+        stamps: passport.stamps.map(s => ({ name: s.name, eraId: s.eraId })),
+        wishlist: passport.wishlist.map(w => ({ title: w.title, region: w.region })),
         visitedStates: passport.visitedStates,
       }
 

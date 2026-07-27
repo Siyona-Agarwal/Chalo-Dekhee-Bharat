@@ -29,6 +29,34 @@ function sanitizeString(val, maxLen = 100) {
   return val.trim().slice(0, maxLen).replace(/[<>"]/g, '') // Strip basic HTML chars
 }
 
+function normalizePassportContext(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return { stamps: [], wishlist: [], visitedStates: [] }
+  }
+
+  const stamps = Array.isArray(value.stamps)
+    ? value.stamps.slice(0, 50).map(stamp => {
+      if (typeof stamp === 'string') return sanitizeString(stamp, 80)
+      return stamp && typeof stamp === 'object'
+        ? sanitizeString(stamp.name || stamp.eraId, 80)
+        : null
+    }).filter(Boolean)
+    : []
+  const wishlist = Array.isArray(value.wishlist)
+    ? value.wishlist.slice(0, 50).map(item => {
+      if (typeof item === 'string') return sanitizeString(item, 100)
+      return item && typeof item === 'object'
+        ? { title: sanitizeString(item.title, 100), region: sanitizeString(item.region, 50) }
+        : null
+    }).filter(Boolean)
+    : []
+  const visitedStates = Array.isArray(value.visitedStates)
+    ? value.visitedStates.slice(0, 50).map(state => sanitizeString(state, 50)).filter(Boolean)
+    : []
+
+  return { stamps, wishlist, visitedStates }
+}
+
 function validateItineraryInput(body) {
   const errors = []
 
@@ -76,7 +104,7 @@ function validateItineraryInput(body) {
   const pace = sanitizeString(body.pace, 20) || 'Balanced'
 
   // Passport context — optional, used for personalization
-  const passportContext = body.passportContext || {}
+  const passportContext = normalizePassportContext(body.passportContext)
 
   return { errors, destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext }
 }
@@ -85,8 +113,11 @@ function validateItineraryInput(body) {
 function buildSystemPrompt(destination, days, budget, style, interests, origin, month, travelers, accommodation, diet, pace, passportContext) {
   const { stamps = [], wishlist = [], visitedStates = [] } = passportContext
 
-  const stampNames = stamps.map(s => s.name || s.eraId).filter(Boolean)
-  const wishlistItems = wishlist.map(w => `${w.title} (${w.region || 'India'})`).filter(Boolean)
+  const stampNames = stamps.filter(Boolean)
+  const wishlistItems = wishlist.map(w => {
+    if (typeof w === 'string') return w
+    return w.title ? `${w.title} (${w.region || 'India'})` : null
+  }).filter(Boolean)
 
   let personalizationNote = ''
   if (stampNames.length > 0) {

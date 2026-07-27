@@ -1,5 +1,6 @@
 'use strict'
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 const express = require('express')
 const cors = require('cors')
@@ -8,6 +9,9 @@ const plannerRouter = require('./routes/planner')
 
 const app = express()
 const PORT = parseInt(process.env.PORT || '3001', 10)
+const clerkConfigured = Boolean(
+  process.env.CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY,
+)
 
 // ── CORS (strict allow-list) ────────────────────────────────────────────────
 // NOTE(security): Only allow the configured frontend origin. Never use '*'.
@@ -29,7 +33,12 @@ app.use(cors({
 
 // Clerk parses incoming session cookies and bearer tokens. Public routes stay public;
 // individual routes below explicitly decide whether authentication is required.
-app.use(clerkMiddleware())
+if (clerkConfigured) {
+  app.use(clerkMiddleware())
+} else {
+  console.warn('[Auth] Clerk is not configured; protected endpoints will be unavailable.')
+  app.use((req, res, next) => next())
+}
 
 // ── Body parsing ────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '50kb' })) // Limit body size to prevent DoS
@@ -63,6 +72,14 @@ function rateLimiter(req, res, next) {
 
   // Filter out old timestamps outside the window
   const timestamps = rateLimitStore.get(ip).filter(ts => ts > windowStart)
+
+  // Remove stale entries if a long-running process sees many client IPs.
+  if (rateLimitStore.size > 10000) {
+    for (const [storedIp, storedTimestamps] of rateLimitStore) {
+      if (storedTimestamps.every(ts => ts <= windowStart)) rateLimitStore.delete(storedIp)
+    }
+  }
+
   timestamps.push(now)
   rateLimitStore.set(ip, timestamps)
 
@@ -80,6 +97,10 @@ app.get('/api/health', (req, res) => {
 
 // Minimal protected endpoint for the account page and future user-specific features.
 app.get('/api/account/me', (req, res) => {
+  if (!clerkConfigured) {
+    return res.status(503).json({ error: 'Authentication is not configured on the server.' })
+  }
+
   const { isAuthenticated, userId } = getAuth(req)
 
   if (!isAuthenticated || !userId) {
@@ -100,7 +121,7 @@ app.use((req, res) => {
 // NOTE(security): Never expose stack traces or internal errors to the client.
 app.use((err, req, res, _next) => {
   console.error('[Server Error]', err)
-  res.status(500).json({ error: 'An internal error occurred. Please try again.', details: err.message })
+  res.status(500).json({ error: 'An internal error occurred. Please try again.' })
 })
 
 // ── Start server ─────────────────────────────────────────────────────────────

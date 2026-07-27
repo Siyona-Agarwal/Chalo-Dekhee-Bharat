@@ -20,6 +20,12 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
 
   const handlePointerDown = () => setIsDragging(true)
   const handlePointerUp = () => setIsDragging(false)
+  const handleKeyDown = (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    const delta = event.key === 'ArrowRight' ? 5 : -5
+    setSliderPos((position) => Math.max(0, Math.min(100, position + delta)))
+  }
 
   return (
     <div
@@ -31,6 +37,13 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
       onTouchMove={handlePointerMove}
       onTouchStart={handlePointerDown}
       onTouchEnd={handlePointerUp}
+      role="slider"
+      tabIndex={0}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(sliderPos)}
+      aria-valuetext={`${Math.round(sliderPos)}% day view`}
+      onKeyDown={handleKeyDown}
       style={{
         position: 'relative',
         width: '100%',
@@ -94,8 +107,8 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
           top: '50%',
           left: `${sliderPos}%`,
           transform: 'translate(-50%, -50%)',
-          width: '36px',
-          height: '36px',
+          width: '44px',
+          height: '44px',
           borderRadius: '50%',
           background: 'rgba(15,14,23,0.85)',
           border: '2px solid rgba(255,255,255,0.72)',
