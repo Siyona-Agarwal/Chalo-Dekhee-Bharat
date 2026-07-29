@@ -1,0 +1,34 @@
+{
+  "id": "telangana",
+  "name": "Telangana",
+  "tagline": "The Jewel of South India",
+  "topAttractions": [
+    {
+      "name": "Charminar",
+      "city": "Hyderabad",
+      "description": "A historic mosque and one of the most iconic landmarks in India, built in 1591 by Muhammad Quli Qutb Shah."
+    },
+    {
+      "name": "Golconda Fort",
+      "city": "Hyderabad",
+      "description": "A 16th-century fort and former capital of the Qutb Shahi dynasty, known for its impressive architecture and acoustics."
+    },
+    {
+      "name": "Warangal Fort",
+      "city": "Warangal",
+      "description": "A 13th-century fort built by the Kakatiya dynasty, featuring intricate stone carvings and a grand history."
+    }
+  ],
+  "bestTimeToVisit": "October to February, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Hyderabadi Biryani",
+    "Pesarattu (Telugu-style dosa)"
+  ],
+  "culturalFact": "Telangana is home to the traditional art of Kondapalli toy making, a GI-tagged craft that involves creating intricate wooden toys and figurines.",
+  "hiddenGem": {
+    "name": "Khammam's Kinnerasani Wildlife Sanctuary",
+    "description": "A lesser-known wildlife sanctuary that offers trekking and birdwatching opportunities amidst lush forests and waterfalls."
+  },
+  "relatedFestival": "Bathukamma, a vibrant festival celebrated by Telangana women to honor the goddess Lakshmi and the arrival of spring.",
+  "passportTieIn": "If you've already visited the Golconda Fort in Hyderabad, you might be interested in exploring the similar architecture and history of the Warangal Fort in Telangana."
+}

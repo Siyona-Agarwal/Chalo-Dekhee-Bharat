@@ -1,0 +1,35 @@
+{
+  "id": "mizoram",
+  "name": "Mizoram",
+  "tagline": "Nature's Paradise in the North East",
+  "topAttractions": [
+    {
+      "name": "Reiek Hill",
+      "city": "Aizawl",
+      "description": "A scenic hill offering panoramic views of Aizawl and the surrounding landscape."
+    },
+    {
+      "name": "Mizo Heritage Village",
+      "city": "Aizawl",
+      "description": "A museum showcasing the traditional Mizo culture, architecture, and way of life."
+    },
+    {
+      "name": "Dampa Tiger Reserve",
+      "city": "Bairabi",
+      "description": "A protected area home to a variety of flora and fauna, including the Bengal tiger."
+    }
+  ],
+  "bestTimeToVisit": "October to May, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Bai",
+    "Champ",
+    "Mizo Chicken"
+  ],
+  "culturalFact": "Mizoram is home to the traditional Mizo art of 'Hrangtial' or 'Rattan Craft', a GI-tagged craft that involves weaving and decorating rattan baskets and other items.",
+  "hiddenGem": {
+    "name": "Phawngpui National Park",
+    "description": "A lesser-known national park offering stunning views of the surrounding landscape and a chance to spot rare wildlife."
+  },
+  "relatedFestival": "The Chapchar Kut festival, a traditional Mizo harvest festival celebrated in April.",
+  "passportTieIn": "If you have stamps or wishlist items for the North East region, you might already have a taste for the region's unique cuisine and culture. Mizoram is a great place to explore and experience the region's natural beauty and rich cultural heritage."
+}

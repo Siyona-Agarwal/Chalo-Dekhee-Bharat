@@ -1,0 +1,34 @@
+{
+  "id": "chandigarh",
+  "name": "Chandigarh",
+  "tagline": "The City Beautiful",
+  "topAttractions": [
+    {
+      "name": "Rock Garden",
+      "city": "Chandigarh",
+      "description": "A unique rock garden created from industrial and urban waste, showcasing the city's commitment to sustainability and creativity."
+    },
+    {
+      "name": "Sukhna Lake",
+      "city": "Chandigarh",
+      "description": "A man-made lake that offers boating, walking, and picnic opportunities, surrounded by beautiful gardens and scenic views."
+    },
+    {
+      "name": "Rose Garden",
+      "city": "Chandigarh",
+      "description": "A 30-acre garden featuring over 1,600 varieties of roses, making it one of the largest rose gardens in Asia."
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Sarson Ka Saag",
+    "Makki Ki Roti"
+  ],
+  "culturalFact": "Chandigarh is home to the Government Museum and Art Gallery, which houses a collection of artifacts and artworks from the region, including a 2nd-century BCE Gandhara sculpture.",
+  "hiddenGem": {
+    "name": "Pinjore Gardens",
+    "description": "A lesser-known but equally beautiful garden complex featuring fountains, waterfalls, and walking trails, located just outside Chandigarh."
+  },
+  "relatedFestival": "Baisakhi, a harvest festival celebrated by the Sikh community, which is marked by processions, music, and traditional food.",
+  "passportTieIn": "If you have stamps or wishlist items for Punjab or Haryana, you might want to consider visiting Chandigarh, as it is the joint capital of both states and offers a unique blend of their cultures and traditions."
+}

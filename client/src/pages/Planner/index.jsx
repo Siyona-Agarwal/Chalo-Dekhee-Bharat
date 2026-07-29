@@ -51,7 +51,7 @@ export default function Planner() {
         passportContext: { xp: passport.xp, badges: passport.badges.map(b => b.name), stamps: passport.stamps.map(s => ({ name: s.name, eraId: s.eraId })), wishlist: passport.wishlist.map(w => ({ title: w.title, region: w.region })), visitedStates: passport.visitedStates },
       })
       setResult(data)
-      savePlannerResult({ id: Date.now().toString(), destination: form.destination.trim(), days: Number(form.days), budget: form.budget, style: form.style.join(', '), generatedAt: new Date().toISOString(), summary: data.summary || '' })
+      savePlannerResult({ id: Date.now().toString(), destination: form.destination.trim(), days: Number(form.days), budget: form.budget, style: form.style.join(', '), generatedAt: new Date().toISOString(), summary: data.summary || '', fullPlan: data, formOptions: form })
       addXP(40, 'AI Itinerary Generated!')
       if (passport.plannerHistory.length === 0 && !passport.badges.some(b => b.id === 'badge-010')) {
         const badge = badges.find(item => item.id === 'badge-010')
@@ -74,29 +74,31 @@ export default function Planner() {
         </motion.div>
       </header>
 
-      <main style={{ maxWidth: 980, margin: '0 auto', padding: '0 20px 84px' }}>
-        {(passport.stamps.length > 0 || passport.wishlist.length > 0) && <PassportContext passport={passport} />}
-        <motion.section initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.35fr) minmax(250px, 0.65fr)', gap: 18, alignItems: 'start' }} className="planner-layout">
-          <div style={panelStyle}>
-            <div style={{ marginBottom: 24 }}><p style={eyebrowStyle}>01 / Route</p><h2 style={headingStyle}>Where do you want to go?</h2><p style={subtleStyle}>Start with the route. We’ll shape everything else around it.</p></div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 14 }}>
-              <Field label="Starting city" icon="home"><input value={form.origin} onChange={e => setForm(f => ({ ...f, origin: e.target.value.slice(0, 100) }))} placeholder="Delhi, Mumbai..." style={inputStyle} /></Field>
-              <Field label="Destination" icon="location"><input value={form.destination} onChange={e => setForm(f => ({ ...f, destination: e.target.value.slice(0, 100) }))} placeholder="Jaipur, Kerala..." style={inputStyle} /></Field>
-            </div>
-            {form.destination.length > 1 && <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>{destinations.filter(d => d.name.toLowerCase().startsWith(form.destination.toLowerCase()) && d.name.toLowerCase() !== form.destination.toLowerCase()).slice(0, 3).map(d => <button key={d.id} type="button" onClick={() => setForm(f => ({ ...f, destination: d.name }))} style={suggestionStyle}>{d.name}</button>)}</div>}
+      <main style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px 100px' }}>
+        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="planner-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 32, alignItems: 'start' }}>
+          <div>
+            <PassportContext passport={passport} />
 
-            <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', margin: '26px 0' }} />
-            <p style={eyebrowStyle}>02 / Trip shape</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, marginTop: 12 }}>
-              <Field label="Days" icon="calendar"><input type="number" min="1" max="14" value={form.days} onChange={e => setForm(f => ({ ...f, days: Math.max(1, Math.min(14, parseInt(e.target.value) || 1)) }))} style={inputStyle} /></Field>
-              <Field label="Month" icon="weather"><select value={form.month} onChange={e => setForm(f => ({ ...f, month: e.target.value }))} style={inputStyle}>{MONTHS.map(m => <option key={m} value={m}>{m}</option>)}</select></Field>
-              <Field label="Travel party" icon="travelers"><select value={form.travelers} onChange={e => setForm(f => ({ ...f, travelers: e.target.value }))} style={inputStyle}>{TRAVELERS.map(t => <option key={t} value={t}>{t}</option>)}</select></Field>
+            <div style={panelStyle}>
+              <p style={eyebrowStyle}>01 / The essentials</p><h2 style={{ ...headingStyle, marginBottom: 24, fontSize: '1.3rem' }}>Where and when?</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 16 }}>
+                <Field label="Origin city" icon="map"><input value={form.origin} onChange={e => setForm(f => ({ ...f, origin: e.target.value }))} placeholder="e.g. Mumbai" style={inputStyle} /></Field>
+                <Field label="Destination" icon="map"><input value={form.destination} onChange={e => setForm(f => ({ ...f, destination: e.target.value }))} placeholder="e.g. Hampi" style={inputStyle} /></Field>
+                <Field label="When are you going?" icon="calendar"><select value={form.month} onChange={e => setForm(f => ({ ...f, month: e.target.value }))} style={inputStyle}>{MONTHS.map(m => <option key={m} value={m}>{m}</option>)}</select></Field>
+                <Field label="Duration (days)" icon="calendar"><input type="number" min="1" max="14" value={form.days} onChange={e => setForm(f => ({ ...f, days: e.target.value }))} style={inputStyle} /></Field>
+                <Field label="Who is traveling?" icon="backpack"><select value={form.travelers} onChange={e => setForm(f => ({ ...f, travelers: e.target.value }))} style={inputStyle}>{TRAVELERS.map(v => <option key={v} value={v}>{v}</option>)}</select></Field>
+              </div>
             </div>
 
-            <div style={{ marginTop: 24 }}><label style={labelStyle}><Icon name="palette" size={15} /> Travel mood</label><div style={chipWrapStyle}>{STYLES.map(style => <Chip key={style} active={form.style.includes(style)} onClick={() => toggleListValue('style', style, true)}>{style}</Chip>)}</div></div>
-            <div style={{ marginTop: 22 }}><label style={labelStyle}><Icon name="heart" size={15} /> What should be part of it?</label><div style={chipWrapStyle}>{INTERESTS.map(interest => <Chip key={interest} active={form.interests.includes(interest)} onClick={() => toggleListValue('interests', interest)}>{interest}</Chip>)}</div></div>
+            <div style={{ ...panelStyle, marginTop: 24 }}>
+              <p style={eyebrowStyle}>02 / Your vibe</p><h2 style={{ ...headingStyle, marginBottom: 24, fontSize: '1.3rem' }}>What draws you in?</h2>
+              <Field label="Trip style (pick any)" icon="sparkles"><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>{STYLES.map(style => <Chip key={style} active={form.style.includes(style)} onClick={() => toggleListValue('style', style, true)}>{style}</Chip>)}</div></Field>
+              <div style={{ marginTop: 24 }}><Field label="Specific interests" icon="sparkles"><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>{INTERESTS.map(interest => <Chip key={interest} active={form.interests.includes(interest)} onClick={() => toggleListValue('interests', interest)}>{interest}</Chip>)}</div></Field></div>
+            </div>
 
-            {error && <div role="alert" style={errorStyle}><Icon name="warning" size={16} /> {error}</div>}
+            {error && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} style={{ padding: '16px 20px', background: 'rgba(239,68,68,0.1)', color: '#fca5a5', borderRadius: 12, margin: '24px 0', border: '1px solid rgba(239,68,68,0.2)' }}><Icon name="weather" size={16} /> {error}</motion.div>}
+            
+            <div style={{ margin: '32px 0 16px', height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <button type="button" onClick={handleGenerate} disabled={loading} style={{ ...primaryButtonStyle, opacity: loading ? 0.65 : 1 }}>{loading ? <><Icon name="hourglass" size={18} /> Building your route...</> : <><Icon name="sparkles" size={18} /> Build my itinerary</>}</button>
           </div>
 
@@ -119,7 +121,7 @@ function Field({ label, icon, children }) { return <div><label style={labelStyle
 function Chip({ active, onClick, children }) { return <button type="button" aria-pressed={active} onClick={onClick} style={{ ...chipStyle, ...(active ? chipActiveStyle : {}) }}>{children}</button> }
 function PassportContext({ passport }) { return <div style={{ ...panelStyle, marginBottom: 18, padding: '16px 18px' }}><div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-saffron-500)', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}><Icon name="backpack" size={15} /> Passport context</div><p style={{ ...subtleStyle, margin: '6px 0 12px' }}>Your saved discoveries will influence the route.</p><div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>{[...passport.stamps.map(s => s.name), ...passport.wishlist.map(w => w.title)].slice(0, 8).map((item, index) => <span key={`${item}-${index}`} style={contextTagStyle}>{item}</span>)}</div></div> }
 
-function ItineraryResult({ result, form, destInfo }) {
+export function ItineraryResult({ result, form, destInfo }) {
   const [openDay, setOpenDay] = useState(0)
   const [packingOpen, setPackingOpen] = useState(false)
   const perDay = destInfo?.avgBudgetPerDay?.[form.budget] || (result.estimatedTotalCost?.INR / form.days) || 0

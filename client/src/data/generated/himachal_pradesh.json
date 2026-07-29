@@ -1,0 +1,35 @@
+{
+  "id": "himachal",
+  "name": "Himachal Pradesh",
+  "tagline": "Nature's Paradise in the Himalayas",
+  "topAttractions": [
+    {
+      "name": "Manali",
+      "city": "Manali",
+      "description": "A popular hill station known for its snow-capped mountains, picturesque valleys, and adventure sports like skiing and paragliding."
+    },
+    {
+      "name": "Shimla",
+      "city": "Shimla",
+      "description": "The capital city of Himachal Pradesh, known for its colonial architecture, scenic views, and the famous Mall Road."
+    },
+    {
+      "name": "Dharamshala",
+      "city": "Dharamshala",
+      "description": "A hill station and the headquarters of the Central Tibetan Administration, known for its Buddhist monasteries and the famous McLeod Ganj market."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Himachal Pradesh is from March to June and from September to November, when the weather is pleasant and ideal for sightseeing.",
+  "signatureFood": [
+    "Siddu",
+    "Bhagjery",
+    "Madra"
+  ],
+  "culturalFact": "Himachal Pradesh is home to the ancient Kullu Valley Shiva temple, also known as the Bheeshma Shakthi Temple, which is a significant Shiva temple in the region.",
+  "hiddenGem": {
+    "name": "Solang Valley",
+    "description": "A picturesque valley near Manali, known for its stunning views, trekking trails, and adventure sports like paragliding and zorbing."
+  },
+  "relatedFestival": "The Himachal Pradesh government celebrates the Himachal Day on April 15th, which commemorates the state's formation in 1948.",
+  "passportTieIn": "If you have stamps or wishlist items for the Rohtang Pass, the Kullu Valley, or the Manali-Leh Highway, they will appear here! These are some of the most popular attractions in Himachal Pradesh."
+}

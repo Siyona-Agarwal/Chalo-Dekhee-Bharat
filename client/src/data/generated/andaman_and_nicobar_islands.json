@@ -1,0 +1,34 @@
+{
+  "id": "andaman",
+  "name": "Andaman and Nicobar Islands",
+  "tagline": "Where the Indian Ocean meets the thrill of the unknown",
+  "topAttractions": [
+    {
+      "name": "Cellular Jail",
+      "city": "Port Blair",
+      "description": "A former British colonial prison turned museum, showcasing the history of the Indian independence movement"
+    },
+    {
+      "name": "Ross Island",
+      "city": "Port Blair",
+      "description": "A picturesque island with remnants of a British colonial settlement, offering stunning views of the surrounding waters"
+    },
+    {
+      "name": "Elephant Beach",
+      "city": "Havelock Island",
+      "description": "A pristine beach with crystal-clear waters, perfect for snorkeling and swimming"
+    }
+  ],
+  "bestTimeToVisit": "October to May, when the weather is cooler and drier",
+  "signatureFood": [
+    "Seafood",
+    "Coconut-based dishes"
+  ],
+  "culturalFact": "The Andaman and Nicobar Islands are home to the Sentinelese people, an indigenous tribe that has lived on North Sentinel Island for thousands of years, with their language and culture remaining largely uncontacted",
+  "hiddenGem": {
+    "name": "Diglipur",
+    "description": "A charming town on the north of Middle Andaman Island, known for its scenic beaches, waterfalls, and trekking trails"
+  },
+  "relatedFestival": "The Andaman and Nicobar Islands celebrate the annual 'Island Tourism Festival' in November, showcasing the region's rich cultural heritage and natural beauty",
+  "passportTieIn": "If you have stamps from the Cellular Jail or the Ross Island, they will appear here!"
+}

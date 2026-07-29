@@ -6,7 +6,7 @@ import PassportWidget from './PassportWidget.jsx'
 import Icon from './Icon.jsx'
 
 const NAV_LINKS = [
-  { to: '/',          label: 'Home',          icon: 'home' },
+  { to: '/',          label: 'Prarambh',      icon: 'home' },
   { to: '/museum',    label: 'Sangrahalaya',  icon: 'museum' },
   { to: '/gallery',   label: 'Chitrashala',   icon: 'gallery' },
   { to: '/games',     label: 'Akhada',        icon: 'games' },

@@ -1,0 +1,34 @@
+{
+  "id": "tripura",
+  "name": "Tripura",
+  "tagline": "The Hidden Gem of the Northeast",
+  "topAttractions": [
+    {
+      "name": "Ujjayanta Palace",
+      "city": "Agartala",
+      "description": "A stunning example of traditional Tripuri architecture, this palace was built in 1899 and features a unique blend of European and indigenous styles."
+    },
+    {
+      "name": "Neermahal Palace",
+      "city": "Melaghar",
+      "description": "A beautiful lakeside palace built in the 1930s, Neermahal is a must-visit for its stunning architecture and picturesque surroundings."
+    },
+    {
+      "name": "Sipahijala Wildlife Sanctuary",
+      "city": "Khowai",
+      "description": "A haven for wildlife enthusiasts, this sanctuary is home to a wide variety of flora and fauna, including the endangered clouded leopard."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Tripura is from October to March, when the weather is cool and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Jadoi",
+    "Bhuna"
+  ],
+  "culturalFact": "Tripura is home to the Tripuri people, an indigenous community that has a rich tradition of handicrafts, particularly woodcarvings, which are GI-tagged and highly prized for their intricate designs.",
+  "hiddenGem": {
+    "name": "Bhuvaneswari Temple",
+    "description": "A beautiful temple dedicated to the goddess Bhuvaneswari, this ancient structure is a must-visit for its stunning architecture and historical significance."
+  },
+  "relatedFestival": "The Tripura International Film Festival, which is held annually in Agartala, showcasing a wide range of films from across the country and the world.",
+  "passportTieIn": "If you have stamps from the Ujjayanta Palace or the Neermahal Palace, you can tie in your Tripura visit with your existing stamps from these attractions!"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "lakshadweep",
+  "name": "Lakshadweep",
+  "tagline": "Unspoiled islands, endless blue",
+  "topAttractions": [
+    {
+      "name": "Minicoy Island",
+      "city": "Minicoy",
+      "description": "A coral island known for its beautiful beaches, crystal-clear lagoons, and a unique culture influenced by the Maldivian and Indian traditions."
+    },
+    {
+      "name": "Kavaratti Island",
+      "city": "Kavaratti",
+      "description": "The administrative capital of Lakshadweep, known for its beautiful beaches, coral reefs, and the famous Kavaratti Beach."
+    },
+    {
+      "name": "Bangaram Island",
+      "city": "Bangaram",
+      "description": "A picturesque island with pristine beaches, crystal-clear waters, and a coral reef perfect for snorkeling and diving."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Lakshadweep is from October to May, when the weather is pleasant and the sea is calm, making it ideal for water sports and activities.",
+  "signatureFood": [
+    "Tharavu Fry",
+    "Meen Moilee"
+  ],
+  "culturalFact": "Lakshadweep is home to the traditional 'Kalakari' craft, a unique form of handloom weaving that is a Geographical Indication (GI) tagged craft of the Union Territory.",
+  "hiddenGem": {
+    "name": "The Lakshadweep Museum",
+    "description": "A museum located in Kavaratti that showcases the history, culture, and marine life of the islands."
+  },
+  "relatedFestival": "The Lakshadweep Islands celebrate the Eid-al-Fitr festival with great fervor, showcasing the unique blend of Islamic and Indian traditions.",
+  "passportTieIn": "If you have stamps or wishlist items for the Andaman and Nicobar Islands, you might be interested in visiting Lakshadweep, which shares a similar tropical island experience and rich marine biodiversity."
+}

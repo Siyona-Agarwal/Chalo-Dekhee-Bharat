@@ -1,0 +1,34 @@
+{
+  "id": "bihar",
+  "name": "Bihar",
+  "tagline": "The Land of Enlightenment",
+  "topAttractions": [
+    {
+      "name": "Bodh Gaya",
+      "city": "Gaya",
+      "description": "A UNESCO World Heritage Site and one of the most sacred Buddhist pilgrimage sites, where Lord Buddha attained enlightenment under the Bodhi Tree."
+    },
+    {
+      "name": "Nalanda University",
+      "city": "Nalanda",
+      "description": "A historic university and one of the oldest centers of learning in the world, which was a major hub of Buddhist and Hindu learning in ancient India."
+    },
+    {
+      "name": "Vaishali",
+      "city": "Muzaffarpur",
+      "description": "An ancient city and a major pilgrimage site for Buddhists and Jains, which is home to the Ashokan Pillar and the Vaishali Stupa."
+    }
+  ],
+  "bestTimeToVisit": "October to February, when the weather is cool and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Litti Chokha",
+    "Khaja"
+  ],
+  "culturalFact": "Bihar is home to the ancient tradition of Madhubani painting, a unique and intricate form of folk art that originated in the Mithila region and is now a Geographical Indication (GI)-tagged craft.",
+  "hiddenGem": {
+    "name": "Valmiki National Park",
+    "description": "A lesser-known wildlife sanctuary that is home to a wide variety of flora and fauna, including the Bengal tiger, and offers opportunities for trekking and birdwatching."
+  },
+  "relatedFestival": "Bodh Purnima, a festival that celebrates the enlightenment of Lord Buddha, which is observed in January at Bodh Gaya.",
+  "passportTieIn": "If you have a stamp from Bodh Gaya, you might also want to visit the nearby Mahabodhi Temple, which is a UNESCO World Heritage Site and a major pilgrimage site for Buddhists."
+}

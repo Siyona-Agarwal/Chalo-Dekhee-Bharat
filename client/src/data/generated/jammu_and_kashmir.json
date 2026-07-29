@@ -1,0 +1,35 @@
+{
+  "id": "jk",
+  "name": "Jammu and Kashmir",
+  "tagline": "Paradise on Earth",
+  "topAttractions": [
+    {
+      "name": "Dal Lake",
+      "city": "Srinagar",
+      "description": "A serene and picturesque lake surrounded by majestic mountains and houseboats, perfect for a romantic getaway or a relaxing boat ride."
+    },
+    {
+      "name": "Vaishno Devi Temple",
+      "city": "Katra",
+      "description": "A revered Hindu temple dedicated to the goddess Vaishno Devi, attracting millions of devotees and pilgrims every year."
+    },
+    {
+      "name": "Sonmarg",
+      "city": "Srinagar",
+      "description": "A picturesque meadow surrounded by snow-capped mountains, offering breathtaking views, trekking opportunities, and a chance to experience the beauty of Kashmir's natural landscape."
+    }
+  ],
+  "bestTimeToVisit": "Summer (June to August) for pleasant weather and scenic beauty, or winter (December to February) for skiing and snowboarding in the Himalayas.",
+  "signatureFood": [
+    "Kashmiri Pulao",
+    "Rogan Josh",
+    "Mutton Yakhni"
+  ],
+  "culturalFact": "The ancient Mughal Empire's influence on Jammu and Kashmir's architecture is evident in the stunning Mughal gardens, such as the Nishat Bagh and Shalimar Bagh, built during the reign of Mughal Emperor Jahangir.",
+  "hiddenGem": {
+    "name": "Aru Valley",
+    "description": "A scenic valley surrounded by towering mountains, offering breathtaking views, trekking opportunities, and a chance to experience the natural beauty of Kashmir."
+  },
+  "relatedFestival": "Baisakhi, a harvest festival celebrated by the Sikh community in Jammu and Kashmir, typically falls on April 13th or 14th.",
+  "passportTieIn": "If you have a stamp from the iconic Attabad Lake in Pakistan-occupied Kashmir, you might be interested in visiting the similar yet distinct Dal Lake in Jammu and Kashmir!"
+}

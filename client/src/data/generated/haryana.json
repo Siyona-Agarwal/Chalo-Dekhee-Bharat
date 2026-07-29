@@ -1,0 +1,45 @@
+{
+  "id": "haryana",
+  "name": "Haryana",
+  "tagline": "Where Heritage Meets Modernity",
+  "topAttractions": [
+    {
+      "name": "Tughlaqabad Fort",
+      "city": "New Delhi",
+      "description": "A 14th-century fort built by the Tughlaq dynasty, showcasing the architectural style of the era."
+    },
+    {
+      "name": "Kurukshetra",
+      "city": "Kurukshetra",
+      "description": "A sacred site in Hinduism, known for the epic battle of the Mahabharata, and home to the Jyotisar Lake."
+    },
+    {
+      "name": "Taj-e-Gaj",
+      "city": "Jhajjar",
+      "description": "A 10th-century temple dedicated to Lord Shiva, featuring intricate carvings and sculptures."
+    },
+    {
+      "name": "Panipat Museum",
+      "city": "Panipat",
+      "description": "A museum showcasing the history of the region, with a focus on the three battles of Panipat."
+    },
+    {
+      "name": "Sultanpur Bird Sanctuary",
+      "city": "Gurgaon",
+      "description": "A protected area for migratory birds, with over 100 species recorded."
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Kadhi Chawal",
+    "Lassi",
+    "Kesar Pista Kulfi"
+  ],
+  "culturalFact": "Haryana is home to the traditional craft of Zardozi embroidery, a delicate and intricate form of embroidery that originated in the Mughal era.",
+  "hiddenGem": {
+    "name": "The Royal Residency",
+    "description": "A 19th-century palace turned hotel, offering a glimpse into the region's royal past."
+  },
+  "relatedFestival": "The Kurukshetra Mahotsav, a festival celebrating the epic battle of the Mahabharata, held annually in Kurukshetra.",
+  "passportTieIn": "If you have stamps from the Taj Mahal in Agra or the Red Fort in Delhi, you'll love exploring the rich history and architecture of Haryana!"
+}

@@ -359,5 +359,924 @@
     "relatedFestival": "Durga Puja",
     "passportTieIn": "If you have stamps or wishlist items for Darjeeling, the Himalayan foothills, or the Sundarbans, you might want to consider visiting West Bengal next!",
     "heroImage": "/images/states/westbengal.png"
+  },
+  {
+    "id": "andaman",
+    "name": "Andaman and Nicobar Islands",
+    "tagline": "Where the Indian Ocean meets the thrill of the unknown",
+    "topAttractions": [
+      {
+        "name": "Cellular Jail",
+        "city": "Port Blair",
+        "description": "A former British colonial prison turned museum, showcasing the history of the Indian independence movement"
+      },
+      {
+        "name": "Ross Island",
+        "city": "Port Blair",
+        "description": "A picturesque island with remnants of a British colonial settlement, offering stunning views of the surrounding waters"
+      },
+      {
+        "name": "Elephant Beach",
+        "city": "Havelock Island",
+        "description": "A pristine beach with crystal-clear waters, perfect for snorkeling and swimming"
+      }
+    ],
+    "bestTimeToVisit": "October to May",
+    "signatureFood": [
+      "Seafood",
+      "Coconut-based dishes"
+    ],
+    "culturalFact": "The Andaman and Nicobar Islands are home to the Sentinelese people, an indigenous tribe that has lived on North Sentinel Island for thousands of years, with their language and culture remaining largely uncontacted",
+    "hiddenGem": {
+      "name": "Diglipur",
+      "description": "A charming town on the north of Middle Andaman Island, known for its scenic beaches, waterfalls, and trekking trails"
+    },
+    "relatedFestival": "The Andaman and Nicobar Islands celebrate the annual 'Island Tourism Festival' in November",
+    "passportTieIn": "If you have stamps from the Cellular Jail or the Ross Island, they will appear here!",
+    "heroImage": "/images/states/an.png"
+  },
+  {
+    "id": "ap",
+    "name": "Andhra Pradesh",
+    "tagline": "Where Tradition Meets Modernity",
+    "topAttractions": [
+      {
+        "name": "Charminar",
+        "city": "Hyderabad",
+        "description": "A historic mosque and one of the most recognizable landmarks in India, built in 1591 by Muhammad Quli Qutb Shah."
+      },
+      {
+        "name": "Ramappa Temple",
+        "city": "Palampet",
+        "description": "A UNESCO World Heritage Site and one of the finest examples of Kakatiya architecture, built in the 12th century."
+      },
+      {
+        "name": "Araku Valley",
+        "city": "Visakhapatnam",
+        "description": "A scenic hill station with breathtaking views, waterfalls, and trekking trails, known for its coffee plantations and indigenous tribes."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Andhra Pradesh is from October to February",
+    "signatureFood": [
+      "Hyderabadi Biryani",
+      "Pesarattu (Green Gram Dosa)"
+    ],
+    "culturalFact": "Andhra Pradesh is home to the ancient and revered tradition of Bhakti movement, which emerged in the 12th century and emphasized devotion to a personal deity.",
+    "hiddenGem": {
+      "name": "Kolleru Lake",
+      "description": "The second-largest freshwater lake in India, known for its migratory birds and scenic beauty."
+    },
+    "relatedFestival": "The Bonalu festival",
+    "passportTieIn": "If you have stamps from the Ramoji Film City in Hyderabad, you might be interested in exploring the state's vibrant film industry and attending a movie shoot!",
+    "heroImage": "/images/states/ap.png"
+  },
+  {
+    "id": "arunachal-pradesh",
+    "name": "Arunachal Pradesh",
+    "tagline": "Land of the Rising Sun",
+    "topAttractions": [
+      {
+        "name": "Tawang Monastery",
+        "city": "Tawang",
+        "description": "The largest monastery in India, built in 1681 by Merag Lama, a Tibetan Buddhist monk."
+      },
+      {
+        "name": "Sela Pass",
+        "city": "Tawang",
+        "description": "A high-altitude mountain pass at 13,700 feet, connecting Tawang to other parts of Arunachal Pradesh."
+      },
+      {
+        "name": "Itanagar",
+        "city": "Itanagar",
+        "description": "The capital city of Arunachal Pradesh, known for its scenic beauty and the Ita Fort, a 19th-century fort built by the Ahom kingdom."
+      }
+    ],
+    "bestTimeToVisit": "October to November or March to May",
+    "signatureFood": [
+      "Thukpa",
+      "Momo",
+      "Sel Roti"
+    ],
+    "culturalFact": "Arunachal Pradesh is home to the Nyishi tribe, who are known for their expertise in traditional crafts like woodcarving and bamboo work.",
+    "hiddenGem": {
+      "name": "Dirang Valley",
+      "description": "A picturesque valley surrounded by mountains, known for its scenic beauty and trekking opportunities."
+    },
+    "relatedFestival": "Losar",
+    "passportTieIn": "If you have stamps from Tawang or Itanagar, you might be interested in visiting the other northeastern states of India, like Meghalaya or Nagaland!",
+    "heroImage": "/images/states/ar.png"
+  },
+  {
+    "id": "bihar",
+    "name": "Bihar",
+    "tagline": "The Land of Enlightenment",
+    "topAttractions": [
+      {
+        "name": "Bodh Gaya",
+        "city": "Gaya",
+        "description": "A UNESCO World Heritage Site and one of the most sacred Buddhist pilgrimage sites, where Lord Buddha attained enlightenment under the Bodhi Tree."
+      },
+      {
+        "name": "Nalanda University",
+        "city": "Nalanda",
+        "description": "A historic university and one of the oldest centers of learning in the world, which was a major hub of Buddhist and Hindu learning in ancient India."
+      },
+      {
+        "name": "Vaishali",
+        "city": "Muzaffarpur",
+        "description": "An ancient city and a major pilgrimage site for Buddhists and Jains, which is home to the Ashokan Pillar and the Vaishali Stupa."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Litti Chokha",
+      "Khaja"
+    ],
+    "culturalFact": "Bihar is home to the ancient tradition of Madhubani painting, a unique and intricate form of folk art that originated in the Mithila region and is now a Geographical Indication (GI)-tagged craft.",
+    "hiddenGem": {
+      "name": "Valmiki National Park",
+      "description": "A lesser-known wildlife sanctuary that is home to a wide variety of flora and fauna, including the Bengal tiger, and offers opportunities for trekking and birdwatching."
+    },
+    "relatedFestival": "Bodh Purnima",
+    "passportTieIn": "If you have a stamp from Bodh Gaya, you might also want to visit the nearby Mahabodhi Temple, which is a UNESCO World Heritage Site and a major pilgrimage site for Buddhists.",
+    "heroImage": "/images/states/br.png"
+  },
+  {
+    "id": "chandigarh",
+    "name": "Chandigarh",
+    "tagline": "The City Beautiful",
+    "topAttractions": [
+      {
+        "name": "Rock Garden",
+        "city": "Chandigarh",
+        "description": "A unique rock garden created from industrial and urban waste, showcasing the city's commitment to sustainability and creativity."
+      },
+      {
+        "name": "Sukhna Lake",
+        "city": "Chandigarh",
+        "description": "A man-made lake that offers boating, walking, and picnic opportunities, surrounded by beautiful gardens and scenic views."
+      },
+      {
+        "name": "Rose Garden",
+        "city": "Chandigarh",
+        "description": "A 30-acre garden featuring over 1,600 varieties of roses, making it one of the largest rose gardens in Asia."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Sarson Ka Saag",
+      "Makki Ki Roti"
+    ],
+    "culturalFact": "Chandigarh is home to the Government Museum and Art Gallery, which houses a collection of artifacts and artworks from the region, including a 2nd-century BCE Gandhara sculpture.",
+    "hiddenGem": {
+      "name": "Pinjore Gardens",
+      "description": "A lesser-known but equally beautiful garden complex featuring fountains, waterfalls, and walking trails, located just outside Chandigarh."
+    },
+    "relatedFestival": "Baisakhi",
+    "passportTieIn": "If you have stamps or wishlist items for Punjab or Haryana, you might want to consider visiting Chandigarh, as it is the joint capital of both states and offers a unique blend of their cultures and traditions.",
+    "heroImage": "/images/states/ch.png"
+  },
+  {
+    "id": "chhattisgarh",
+    "name": "Chhattisgarh",
+    "tagline": "The Emerald State of India",
+    "topAttractions": [
+      {
+        "name": "Kanger Ghati National Park",
+        "city": "Bastar",
+        "description": "A UNESCO World Heritage Site and one of the largest national parks in India, known for its diverse wildlife and unique geological formations."
+      },
+      {
+        "name": "Tirthgarh Falls",
+        "city": "Kanger Valley National Park",
+        "description": "A 100-foot high waterfall located in the Kanger Valley National Park, surrounded by lush green forests and offering breathtaking views."
+      },
+      {
+        "name": "Ratanpur",
+        "city": "Jangir-Champa",
+        "description": "A historic town famous for its ancient temples, including the 10th-century Ratanpur Fort and the 12th-century Jagannath Temple."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Bhajia",
+      "Poha"
+    ],
+    "culturalFact": "Chhattisgarh is home to the ancient Kalchuri dynasty, which ruled the region from the 6th to the 12th century and is known for its contributions to Hinduism and Jainism.",
+    "hiddenGem": {
+      "name": "Chitrakoot Waterfalls",
+      "description": "A picturesque waterfall located in the Chitrakoot region, surrounded by dense forests and offering stunning views."
+    },
+    "relatedFestival": "The Bastar Dussehra",
+    "passportTieIn": "If you have stamps or wishlist items for the Sundarvan National Park, the Kanger Valley National Park, or the Tirthgarh Falls, they will appear here!",
+    "heroImage": "/images/states/ct.png"
+  },
+  {
+    "id": "dnh",
+    "name": "Dadra and Nagar Haveli",
+    "tagline": "A tranquil haven of natural beauty and rich cultural heritage",
+    "topAttractions": [
+      {
+        "name": "Dadra Beach",
+        "city": "Dadra",
+        "description": "A scenic beach along the Arabian Sea, perfect for relaxation and water sports"
+      },
+      {
+        "name": "Silvassa Tribal Museum",
+        "city": "Silvassa",
+        "description": "A museum showcasing the history and culture of the local tribes, with a collection of artifacts and exhibits"
+      },
+      {
+        "name": "Vanganga Lake",
+        "city": "Silvassa",
+        "description": "A serene lake surrounded by lush greenery, ideal for boating and picnics"
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Dhokla",
+      "Handvo"
+    ],
+    "culturalFact": "Dadra and Nagar Haveli is home to the Warli tribe, known for their unique Warli paintings, which are a UNESCO-recognized intangible cultural heritage of India",
+    "hiddenGem": {
+      "name": "Dadra and Nagar Haveli Wildlife Sanctuary",
+      "description": "A protected area with a diverse range of flora and fauna, including several species of birds and animals"
+    },
+    "relatedFestival": "The Warli festival",
+    "passportTieIn": "If you have stamps or wishlist items for Gujarat or Maharashtra, you may be interested in visiting Dadra and Nagar Haveli, as it is a union territory located between these two states.",
+    "heroImage": "/images/states/dn.png"
+  },
+  {
+    "id": "dd",
+    "name": "Daman and Diu",
+    "tagline": "A tranquil haven by the Arabian Sea",
+    "topAttractions": [
+      {
+        "name": "Nagoa Beach",
+        "city": "Diu",
+        "description": "A picturesque beach with crystal-clear waters and powdery white sand"
+      },
+      {
+        "name": "Diu Fort",
+        "city": "Diu",
+        "description": "A 16th-century Portuguese fort that now houses a museum and offers stunning views of the Arabian Sea"
+      },
+      {
+        "name": "Jalandhar Beach",
+        "city": "Daman",
+        "description": "A scenic beach with a historic lighthouse and a tranquil atmosphere"
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Diu's famous cashew nuts",
+      "Daman's seafood delicacies"
+    ],
+    "culturalFact": "Daman and Diu have a significant Portuguese influence, with many historical buildings and landmarks still standing, including the 16th-century St. Jerome Fort in Daman.",
+    "hiddenGem": {
+      "name": "Chakratirth Beach",
+      "description": "A secluded beach in Diu with a tranquil atmosphere and stunning sunsets"
+    },
+    "relatedFestival": "The Diu Festival",
+    "passportTieIn": "If you have stamps from Portugal or Goa, you'll feel right at home in Daman and Diu, with its rich Portuguese history and cultural influences!",
+    "heroImage": "/images/states/dd.png"
+  },
+  {
+    "id": "delhi",
+    "name": "Delhi",
+    "tagline": "The Heart of India",
+    "topAttractions": [
+      {
+        "name": "Qutub Minar",
+        "city": "Delhi",
+        "description": "The tallest minaret in India, built in 1199 by Qutb-ud-din Aibak, is a UNESCO World Heritage Site and a symbol of Delhi's rich history."
+      },
+      {
+        "name": "Red Fort",
+        "city": "Delhi",
+        "description": "A UNESCO World Heritage Site, the Red Fort was built by Mughal Emperor Shah Jahan in 1648 and served as the imperial palace for nearly 200 years."
+      },
+      {
+        "name": "India Gate",
+        "city": "Delhi",
+        "description": "A war memorial built in 1931, India Gate is a 42-meter tall structure that honors the soldiers who died in World War I and the Third Anglo-Afghan War."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Butter Chicken",
+      "Samosas",
+      "Chole Bhature"
+    ],
+    "culturalFact": "Delhi is home to the ancient Indraprastha, the capital of the Pandavas in the Hindu epic, the Mahabharata.",
+    "hiddenGem": {
+      "name": "Hauz Khas Village",
+      "description": "A charming village in South Delhi, known for its ancient architecture, boutique shops, and vibrant nightlife."
+    },
+    "relatedFestival": "Diwali",
+    "passportTieIn": "If you have stamps or wishlist items for the Red Fort, Qutub Minar, or India Gate, they will appear here! These iconic landmarks are a must-visit for any traveler to Delhi.",
+    "heroImage": "/images/states/dl.png"
+  },
+  {
+    "id": "haryana",
+    "name": "Haryana",
+    "tagline": "Where Heritage Meets Modernity",
+    "topAttractions": [
+      {
+        "name": "Tughlaqabad Fort",
+        "city": "New Delhi",
+        "description": "A 14th-century fort built by the Tughlaq dynasty, showcasing the architectural style of the era."
+      },
+      {
+        "name": "Kurukshetra",
+        "city": "Kurukshetra",
+        "description": "A sacred site in Hinduism, known for the epic battle of the Mahabharata, and home to the Jyotisar Lake."
+      },
+      {
+        "name": "Taj-e-Gaj",
+        "city": "Jhajjar",
+        "description": "A 10th-century temple dedicated to Lord Shiva, featuring intricate carvings and sculptures."
+      },
+      {
+        "name": "Panipat Museum",
+        "city": "Panipat",
+        "description": "A museum showcasing the history of the region, with a focus on the three battles of Panipat."
+      },
+      {
+        "name": "Sultanpur Bird Sanctuary",
+        "city": "Gurgaon",
+        "description": "A protected area for migratory birds, with over 100 species recorded."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Kadhi Chawal",
+      "Lassi",
+      "Kesar Pista Kulfi"
+    ],
+    "culturalFact": "Haryana is home to the traditional craft of Zardozi embroidery, a delicate and intricate form of embroidery that originated in the Mughal era.",
+    "hiddenGem": {
+      "name": "The Royal Residency",
+      "description": "A 19th-century palace turned hotel, offering a glimpse into the region's royal past."
+    },
+    "relatedFestival": "The Kurukshetra Mahotsav",
+    "passportTieIn": "If you have stamps from the Taj Mahal in Agra or the Red Fort in Delhi, you'll love exploring the rich history and architecture of Haryana!",
+    "heroImage": "/images/states/hr.png"
+  },
+  {
+    "id": "himachal",
+    "name": "Himachal Pradesh",
+    "tagline": "Nature's Paradise in the Himalayas",
+    "topAttractions": [
+      {
+        "name": "Manali",
+        "city": "Manali",
+        "description": "A popular hill station known for its snow-capped mountains, picturesque valleys, and adventure sports like skiing and paragliding."
+      },
+      {
+        "name": "Shimla",
+        "city": "Shimla",
+        "description": "The capital city of Himachal Pradesh, known for its colonial architecture, scenic views, and the famous Mall Road."
+      },
+      {
+        "name": "Dharamshala",
+        "city": "Dharamshala",
+        "description": "A hill station and the headquarters of the Central Tibetan Administration, known for its Buddhist monasteries and the famous McLeod Ganj market."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Himachal Pradesh is from March to June and from September to November",
+    "signatureFood": [
+      "Siddu",
+      "Bhagjery",
+      "Madra"
+    ],
+    "culturalFact": "Himachal Pradesh is home to the ancient Kullu Valley Shiva temple, also known as the Bheeshma Shakthi Temple, which is a significant Shiva temple in the region.",
+    "hiddenGem": {
+      "name": "Solang Valley",
+      "description": "A picturesque valley near Manali, known for its stunning views, trekking trails, and adventure sports like paragliding and zorbing."
+    },
+    "relatedFestival": "The Himachal Pradesh government celebrates the Himachal Day on April 15th",
+    "passportTieIn": "If you have stamps or wishlist items for the Rohtang Pass, the Kullu Valley, or the Manali-Leh Highway, they will appear here! These are some of the most popular attractions in Himachal Pradesh.",
+    "heroImage": "/images/states/hp.png"
+  },
+  {
+    "id": "jk",
+    "name": "Jammu and Kashmir",
+    "tagline": "Paradise on Earth",
+    "topAttractions": [
+      {
+        "name": "Dal Lake",
+        "city": "Srinagar",
+        "description": "A serene and picturesque lake surrounded by majestic mountains and houseboats, perfect for a romantic getaway or a relaxing boat ride."
+      },
+      {
+        "name": "Vaishno Devi Temple",
+        "city": "Katra",
+        "description": "A revered Hindu temple dedicated to the goddess Vaishno Devi, attracting millions of devotees and pilgrims every year."
+      },
+      {
+        "name": "Sonmarg",
+        "city": "Srinagar",
+        "description": "A picturesque meadow surrounded by snow-capped mountains, offering breathtaking views, trekking opportunities, and a chance to experience the beauty of Kashmir's natural landscape."
+      }
+    ],
+    "bestTimeToVisit": "Summer (June to August) for pleasant weather and scenic beauty",
+    "signatureFood": [
+      "Kashmiri Pulao",
+      "Rogan Josh",
+      "Mutton Yakhni"
+    ],
+    "culturalFact": "The ancient Mughal Empire's influence on Jammu and Kashmir's architecture is evident in the stunning Mughal gardens, such as the Nishat Bagh and Shalimar Bagh, built during the reign of Mughal Emperor Jahangir.",
+    "hiddenGem": {
+      "name": "Aru Valley",
+      "description": "A scenic valley surrounded by towering mountains, offering breathtaking views, trekking opportunities, and a chance to experience the natural beauty of Kashmir."
+    },
+    "relatedFestival": "Baisakhi",
+    "passportTieIn": "If you have a stamp from the iconic Attabad Lake in Pakistan-occupied Kashmir, you might be interested in visiting the similar yet distinct Dal Lake in Jammu and Kashmir!",
+    "heroImage": "/images/states/jk.png"
+  },
+  {
+    "id": "jharkhand",
+    "name": "Jharkhand",
+    "tagline": "The Land of Forests and Waterfalls",
+    "topAttractions": [
+      {
+        "name": "Parasnath Hill",
+        "city": "Dhanbad",
+        "description": "A sacred Jain pilgrimage site and the highest peak in Jharkhand, offering panoramic views of the surrounding landscape."
+      },
+      {
+        "name": "Hazaribagh National Park",
+        "city": "Hazaribagh",
+        "description": "A protected area known for its diverse wildlife, including tigers, leopards, and elephants."
+      },
+      {
+        "name": "Ranchi Lake",
+        "city": "Ranchi",
+        "description": "A picturesque artificial lake in the heart of Ranchi, offering boating and walking opportunities."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Pitha",
+      "Litti Chokha"
+    ],
+    "culturalFact": "Jharkhand is home to the Santhali people, who have a rich tradition of folk music and dance, including the famous Santhali folk song 'Santhali Baul'.",
+    "hiddenGem": {
+      "name": "Dassam Falls",
+      "description": "A beautiful waterfall located in the Deoghar district, surrounded by lush green forests and offering a serene atmosphere."
+    },
+    "relatedFestival": "Sarhul",
+    "passportTieIn": "If you have stamps from the Hazaribagh National Park or the Parasnath Hill, you might be interested in visiting the nearby Dhanbad city, which is known for its coal mining history and the Bokaro Steel City, a major steel-producing hub in India.",
+    "heroImage": "/images/states/jh.png"
+  },
+  {
+    "id": "lakshadweep",
+    "name": "Lakshadweep",
+    "tagline": "Unspoiled islands, endless blue",
+    "topAttractions": [
+      {
+        "name": "Minicoy Island",
+        "city": "Minicoy",
+        "description": "A coral island known for its beautiful beaches, crystal-clear lagoons, and a unique culture influenced by the Maldivian and Indian traditions."
+      },
+      {
+        "name": "Kavaratti Island",
+        "city": "Kavaratti",
+        "description": "The administrative capital of Lakshadweep, known for its beautiful beaches, coral reefs, and the famous Kavaratti Beach."
+      },
+      {
+        "name": "Bangaram Island",
+        "city": "Bangaram",
+        "description": "A picturesque island with pristine beaches, crystal-clear waters, and a coral reef perfect for snorkeling and diving."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Lakshadweep is from October to May",
+    "signatureFood": [
+      "Tharavu Fry",
+      "Meen Moilee"
+    ],
+    "culturalFact": "Lakshadweep is home to the traditional 'Kalakari' craft, a unique form of handloom weaving that is a Geographical Indication (GI) tagged craft of the Union Territory.",
+    "hiddenGem": {
+      "name": "The Lakshadweep Museum",
+      "description": "A museum located in Kavaratti that showcases the history, culture, and marine life of the islands."
+    },
+    "relatedFestival": "The Lakshadweep Islands celebrate the Eid-al-Fitr festival with great fervor",
+    "passportTieIn": "If you have stamps or wishlist items for the Andaman and Nicobar Islands, you might be interested in visiting Lakshadweep, which shares a similar tropical island experience and rich marine biodiversity."
+  },
+  {
+    "id": "madhya-pradesh",
+    "name": "Madhya Pradesh",
+    "tagline": "The Heart of India",
+    "topAttractions": [
+      {
+        "name": "Khajuraho Group of Monuments",
+        "city": "Khajuraho",
+        "description": "A UNESCO World Heritage Site featuring intricate carvings and sculptures of Hindu and Jain temples from the 9th to 11th centuries."
+      },
+      {
+        "name": "Bandhavgarh National Park",
+        "city": "Umaria",
+        "description": "One of India's premier tiger reserves, known for its high density of Bengal tigers and diverse wildlife."
+      },
+      {
+        "name": "Sanchi Stupa",
+        "city": "Sanchi",
+        "description": "A UNESCO World Heritage Site and one of the oldest Buddhist stupas in India, built during the Mauryan Empire in the 3rd century BCE."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Dal Bafla",
+      "Kebabs",
+      "Jalebi"
+    ],
+    "culturalFact": "Madhya Pradesh is home to the traditional Bhil tribe's unique craft of 'Bhil Painting', a style of folk art that originated in the state's tribal regions.",
+    "hiddenGem": {
+      "name": "Maheshwar Fort",
+      "description": "A 17th-century fort situated on the banks of the Narmada River, offering stunning views of the surrounding landscape and a glimpse into the region's rich history."
+    },
+    "relatedFestival": "The Khajuraho Dance Festival",
+    "passportTieIn": "If you have stamps from the Khajuraho Group of Monuments or the Sanchi Stupa, you've already experienced the rich cultural heritage of Madhya Pradesh! Consider adding the Bandhavgarh National Park to your wishlist for a thrilling wildlife adventure."
+  },
+  {
+    "id": "manipur",
+    "name": "Manipur",
+    "tagline": "The Land of Jewels and Lakes",
+    "topAttractions": [
+      {
+        "name": "Loktak Lake",
+        "city": "Moirang",
+        "description": "The largest freshwater lake in Northeast India, known for its floating islands and diverse wildlife."
+      },
+      {
+        "name": "Kangla Fort",
+        "city": "Imphal",
+        "description": "A 14th-century fort complex that served as the capital of the Manipuri kingdom and is now a UNESCO World Heritage Site."
+      },
+      {
+        "name": "Keibul Lamjao National Park",
+        "city": "Bishnupur",
+        "description": "A protected area and home to the endangered Manipuri brow-antlered deer, also known as the Sangai."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Manipur is from October to May",
+    "signatureFood": [
+      "Thangmang Diyen",
+      "Eromba",
+      "Singju"
+    ],
+    "culturalFact": "Manipur is home to the ancient Meitei script, a unique writing system that dates back to the 11th century and is still used by the Meitei people today.",
+    "hiddenGem": {
+      "name": "Moirang Keithel",
+      "description": "A 200-year-old marketplace in Moirang that is a hub for local handicrafts and traditional Manipuri clothing."
+    },
+    "relatedFestival": "The Manipur Sangai Festival",
+    "passportTieIn": "If you have stamps from the Loktak Lake or the Kangla Fort, you might be interested in visiting the nearby Keibul Lamjao National Park to spot the elusive Manipuri brow-antlered deer!"
+  },
+  {
+    "id": "meghalaya",
+    "name": "Meghalaya",
+    "tagline": "The Abode of Clouds",
+    "topAttractions": [
+      {
+        "name": "Mawlynnong Village",
+        "city": "East Khasi Hills",
+        "description": "A picturesque village known for its cleanliness and the Living Root Bridge, a natural wonder created by the Khasi people."
+      },
+      {
+        "name": "Cherrapunji",
+        "city": "East Khasi Hills",
+        "description": "A town famous for being one of the wettest places on Earth, with the highest annual rainfall recorded in 1861."
+      },
+      {
+        "name": "Krem Mawjane Cave",
+        "city": "East Khasi Hills",
+        "description": "A massive limestone cave system that is home to a variety of unique flora and fauna."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Meghalaya is from October to May",
+    "signatureFood": [
+      "Jadoh",
+      "Dohkhlieh"
+    ],
+    "culturalFact": "Meghalaya is home to the Khasi people, an indigenous tribe that has a matrilineal society, where property and social status are passed down through the maternal line.",
+    "hiddenGem": {
+      "name": "Nongkhnum Island",
+      "description": "A serene island in the Umngot River, perfect for a peaceful boat ride and a glimpse into the region's natural beauty."
+    },
+    "relatedFestival": "The Shad Suk Mynsiem festival",
+    "passportTieIn": "If you have stamps from the nearby state of Assam, you can easily explore Meghalaya's natural wonders and cultural heritage. If you have wishlist items for the Northeast region, Meghalaya is a must-visit destination for its unique landscapes and traditions."
+  },
+  {
+    "id": "mizoram",
+    "name": "Mizoram",
+    "tagline": "Nature's Paradise in the North East",
+    "topAttractions": [
+      {
+        "name": "Reiek Hill",
+        "city": "Aizawl",
+        "description": "A scenic hill offering panoramic views of Aizawl and the surrounding landscape."
+      },
+      {
+        "name": "Mizo Heritage Village",
+        "city": "Aizawl",
+        "description": "A museum showcasing the traditional Mizo culture, architecture, and way of life."
+      },
+      {
+        "name": "Dampa Tiger Reserve",
+        "city": "Bairabi",
+        "description": "A protected area home to a variety of flora and fauna, including the Bengal tiger."
+      }
+    ],
+    "bestTimeToVisit": "October to May",
+    "signatureFood": [
+      "Bai",
+      "Champ",
+      "Mizo Chicken"
+    ],
+    "culturalFact": "Mizoram is home to the traditional Mizo art of 'Hrangtial' or 'Rattan Craft', a GI-tagged craft that involves weaving and decorating rattan baskets and other items.",
+    "hiddenGem": {
+      "name": "Phawngpui National Park",
+      "description": "A lesser-known national park offering stunning views of the surrounding landscape and a chance to spot rare wildlife."
+    },
+    "relatedFestival": "The Chapchar Kut festival",
+    "passportTieIn": "If you have stamps or wishlist items for the North East region, you might already have a taste for the region's unique cuisine and culture. Mizoram is a great place to explore and experience the region's natural beauty and rich cultural heritage."
+  },
+  {
+    "id": "nagaland",
+    "name": "Nagaland",
+    "tagline": "Experience the Vibrant Tribes of North East India",
+    "topAttractions": [
+      {
+        "name": "Dzukou Valley",
+        "city": "Peren",
+        "description": "A scenic valley nestled in the Patkai Hills, known for its stunning natural beauty and trekking opportunities."
+      },
+      {
+        "name": "Kohima War Cemetery",
+        "city": "Kohima",
+        "description": "A historic cemetery that commemorates the soldiers who lost their lives during World War II's Battle of Kohima."
+      },
+      {
+        "name": "Mokokchung",
+        "city": "Mokokchung",
+        "description": "The 'Mokokchung Heritage Village' showcases the traditional Ao Naga culture and architecture."
+      }
+    ],
+    "bestTimeToVisit": "October to May",
+    "signatureFood": [
+      "Smoked Pork",
+      "Naga Cuisine's signature dish, 'Aloo Pitika' (Mashed Potato with Smoked Pork)"
+    ],
+    "culturalFact": "Nagaland is home to the Angami Naga's traditional 'Daos' (wooden swords), which are intricately carved and considered a symbol of the tribe's rich cultural heritage.",
+    "hiddenGem": {
+      "name": "Phek District's 'Pulongduen Lake'",
+      "description": "A serene and picturesque lake surrounded by lush greenery, perfect for a peaceful getaway."
+    },
+    "relatedFestival": "The Hornbill Festival",
+    "passportTieIn": "If you have stamps from the Hornbill Festival or have a wishlist item for the 'Dzukou Valley Trek', now's the time to plan your Nagaland trip!"
+  },
+  {
+    "id": "odisha",
+    "name": "Odisha",
+    "tagline": "Where the Sun Meets the Sea",
+    "topAttractions": [
+      {
+        "name": "Sun Temple of Konark",
+        "city": "Konark",
+        "description": "A UNESCO World Heritage Site and one of the most iconic temples in India, built in the 13th century during the reign of King Narasimhadeva I of the Eastern Ganga dynasty."
+      },
+      {
+        "name": "Chilka Lake",
+        "city": "Puri",
+        "description": "The largest saltwater lake in Asia, known for its migratory birds and dolphin sightings."
+      },
+      {
+        "name": "Puri Beach",
+        "city": "Puri",
+        "description": "A popular beach destination and one of the most sacred beaches in India, known for its annual Rath Yatra festival."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Dahi Bara",
+      "Chhena Jhili"
+    ],
+    "culturalFact": "Odisha is home to the ancient Jagannath Temple in Puri, one of the four sacred dhams in Hinduism, and a major pilgrimage site for millions of devotees every year.",
+    "hiddenGem": {
+      "name": "Raghurajpur Village",
+      "description": "A quaint village famous for its traditional pattachitra paintings, a unique form of Indian folk art."
+    },
+    "relatedFestival": "Rath Yatra",
+    "passportTieIn": "If you have stamps or wishlist items for Odisha, you might have already visited the Konark Sun Temple or tried the delicious Dahi Bara at a local street food stall!"
+  },
+  {
+    "id": "puducherry",
+    "name": "Puducherry",
+    "tagline": "A French legacy in the heart of India",
+    "topAttractions": [
+      {
+        "name": "Basilica of the Sacred Heart of Jesus",
+        "city": "Puducherry",
+        "description": "A beautiful Catholic church built in 1894, showcasing a mix of French and Indian architectural styles"
+      },
+      {
+        "name": "Pondicherry Museum",
+        "city": "Puducherry",
+        "description": "A museum showcasing the history and culture of Puducherry, with a collection of artifacts and exhibits on the region's French and Indian heritage"
+      },
+      {
+        "name": "Auroville",
+        "city": "Near Puducherry",
+        "description": "A UNESCO-recognized experimental township that aims to create a self-sufficient community, promoting peace, harmony, and sustainability"
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Idli",
+      "Dosa",
+      "Samosas",
+      "French-inspired Crepes"
+    ],
+    "culturalFact": "Puducherry is home to the famous Pondicherry Handloom Weaves, a Geographical Indication (GI)-tagged craft that showcases the region's expertise in weaving and textile production",
+    "hiddenGem": {
+      "name": "The Promenade Beach",
+      "description": "A scenic beach along the Bay of Bengal, perfect for sunset views and a relaxing stroll"
+    },
+    "relatedFestival": "The Puducherry Republic Day Celebrations",
+    "passportTieIn": "If you have a stamp from Auroville or a wish to visit the Basilica of the Sacred Heart of Jesus, Puducherry is the perfect destination to fulfill your travel dreams!"
+  },
+  {
+    "id": "punjab",
+    "name": "Punjab",
+    "tagline": "The Land of Five Rivers, Where History Meets Vibrancy",
+    "topAttractions": [
+      {
+        "name": "Golden Temple",
+        "city": "Amritsar",
+        "description": "A stunning gurudwara (Sikh temple) made of white marble, surrounded by a pool of water and beautiful gardens."
+      },
+      {
+        "name": "Jallianwala Bagh",
+        "city": "Amritsar",
+        "description": "A historic site that commemorates the 1919 Amritsar Massacre, a pivotal event in India's struggle for independence."
+      },
+      {
+        "name": "Harike Lake",
+        "city": "Bathinda",
+        "description": "A large wetland and bird sanctuary, home to over 200 species of birds and a popular spot for boating and birdwatching."
+      }
+    ],
+    "bestTimeToVisit": "October to March",
+    "signatureFood": [
+      "Sarson Ka Saag",
+      "Butter Chicken",
+      "Amritsari Kulche"
+    ],
+    "culturalFact": "Punjab is home to the traditional craft of Phulkari embroidery, a intricate and colorful form of embroidery that is a UNESCO-recognized intangible cultural heritage of humanity.",
+    "hiddenGem": {
+      "name": "Kila Raipur Sports Festival",
+      "description": "A unique festival that showcases traditional Punjabi sports and games, such as camel racing and wrestling."
+    },
+    "relatedFestival": "Baisakhi",
+    "passportTieIn": "If you have stamps from the Golden Temple or the Wagah Border, you'll love exploring the rich history and culture of Punjab!"
+  },
+  {
+    "id": "sikkim",
+    "name": "Sikkim",
+    "tagline": "Nature's Paradise in the Himalayas",
+    "topAttractions": [
+      {
+        "name": "Tsomgo Lake",
+        "city": "Gangtok",
+        "description": "A glacial lake at an altitude of 3,780 meters, surrounded by breathtaking Himalayan views and home to the endangered Himalayan black-necked crane."
+      },
+      {
+        "name": "Rumtek Monastery",
+        "city": "Gangtok",
+        "description": "A stunning example of Tibetan architecture, housing the sacred relics of the 16th Karmapa and offering panoramic views of the surrounding mountains."
+      },
+      {
+        "name": "Nathula Pass",
+        "city": "Gangtok",
+        "description": "A high-altitude mountain pass connecting Sikkim to Tibet, offering breathtaking views of the Himalayas and the opportunity to witness the unique culture of the Indo-Tibetan border."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Sikkim is from March to May and from September to November",
+    "signatureFood": [
+      "Thukpa",
+      "Momo",
+      "Sikkimese Sael Roti"
+    ],
+    "culturalFact": "Sikkim is home to the Lepcha people, an indigenous tribe that has a unique culture and language, and is known for their expertise in traditional crafts such as woodcarving and weaving.",
+    "hiddenGem": {
+      "name": "Phodong Monastery",
+      "description": "A lesser-known monastery in the Phodong village, offering stunning views of the surrounding mountains and a glimpse into the traditional Buddhist culture of Sikkim."
+    },
+    "relatedFestival": "The Saga Dawa Festival",
+    "passportTieIn": "If you have stamps or wishlist items for the Himalayas, trekking, or Buddhist culture, Sikkim is a must-visit destination for you!"
+  },
+  {
+    "id": "telangana",
+    "name": "Telangana",
+    "tagline": "The Jewel of South India",
+    "topAttractions": [
+      {
+        "name": "Charminar",
+        "city": "Hyderabad",
+        "description": "A historic mosque and one of the most iconic landmarks in India, built in 1591 by Muhammad Quli Qutb Shah."
+      },
+      {
+        "name": "Golconda Fort",
+        "city": "Hyderabad",
+        "description": "A 16th-century fort and former capital of the Qutb Shahi dynasty, known for its impressive architecture and acoustics."
+      },
+      {
+        "name": "Warangal Fort",
+        "city": "Warangal",
+        "description": "A 13th-century fort built by the Kakatiya dynasty, featuring intricate stone carvings and a grand history."
+      }
+    ],
+    "bestTimeToVisit": "October to February",
+    "signatureFood": [
+      "Hyderabadi Biryani",
+      "Pesarattu (Telugu-style dosa)"
+    ],
+    "culturalFact": "Telangana is home to the traditional art of Kondapalli toy making, a GI-tagged craft that involves creating intricate wooden toys and figurines.",
+    "hiddenGem": {
+      "name": "Khammam's Kinnerasani Wildlife Sanctuary",
+      "description": "A lesser-known wildlife sanctuary that offers trekking and birdwatching opportunities amidst lush forests and waterfalls."
+    },
+    "relatedFestival": "Bathukamma",
+    "passportTieIn": "If you've already visited the Golconda Fort in Hyderabad, you might be interested in exploring the similar architecture and history of the Warangal Fort in Telangana."
+  },
+  {
+    "id": "tripura",
+    "name": "Tripura",
+    "tagline": "The Hidden Gem of the Northeast",
+    "topAttractions": [
+      {
+        "name": "Ujjayanta Palace",
+        "city": "Agartala",
+        "description": "A stunning example of traditional Tripuri architecture, this palace was built in 1899 and features a unique blend of European and indigenous styles."
+      },
+      {
+        "name": "Neermahal Palace",
+        "city": "Melaghar",
+        "description": "A beautiful lakeside palace built in the 1930s, Neermahal is a must-visit for its stunning architecture and picturesque surroundings."
+      },
+      {
+        "name": "Sipahijala Wildlife Sanctuary",
+        "city": "Khowai",
+        "description": "A haven for wildlife enthusiasts, this sanctuary is home to a wide variety of flora and fauna, including the endangered clouded leopard."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Tripura is from October to March",
+    "signatureFood": [
+      "Jadoi",
+      "Bhuna"
+    ],
+    "culturalFact": "Tripura is home to the Tripuri people, an indigenous community that has a rich tradition of handicrafts, particularly woodcarvings, which are GI-tagged and highly prized for their intricate designs.",
+    "hiddenGem": {
+      "name": "Bhuvaneswari Temple",
+      "description": "A beautiful temple dedicated to the goddess Bhuvaneswari, this ancient structure is a must-visit for its stunning architecture and historical significance."
+    },
+    "relatedFestival": "The Tripura International Film Festival",
+    "passportTieIn": "If you have stamps from the Ujjayanta Palace or the Neermahal Palace, you can tie in your Tripura visit with your existing stamps from these attractions!"
+  },
+  {
+    "id": "uttarakhand",
+    "name": "Uttarakhand",
+    "tagline": "Where the Himalayas meet the heavens",
+    "topAttractions": [
+      {
+        "name": "Valley of Flowers National Park",
+        "city": "Joshimath",
+        "description": "A UNESCO World Heritage Site and home to over 500 species of flowers, including the rare Brahmakamal."
+      },
+      {
+        "name": "Nanda Devi National Park",
+        "city": "Joshimath",
+        "description": "A UNESCO World Heritage Site and home to the highest peak in India, Nanda Devi, which stands at 7,816 meters."
+      },
+      {
+        "name": "Haridwar",
+        "city": "Haridwar",
+        "description": "A sacred city and one of the seven holiest places in Hinduism, known for its Ghats and the Kumbh Mela festival."
+      }
+    ],
+    "bestTimeToVisit": "The best time to visit Uttarakhand is from March to May and September to November",
+    "signatureFood": [
+      "Bhatt ki Churki",
+      "Aloo Gutka"
+    ],
+    "culturalFact": "Uttarakhand is home to the traditional Garhwali and Kumaoni folk music and dance, including the famous 'Chhopati' dance, which is a traditional folk dance of the region.",
+    "hiddenGem": {
+      "name": "Ranikhet",
+      "description": "A scenic hill station in the Almora district, known for its picturesque views of the Himalayas and its historic British-era architecture."
+    },
+    "relatedFestival": "The Kumbh Mela festival",
+    "passportTieIn": "If you have stamps from the Kumbh Mela festival or have a wishlist item to visit the Valley of Flowers National Park, then Uttarakhand is a must-visit destination for you!"
   }
 ]

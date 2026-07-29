@@ -1,0 +1,35 @@
+{
+  "id": "madhya-pradesh",
+  "name": "Madhya Pradesh",
+  "tagline": "The Heart of India",
+  "topAttractions": [
+    {
+      "name": "Khajuraho Group of Monuments",
+      "city": "Khajuraho",
+      "description": "A UNESCO World Heritage Site featuring intricate carvings and sculptures of Hindu and Jain temples from the 9th to 11th centuries."
+    },
+    {
+      "name": "Bandhavgarh National Park",
+      "city": "Umaria",
+      "description": "One of India's premier tiger reserves, known for its high density of Bengal tigers and diverse wildlife."
+    },
+    {
+      "name": "Sanchi Stupa",
+      "city": "Sanchi",
+      "description": "A UNESCO World Heritage Site and one of the oldest Buddhist stupas in India, built during the Mauryan Empire in the 3rd century BCE."
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant, making it ideal for sightseeing and wildlife exploration.",
+  "signatureFood": [
+    "Dal Bafla",
+    "Kebabs",
+    "Jalebi"
+  ],
+  "culturalFact": "Madhya Pradesh is home to the traditional Bhil tribe's unique craft of 'Bhil Painting', a style of folk art that originated in the state's tribal regions.",
+  "hiddenGem": {
+    "name": "Maheshwar Fort",
+    "description": "A 17th-century fort situated on the banks of the Narmada River, offering stunning views of the surrounding landscape and a glimpse into the region's rich history."
+  },
+  "relatedFestival": "The Khajuraho Dance Festival, a five-day celebration of classical dance and music held annually in February and March.",
+  "passportTieIn": "If you have stamps from the Khajuraho Group of Monuments or the Sanchi Stupa, you've already experienced the rich cultural heritage of Madhya Pradesh! Consider adding the Bandhavgarh National Park to your wishlist for a thrilling wildlife adventure."
+}

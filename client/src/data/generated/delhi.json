@@ -1,0 +1,35 @@
+{
+  "id": "delhi",
+  "name": "Delhi",
+  "tagline": "The Heart of India",
+  "topAttractions": [
+    {
+      "name": "Qutub Minar",
+      "city": "Delhi",
+      "description": "The tallest minaret in India, built in 1199 by Qutb-ud-din Aibak, is a UNESCO World Heritage Site and a symbol of Delhi's rich history."
+    },
+    {
+      "name": "Red Fort",
+      "city": "Delhi",
+      "description": "A UNESCO World Heritage Site, the Red Fort was built by Mughal Emperor Shah Jahan in 1648 and served as the imperial palace for nearly 200 years."
+    },
+    {
+      "name": "India Gate",
+      "city": "Delhi",
+      "description": "A war memorial built in 1931, India Gate is a 42-meter tall structure that honors the soldiers who died in World War I and the Third Anglo-Afghan War."
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Butter Chicken",
+    "Samosas",
+    "Chole Bhature"
+  ],
+  "culturalFact": "Delhi is home to the ancient Indraprastha, the capital of the Pandavas in the Hindu epic, the Mahabharata.",
+  "hiddenGem": {
+    "name": "Hauz Khas Village",
+    "description": "A charming village in South Delhi, known for its ancient architecture, boutique shops, and vibrant nightlife."
+  },
+  "relatedFestival": "Diwali, the Festival of Lights, is celebrated with great fervor in Delhi, with the city's streets and homes illuminated with diyas and lights.",
+  "passportTieIn": "If you have stamps or wishlist items for the Red Fort, Qutub Minar, or India Gate, they will appear here! These iconic landmarks are a must-visit for any traveler to Delhi."
+}

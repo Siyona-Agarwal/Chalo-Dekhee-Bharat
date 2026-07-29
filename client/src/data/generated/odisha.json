@@ -1,0 +1,34 @@
+{
+  "id": "odisha",
+  "name": "Odisha",
+  "tagline": "Where the Sun Meets the Sea",
+  "topAttractions": [
+    {
+      "name": "Sun Temple of Konark",
+      "city": "Konark",
+      "description": "A UNESCO World Heritage Site and one of the most iconic temples in India, built in the 13th century during the reign of King Narasimhadeva I of the Eastern Ganga dynasty."
+    },
+    {
+      "name": "Chilka Lake",
+      "city": "Puri",
+      "description": "The largest saltwater lake in Asia, known for its migratory birds and dolphin sightings."
+    },
+    {
+      "name": "Puri Beach",
+      "city": "Puri",
+      "description": "A popular beach destination and one of the most sacred beaches in India, known for its annual Rath Yatra festival."
+    }
+  ],
+  "bestTimeToVisit": "October to February, when the weather is mild and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Dahi Bara",
+    "Chhena Jhili"
+  ],
+  "culturalFact": "Odisha is home to the ancient Jagannath Temple in Puri, one of the four sacred dhams in Hinduism, and a major pilgrimage site for millions of devotees every year.",
+  "hiddenGem": {
+    "name": "Raghurajpur Village",
+    "description": "A quaint village famous for its traditional pattachitra paintings, a unique form of Indian folk art."
+  },
+  "relatedFestival": "Rath Yatra, a grand festival celebrated in Puri, where Lord Jagannath, Lord Balabhadra, and Goddess Subhadra are taken out in a grand procession on chariots.",
+  "passportTieIn": "If you have stamps or wishlist items for Odisha, you might have already visited the Konark Sun Temple or tried the delicious Dahi Bara at a local street food stall!"
+}

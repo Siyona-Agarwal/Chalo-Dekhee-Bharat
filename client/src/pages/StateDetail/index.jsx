@@ -87,7 +87,9 @@ export default function StateDetail() {
       <div style={{ 
         position: 'relative', 
         padding: '120px 24px 80px', 
-        backgroundImage: `linear-gradient(to bottom, rgba(15,14,23,0.3) 0%, rgba(15,14,23,0.8) 70%, rgba(15,14,23,1) 100%), url(${stateData.heroImage})`,
+        backgroundImage: stateData.heroImage 
+          ? `linear-gradient(to bottom, rgba(15,14,23,0.3) 0%, rgba(15,14,23,0.8) 70%, rgba(15,14,23,1) 100%), url(${stateData.heroImage})`
+          : 'linear-gradient(135deg, rgba(255,107,43,0.15) 0%, rgba(14,165,233,0.1) 50%, rgba(15,14,23,1) 100%)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

@@ -19,8 +19,11 @@ const openai = new OpenAI({
 })
 
 const STATES = [
-  'Rajasthan', 'Kerala', 'Goa', 'Maharashtra', 'Tamil Nadu',
-  'Uttar Pradesh', 'Gujarat', 'Karnataka', 'West Bengal', 'Assam'
+  'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Bihar',
+  'Chandigarh', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi',
+  'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Lakshadweep',
+  'Madhya Pradesh', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha',
+  'Puducherry', 'Punjab', 'Sikkim', 'Telangana', 'Tripura', 'Uttarakhand'
 ]
 
 const GENERATED_DIR = path.join(__dirname, '../../client/src/data/generated')
@@ -51,7 +54,7 @@ const SCHEMA = `
 async function generateState(state) {
   console.log(`Generating content for ${state}...`)
   
-  const systemPrompt = `You are a travel content writer for an Indian tourism platform. Generate factual, verifiable content about ${state} following this exact JSON schema: ${SCHEMA}. Only include well-known, verifiable attractions and facts. Do not invent statistics, dates, or claims you're not confident about. If uncertain about a specific fact, choose a safer, well-documented alternative instead.`
+  const systemPrompt = `You are a travel content writer for an Indian tourism platform. Generate factual, verifiable content about ${state} following this exact JSON schema: ${SCHEMA}. Only include well-known, verifiable attractions and facts. Do not invent statistics, dates, or claims you're not confident about. CRITICAL: The "culturalFact" MUST be highly concrete, specific, and verifiable (e.g. mention a specific historical dynasty, a specific GI-tagged craft, or a specific named tradition). Do NOT write vague filler like "rich cultural heritage" or "home to ancient civilizations".`
 
   const userMessage = `Generate factual travel content for the Indian state of ${state}.`
 

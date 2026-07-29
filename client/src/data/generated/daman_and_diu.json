@@ -1,0 +1,34 @@
+{
+  "id": "dd",
+  "name": "Daman and Diu",
+  "tagline": "A tranquil haven by the Arabian Sea",
+  "topAttractions": [
+    {
+      "name": "Nagoa Beach",
+      "city": "Diu",
+      "description": "A picturesque beach with crystal-clear waters and powdery white sand"
+    },
+    {
+      "name": "Diu Fort",
+      "city": "Diu",
+      "description": "A 16th-century Portuguese fort that now houses a museum and offers stunning views of the Arabian Sea"
+    },
+    {
+      "name": "Jalandhar Beach",
+      "city": "Daman",
+      "description": "A scenic beach with a historic lighthouse and a tranquil atmosphere"
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant",
+  "signatureFood": [
+    "Diu's famous cashew nuts",
+    "Daman's seafood delicacies"
+  ],
+  "culturalFact": "Daman and Diu have a significant Portuguese influence, with many historical buildings and landmarks still standing, including the 16th-century St. Jerome Fort in Daman.",
+  "hiddenGem": {
+    "name": "Chakratirth Beach",
+    "description": "A secluded beach in Diu with a tranquil atmosphere and stunning sunsets"
+  },
+  "relatedFestival": "The Diu Festival, a three-day celebration of music, dance, and culture, held annually in December",
+  "passportTieIn": "If you have stamps from Portugal or Goa, you'll feel right at home in Daman and Diu, with its rich Portuguese history and cultural influences!"
+}

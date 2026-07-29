@@ -1,0 +1,34 @@
+{
+  "id": "jharkhand",
+  "name": "Jharkhand",
+  "tagline": "The Land of Forests and Waterfalls",
+  "topAttractions": [
+    {
+      "name": "Parasnath Hill",
+      "city": "Dhanbad",
+      "description": "A sacred Jain pilgrimage site and the highest peak in Jharkhand, offering panoramic views of the surrounding landscape."
+    },
+    {
+      "name": "Hazaribagh National Park",
+      "city": "Hazaribagh",
+      "description": "A protected area known for its diverse wildlife, including tigers, leopards, and elephants."
+    },
+    {
+      "name": "Ranchi Lake",
+      "city": "Ranchi",
+      "description": "A picturesque artificial lake in the heart of Ranchi, offering boating and walking opportunities."
+    }
+  ],
+  "bestTimeToVisit": "October to February, when the weather is cool and pleasant, making it ideal for outdoor activities like trekking and wildlife spotting.",
+  "signatureFood": [
+    "Pitha",
+    "Litti Chokha"
+  ],
+  "culturalFact": "Jharkhand is home to the Santhali people, who have a rich tradition of folk music and dance, including the famous Santhali folk song 'Santhali Baul'.",
+  "hiddenGem": {
+    "name": "Dassam Falls",
+    "description": "A beautiful waterfall located in the Deoghar district, surrounded by lush green forests and offering a serene atmosphere."
+  },
+  "relatedFestival": "Sarhul, a traditional festival celebrated by the Santhali people to mark the beginning of summer, typically in April.",
+  "passportTieIn": "If you have stamps from the Hazaribagh National Park or the Parasnath Hill, you might be interested in visiting the nearby Dhanbad city, which is known for its coal mining history and the Bokaro Steel City, a major steel-producing hub in India."
+}

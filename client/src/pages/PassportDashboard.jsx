@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { usePassport } from '../context/PassportContext.jsx'
 import PassportStamp from '../components/PassportStamp.jsx'
 import allBadges from '../data/badges.json'
+import destinations from '../data/destinations.json'
 import Icon from '../components/Icon.jsx'
+import { ItineraryResult } from './Planner/index.jsx'
 import './passportDashboard.css'
 
 const ERA_META = [
@@ -44,6 +46,7 @@ function EraStamp({ era, earned, earnedAt, index }) {
 export default function PassportDashboard() {
   const { passport, level } = usePassport()
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedTrip, setSelectedTrip] = useState(null)
   const [spreadIndex, setSpreadIndex] = useState(0)
   const [pendingSpread, setPendingSpread] = useState(null)
   const [turnDirection, setTurnDirection] = useState(1)
@@ -91,7 +94,7 @@ export default function PassportDashboard() {
       case 4:
         return <section className="passport-page passport-page--collection"><div className="page-kicker">Personal collection</div><h2 className="page-title">Places to remember</h2><p className="page-intro">Your saved destinations, pressed into the pages for later.</p>{passport.wishlist?.length ? <div className="collection-grid">{passport.wishlist.slice(0, 6).map((item, index) => <motion.div className="collection-card" key={item.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0, rotate: index % 2 ? 1.2 : -1 }} transition={{ delay: .18 + index * .06 }}><div className="collection-photo" style={{ backgroundImage: `url(${item.imageUrl})` }} /><strong>{item.title}</strong><span>{item.region}</span></motion.div>)}</div> : <div className="empty-collection">Your first saved place will appear here.</div>}<div className="page-footer"><span>WISHLIST CURATION</span><span>05</span></div></section>
       default:
-        return <section className="passport-page passport-page--history"><div className="page-kicker">Journey log</div><h2 className="page-title">Recent expeditions</h2><p className="page-intro">A quiet record of where your curiosity has taken you.</p>{passport.plannerHistory?.length ? passport.plannerHistory.slice(0, 5).map((trip, index) => <motion.div className="trip-row" key={trip.id || index} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .18 + index * .07 }}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{trip.destination}</strong><small>{trip.days} days · {trip.budget}</small></div><em>{formatDate(trip.generatedAt)}</em></motion.div>) : <div className="empty-collection">Your first itinerary will be recorded here.</div>}<div className="page-footer"><span>EXPLORER LOG</span><span>06</span></div></section>
+        return <section className="passport-page passport-page--history"><div className="page-kicker">Journey log</div><h2 className="page-title">Recent expeditions</h2><p className="page-intro">A quiet record of where your curiosity has taken you.</p>{passport.plannerHistory?.length ? passport.plannerHistory.slice(0, 5).map((trip, index) => <motion.div className="trip-row" key={trip.id || index} onClick={() => setSelectedTrip(trip)} style={{ cursor: 'pointer' }} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .18 + index * .07 }}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{trip.destination}</strong><small>{trip.days} days · {trip.budget}</small></div><em>{formatDate(trip.generatedAt)}</em></motion.div>) : <div className="empty-collection">Your first itinerary will be recorded here.</div>}<div className="page-footer"><span>EXPLORER LOG</span><span>06</span></div></section>
     }
   }
 
@@ -135,6 +138,44 @@ export default function PassportDashboard() {
             </div>
             <div className="passport-page-position"><span>{String(activeSpread * 2 + 1).padStart(2, '0')}—{String(activeSpread * 2 + 2).padStart(2, '0')}</span><b>{SECTIONS[activeSpread].label}</b></div>
           </motion.section>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedTrip && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            style={{ position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', background: 'rgba(7, 13, 27, 0.85)', backdropFilter: 'blur(8px)' }}
+            onClick={() => setSelectedTrip(null)}
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              style={{ background: 'var(--color-deep-900)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: 32, maxWidth: 860, width: '100%', maxHeight: '100%', overflowY: 'auto', position: 'relative' }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button onClick={() => setSelectedTrip(null)} style={{ position: 'absolute', top: 24, right: 24, background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', cursor: 'pointer' }}><Icon name="close" size={16} /></button>
+              
+              {selectedTrip.fullPlan ? (
+                <ItineraryResult 
+                  result={selectedTrip.fullPlan} 
+                  form={selectedTrip.formOptions || { days: selectedTrip.days, destination: selectedTrip.destination, budget: selectedTrip.budget }} 
+                  destInfo={destinations.find(d => d.name.toLowerCase() === selectedTrip.destination.toLowerCase())} 
+                />
+              ) : (
+                <div style={{ textAlign: 'center', padding: '40px 20px' }}>
+                  <Icon name="compass" size={48} />
+                  <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.4rem', color: '#fff', margin: '20px 0 10px' }}>{selectedTrip.destination}</h2>
+                  <p style={{ color: 'var(--color-saffron-500)', fontSize: '0.9rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 700, marginBottom: 24 }}>{selectedTrip.days} days · {selectedTrip.budget} · {selectedTrip.style}</p>
+                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.05rem', lineHeight: 1.6, maxWidth: 500, margin: '0 auto' }}>{selectedTrip.summary}</p>
+                  <div style={{ marginTop: 32, padding: '16px', background: 'rgba(255,255,255,0.04)', borderRadius: 12, color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>Full itinerary details were not saved for this older expedition.</div>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </main>

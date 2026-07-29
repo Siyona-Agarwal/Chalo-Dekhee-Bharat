@@ -1,0 +1,35 @@
+{
+  "id": "punjab",
+  "name": "Punjab",
+  "tagline": "The Land of Five Rivers, Where History Meets Vibrancy",
+  "topAttractions": [
+    {
+      "name": "Golden Temple",
+      "city": "Amritsar",
+      "description": "A stunning gurudwara (Sikh temple) made of white marble, surrounded by a pool of water and beautiful gardens."
+    },
+    {
+      "name": "Jallianwala Bagh",
+      "city": "Amritsar",
+      "description": "A historic site that commemorates the 1919 Amritsar Massacre, a pivotal event in India's struggle for independence."
+    },
+    {
+      "name": "Harike Lake",
+      "city": "Bathinda",
+      "description": "A large wetland and bird sanctuary, home to over 200 species of birds and a popular spot for boating and birdwatching."
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant, making it ideal for sightseeing and outdoor activities.",
+  "signatureFood": [
+    "Sarson Ka Saag",
+    "Butter Chicken",
+    "Amritsari Kulche"
+  ],
+  "culturalFact": "Punjab is home to the traditional craft of Phulkari embroidery, a intricate and colorful form of embroidery that is a UNESCO-recognized intangible cultural heritage of humanity.",
+  "hiddenGem": {
+    "name": "Kila Raipur Sports Festival",
+    "description": "A unique festival that showcases traditional Punjabi sports and games, such as camel racing and wrestling."
+  },
+  "relatedFestival": "Baisakhi, a major Sikh festival that celebrates the harvest season and the birth of the Khalsa (the Sikh community).",
+  "passportTieIn": "If you have stamps from the Golden Temple or the Wagah Border, you'll love exploring the rich history and culture of Punjab!"
+}

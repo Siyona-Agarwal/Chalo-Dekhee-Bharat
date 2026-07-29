@@ -1,0 +1,36 @@
+{
+  "id": "puducherry",
+  "name": "Puducherry",
+  "tagline": "A French legacy in the heart of India",
+  "topAttractions": [
+    {
+      "name": "Basilica of the Sacred Heart of Jesus",
+      "city": "Puducherry",
+      "description": "A beautiful Catholic church built in 1894, showcasing a mix of French and Indian architectural styles"
+    },
+    {
+      "name": "Pondicherry Museum",
+      "city": "Puducherry",
+      "description": "A museum showcasing the history and culture of Puducherry, with a collection of artifacts and exhibits on the region's French and Indian heritage"
+    },
+    {
+      "name": "Auroville",
+      "city": "Near Puducherry",
+      "description": "A UNESCO-recognized experimental township that aims to create a self-sufficient community, promoting peace, harmony, and sustainability"
+    }
+  ],
+  "bestTimeToVisit": "October to February, when the weather is cool and pleasant, making it ideal for sightseeing and outdoor activities",
+  "signatureFood": [
+    "Idli",
+    "Dosa",
+    "Samosas",
+    "French-inspired Crepes"
+  ],
+  "culturalFact": "Puducherry is home to the famous Pondicherry Handloom Weaves, a Geographical Indication (GI)-tagged craft that showcases the region's expertise in weaving and textile production",
+  "hiddenGem": {
+    "name": "The Promenade Beach",
+    "description": "A scenic beach along the Bay of Bengal, perfect for sunset views and a relaxing stroll"
+  },
+  "relatedFestival": "The Puducherry Republic Day Celebrations, held on January 26th, which marks the anniversary of India's independence and the French legacy in the region",
+  "passportTieIn": "If you have a stamp from Auroville or a wish to visit the Basilica of the Sacred Heart of Jesus, Puducherry is the perfect destination to fulfill your travel dreams!"
+}

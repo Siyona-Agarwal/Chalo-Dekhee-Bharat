@@ -111,30 +111,7 @@ export default function Landing() {
               </span>
             </motion.h1>
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.4rem, 5vw, 4rem)',
-                fontWeight: '900',
-                lineHeight: 1.1,
-                margin: '0 0 20px',
-                color: '#fff',
-              }}
-            >
-              चलो देखें{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #FF6B2B, #fbbf24)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                भारत!
-              </span>
-            </motion.h1>
+
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -160,7 +137,7 @@ export default function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '40px' }}
+              style={{ display: 'grid', gridTemplateColumns: 'max-content max-content', gap: '12px', marginBottom: '40px' }}
             >
               {[
                 { icon: 'museum', label: 'Bharat Sangrahalaya' },
@@ -273,11 +250,11 @@ export default function Landing() {
                     d={path}
                     fill="rgba(255,107,43,0.08)"
                     stroke="rgba(255,107,43,0.35)"
-                    strokeWidth="2"
+                    strokeWidth={2}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    whileHover={{ 
-                      fill: 'rgba(255,107,43,0.6)', 
+                    whileHover={{
+                      fill: 'rgba(255,107,43,0.6)',
                       stroke: 'rgba(255,255,255,1)',
                       strokeWidth: 3,
                       y: -12,
@@ -322,41 +299,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Journey Steps Section */}
-      <section style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '80px 24px',
-      }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '60px' }}
-        >
-          <h2 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-            fontWeight: '800',
-            color: '#fff',
-            margin: '0 0 16px',
-          }}>
-            Your Journey, Your Passport
-          </h2>
-          <p style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '1.05rem',
-            color: 'rgba(255,255,255,0.5)',
-            maxWidth: '560px',
-            margin: '0 auto',
-            lineHeight: 1.7,
-          }}>
-            Every page you explore adds stamps, XP, and badges to your Digital Passport — creating a unique record of your virtual India journey.
-          </p>
-        </motion.div>
 
-      </section>
 
       {/* Journey Steps Section */}
       <section style={{

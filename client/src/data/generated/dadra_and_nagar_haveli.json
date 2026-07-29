@@ -1,0 +1,34 @@
+{
+  "id": "dnh",
+  "name": "Dadra and Nagar Haveli",
+  "tagline": "A tranquil haven of natural beauty and rich cultural heritage",
+  "topAttractions": [
+    {
+      "name": "Dadra Beach",
+      "city": "Dadra",
+      "description": "A scenic beach along the Arabian Sea, perfect for relaxation and water sports"
+    },
+    {
+      "name": "Silvassa Tribal Museum",
+      "city": "Silvassa",
+      "description": "A museum showcasing the history and culture of the local tribes, with a collection of artifacts and exhibits"
+    },
+    {
+      "name": "Vanganga Lake",
+      "city": "Silvassa",
+      "description": "A serene lake surrounded by lush greenery, ideal for boating and picnics"
+    }
+  ],
+  "bestTimeToVisit": "October to March, when the weather is mild and pleasant",
+  "signatureFood": [
+    "Dhokla",
+    "Handvo"
+  ],
+  "culturalFact": "Dadra and Nagar Haveli is home to the Warli tribe, known for their unique Warli paintings, which are a UNESCO-recognized intangible cultural heritage of India",
+  "hiddenGem": {
+    "name": "Dadra and Nagar Haveli Wildlife Sanctuary",
+    "description": "A protected area with a diverse range of flora and fauna, including several species of birds and animals"
+  },
+  "relatedFestival": "The Warli festival, celebrated by the local Warli tribe to mark the beginning of the harvest season",
+  "passportTieIn": "If you have stamps or wishlist items for Gujarat or Maharashtra, you may be interested in visiting Dadra and Nagar Haveli, as it is a union territory located between these two states."
+}

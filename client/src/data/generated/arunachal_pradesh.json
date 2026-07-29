@@ -1,0 +1,35 @@
+{
+  "id": "arunachal-pradesh",
+  "name": "Arunachal Pradesh",
+  "tagline": "Land of the Rising Sun",
+  "topAttractions": [
+    {
+      "name": "Tawang Monastery",
+      "city": "Tawang",
+      "description": "The largest monastery in India, built in 1681 by Merag Lama, a Tibetan Buddhist monk."
+    },
+    {
+      "name": "Sela Pass",
+      "city": "Tawang",
+      "description": "A high-altitude mountain pass at 13,700 feet, connecting Tawang to other parts of Arunachal Pradesh."
+    },
+    {
+      "name": "Itanagar",
+      "city": "Itanagar",
+      "description": "The capital city of Arunachal Pradesh, known for its scenic beauty and the Ita Fort, a 19th-century fort built by the Ahom kingdom."
+    }
+  ],
+  "bestTimeToVisit": "October to November or March to May, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Thukpa",
+    "Momo",
+    "Sel Roti"
+  ],
+  "culturalFact": "Arunachal Pradesh is home to the Nyishi tribe, who are known for their expertise in traditional crafts like woodcarving and bamboo work.",
+  "hiddenGem": {
+    "name": "Dirang Valley",
+    "description": "A picturesque valley surrounded by mountains, known for its scenic beauty and trekking opportunities."
+  },
+  "relatedFestival": "Losar, the Tibetan New Year, celebrated by the Buddhist community in Arunachal Pradesh.",
+  "passportTieIn": "If you have stamps from Tawang or Itanagar, you might be interested in visiting the other northeastern states of India, like Meghalaya or Nagaland!"
+}

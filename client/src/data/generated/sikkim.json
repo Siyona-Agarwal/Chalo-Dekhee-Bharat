@@ -1,0 +1,35 @@
+{
+  "id": "sikkim",
+  "name": "Sikkim",
+  "tagline": "Nature's Paradise in the Himalayas",
+  "topAttractions": [
+    {
+      "name": "Tsomgo Lake",
+      "city": "Gangtok",
+      "description": "A glacial lake at an altitude of 3,780 meters, surrounded by breathtaking Himalayan views and home to the endangered Himalayan black-necked crane."
+    },
+    {
+      "name": "Rumtek Monastery",
+      "city": "Gangtok",
+      "description": "A stunning example of Tibetan architecture, housing the sacred relics of the 16th Karmapa and offering panoramic views of the surrounding mountains."
+    },
+    {
+      "name": "Nathula Pass",
+      "city": "Gangtok",
+      "description": "A high-altitude mountain pass connecting Sikkim to Tibet, offering breathtaking views of the Himalayas and the opportunity to witness the unique culture of the Indo-Tibetan border."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Sikkim is from March to May and from September to November, when the weather is mild and the scenery is at its most breathtaking.",
+  "signatureFood": [
+    "Thukpa",
+    "Momo",
+    "Sikkimese Sael Roti"
+  ],
+  "culturalFact": "Sikkim is home to the Lepcha people, an indigenous tribe that has a unique culture and language, and is known for their expertise in traditional crafts such as woodcarving and weaving.",
+  "hiddenGem": {
+    "name": "Phodong Monastery",
+    "description": "A lesser-known monastery in the Phodong village, offering stunning views of the surrounding mountains and a glimpse into the traditional Buddhist culture of Sikkim."
+  },
+  "relatedFestival": "The Saga Dawa Festival, a Buddhist celebration held in May to commemorate the birth, enlightenment, and death of Lord Buddha.",
+  "passportTieIn": "If you have stamps or wishlist items for the Himalayas, trekking, or Buddhist culture, Sikkim is a must-visit destination for you!"
+}

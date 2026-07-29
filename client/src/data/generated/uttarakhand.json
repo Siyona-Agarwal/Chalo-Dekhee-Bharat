@@ -1,0 +1,34 @@
+{
+  "id": "uttarakhand",
+  "name": "Uttarakhand",
+  "tagline": "Where the Himalayas meet the heavens",
+  "topAttractions": [
+    {
+      "name": "Valley of Flowers National Park",
+      "city": "Joshimath",
+      "description": "A UNESCO World Heritage Site and home to over 500 species of flowers, including the rare Brahmakamal."
+    },
+    {
+      "name": "Nanda Devi National Park",
+      "city": "Joshimath",
+      "description": "A UNESCO World Heritage Site and home to the highest peak in India, Nanda Devi, which stands at 7,816 meters."
+    },
+    {
+      "name": "Haridwar",
+      "city": "Haridwar",
+      "description": "A sacred city and one of the seven holiest places in Hinduism, known for its Ghats and the Kumbh Mela festival."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Uttarakhand is from March to May and September to November, when the weather is mild and the scenery is at its best.",
+  "signatureFood": [
+    "Bhatt ki Churki",
+    "Aloo Gutka"
+  ],
+  "culturalFact": "Uttarakhand is home to the traditional Garhwali and Kumaoni folk music and dance, including the famous 'Chhopati' dance, which is a traditional folk dance of the region.",
+  "hiddenGem": {
+    "name": "Ranikhet",
+    "description": "A scenic hill station in the Almora district, known for its picturesque views of the Himalayas and its historic British-era architecture."
+  },
+  "relatedFestival": "The Kumbh Mela festival, which is held every 12 years in Haridwar, is one of the largest and most sacred festivals in Hinduism.",
+  "passportTieIn": "If you have stamps from the Kumbh Mela festival or have a wishlist item to visit the Valley of Flowers National Park, then Uttarakhand is a must-visit destination for you!"
+}

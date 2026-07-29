@@ -1,0 +1,35 @@
+{
+  "id": "manipur",
+  "name": "Manipur",
+  "tagline": "The Land of Jewels and Lakes",
+  "topAttractions": [
+    {
+      "name": "Loktak Lake",
+      "city": "Moirang",
+      "description": "The largest freshwater lake in Northeast India, known for its floating islands and diverse wildlife."
+    },
+    {
+      "name": "Kangla Fort",
+      "city": "Imphal",
+      "description": "A 14th-century fort complex that served as the capital of the Manipuri kingdom and is now a UNESCO World Heritage Site."
+    },
+    {
+      "name": "Keibul Lamjao National Park",
+      "city": "Bishnupur",
+      "description": "A protected area and home to the endangered Manipuri brow-antlered deer, also known as the Sangai."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Manipur is from October to May, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Thangmang Diyen",
+    "Eromba",
+    "Singju"
+  ],
+  "culturalFact": "Manipur is home to the ancient Meitei script, a unique writing system that dates back to the 11th century and is still used by the Meitei people today.",
+  "hiddenGem": {
+    "name": "Moirang Keithel",
+    "description": "A 200-year-old marketplace in Moirang that is a hub for local handicrafts and traditional Manipuri clothing."
+  },
+  "relatedFestival": "The Manipur Sangai Festival, a celebration of the state's rich cultural heritage and natural beauty.",
+  "passportTieIn": "If you have stamps from the Loktak Lake or the Kangla Fort, you might be interested in visiting the nearby Keibul Lamjao National Park to spot the elusive Manipuri brow-antlered deer!"
+}

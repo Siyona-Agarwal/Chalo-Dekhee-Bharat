@@ -1,0 +1,34 @@
+{
+  "id": "meghalaya",
+  "name": "Meghalaya",
+  "tagline": "The Abode of Clouds",
+  "topAttractions": [
+    {
+      "name": "Mawlynnong Village",
+      "city": "East Khasi Hills",
+      "description": "A picturesque village known for its cleanliness and the Living Root Bridge, a natural wonder created by the Khasi people."
+    },
+    {
+      "name": "Cherrapunji",
+      "city": "East Khasi Hills",
+      "description": "A town famous for being one of the wettest places on Earth, with the highest annual rainfall recorded in 1861."
+    },
+    {
+      "name": "Krem Mawjane Cave",
+      "city": "East Khasi Hills",
+      "description": "A massive limestone cave system that is home to a variety of unique flora and fauna."
+    }
+  ],
+  "bestTimeToVisit": "The best time to visit Meghalaya is from October to May, when the weather is mild and pleasant.",
+  "signatureFood": [
+    "Jadoh",
+    "Dohkhlieh"
+  ],
+  "culturalFact": "Meghalaya is home to the Khasi people, an indigenous tribe that has a matrilineal society, where property and social status are passed down through the maternal line.",
+  "hiddenGem": {
+    "name": "Nongkhnum Island",
+    "description": "A serene island in the Umngot River, perfect for a peaceful boat ride and a glimpse into the region's natural beauty."
+  },
+  "relatedFestival": "The Shad Suk Mynsiem festival, a traditional Khasi festival celebrated in March, which marks the beginning of spring and is characterized by traditional dances, music, and feasting.",
+  "passportTieIn": "If you have stamps from the nearby state of Assam, you can easily explore Meghalaya's natural wonders and cultural heritage. If you have wishlist items for the Northeast region, Meghalaya is a must-visit destination for its unique landscapes and traditions."
+}

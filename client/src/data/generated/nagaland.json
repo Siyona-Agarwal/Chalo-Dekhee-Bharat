@@ -1,0 +1,34 @@
+{
+  "id": "nagaland",
+  "name": "Nagaland",
+  "tagline": "Experience the Vibrant Tribes of North East India",
+  "topAttractions": [
+    {
+      "name": "Dzukou Valley",
+      "city": "Peren",
+      "description": "A scenic valley nestled in the Patkai Hills, known for its stunning natural beauty and trekking opportunities."
+    },
+    {
+      "name": "Kohima War Cemetery",
+      "city": "Kohima",
+      "description": "A historic cemetery that commemorates the soldiers who lost their lives during World War II's Battle of Kohima."
+    },
+    {
+      "name": "Mokokchung",
+      "city": "Mokokchung",
+      "description": "The 'Mokokchung Heritage Village' showcases the traditional Ao Naga culture and architecture."
+    }
+  ],
+  "bestTimeToVisit": "October to May, when the weather is mild and pleasant, making it ideal for trekking and sightseeing.",
+  "signatureFood": [
+    "Smoked Pork",
+    "Naga Cuisine's signature dish, 'Aloo Pitika' (Mashed Potato with Smoked Pork)"
+  ],
+  "culturalFact": "Nagaland is home to the Angami Naga's traditional 'Daos' (wooden swords), which are intricately carved and considered a symbol of the tribe's rich cultural heritage.",
+  "hiddenGem": {
+    "name": "Phek District's 'Pulongduen Lake'",
+    "description": "A serene and picturesque lake surrounded by lush greenery, perfect for a peaceful getaway."
+  },
+  "relatedFestival": "The Hornbill Festival, a 10-day celebration of Naga culture, music, and traditions, held annually in December.",
+  "passportTieIn": "If you have stamps from the Hornbill Festival or have a wishlist item for the 'Dzukou Valley Trek', now's the time to plan your Nagaland trip!"
+}
