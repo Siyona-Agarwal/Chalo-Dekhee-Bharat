@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import Icon from '../../components/Icon.jsx'
 
 /**
  * DayNightSlider - drag-based image comparison for iconic landmarks.
@@ -121,7 +122,7 @@ export default function DayNightSlider({ dayUrl, nightUrl, alt }) {
           boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
         }}
       >
-        ↔
+        <Icon name="arrowRight" size={18} />
       </div>
     </div>
   )

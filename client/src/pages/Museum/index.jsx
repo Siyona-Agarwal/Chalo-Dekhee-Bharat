@@ -5,55 +5,52 @@ import { useXP } from '../../hooks/useXP.js'
 import artifacts from '../../data/artifacts.json'
 import badges from '../../data/badges.json'
 import EraRoom from './EraRoom.jsx'
+import Icon from '../../components/Icon.jsx'
 
 const ERAS = [
   {
     id: 'ancient',
-    label: 'Ancient India',
-    period: '3000 BCE – 600 CE',
-    emoji: '🏺',
+    label: 'Prachin Bharat',
+    period: '3000 BCE – 600 CE • Ancient Era',
+    icon: 'artifact',
     color: '#f59e0b',
     gradient: 'linear-gradient(135deg, rgba(245,158,11,0.18), rgba(245,158,11,0.04))',
     border: 'rgba(245,158,11,0.3)',
     description: 'Indus Valley Civilisation, Vedic age, Maurya & Gupta empires — the golden foundations of India.',
-    stamp: { eraId: 'ancient', name: 'Ancient India Stamp' },
-    badge: badges.find(b => b.id === 'badge-001'),
+    stamp: { eraId: 'ancient', name: 'Prachin Bharat Stamp' },
   },
   {
     id: 'medieval',
-    label: 'Medieval India',
-    period: '600 CE – 1700 CE',
-    emoji: '🏰',
+    label: 'Madhyakalin Bharat',
+    period: '600 CE – 1700 CE • Medieval Era',
+    icon: 'museum',
     color: '#FF6B2B',
     gradient: 'linear-gradient(135deg, rgba(255,107,43,0.18), rgba(255,107,43,0.04))',
     border: 'rgba(255,107,43,0.3)',
     description: 'Delhi Sultanate, Mughal splendour, Vijayanagara Empire — an era of conquest, commerce, and art.',
-    stamp: { eraId: 'medieval', name: 'Medieval India Stamp' },
-    badge: badges.find(b => b.id === 'badge-002'),
+    stamp: { eraId: 'medieval', name: 'Madhyakalin Bharat Stamp' },
   },
   {
     id: 'freedom',
-    label: 'Freedom Movement',
-    period: '1757 CE – 1947 CE',
-    emoji: '🕊️',
+    label: 'Swatantrata Sangram',
+    period: '1757 CE – 1947 CE • Freedom Movement',
+    icon: 'nature',
     color: '#138808',
     gradient: 'linear-gradient(135deg, rgba(19,136,8,0.18), rgba(19,136,8,0.04))',
     border: 'rgba(19,136,8,0.3)',
     description: "Resistance, sacrifice, and the long march toward independence — India's most defining chapter.",
-    stamp: { eraId: 'freedom', name: 'Freedom Movement Stamp' },
-    badge: badges.find(b => b.id === 'badge-003'),
+    stamp: { eraId: 'freedom', name: 'Swatantrata Sangram Stamp' },
   },
   {
     id: 'modern',
-    label: 'Modern India',
-    period: '1947 CE – Present',
-    emoji: '🚀',
+    label: 'Adhunik Bharat',
+    period: '1947 CE – Present • Modern Era',
+    icon: 'rocket',
     color: '#38bdf8',
     gradient: 'linear-gradient(135deg, rgba(56,189,248,0.18), rgba(56,189,248,0.04))',
     border: 'rgba(56,189,248,0.3)',
     description: "From the Green Revolution to ISRO's Moon mission — a new nation rising on ancient roots.",
-    stamp: { eraId: 'modern', name: 'Modern India Stamp' },
-    badge: badges.find(b => b.id === 'badge-004'),
+    stamp: { eraId: 'modern', name: 'Adhunik Bharat Stamp' },
   },
 ]
 
@@ -88,8 +85,13 @@ export default function Museum() {
     if (!hasStamp(era.id)) {
       addStamp(era.stamp)
       addXP(50, `${era.label} Heritage Stamp`)
-      if (era.badge) {
-        addBadge(era.badge)
+      const completesHeritage = ERAS.every(item => item.id === era.id || hasStamp(item.id))
+      if (completesHeritage) {
+        const heritageBadge = badges.find(b => b.id === 'badge-005')
+        if (heritageBadge) {
+          addBadge(heritageBadge)
+          addXP(heritageBadge.xpReward, `Badge: ${heritageBadge.name}`)
+        }
       }
     }
   }
@@ -120,6 +122,13 @@ export default function Museum() {
         padding: '80px 24px 60px',
         textAlign: 'center',
         overflow: 'hidden',
+        minHeight: '390px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundImage: "linear-gradient(180deg, rgba(15,14,23,0.38) 0%, rgba(15,14,23,0.62) 56%, var(--color-deep-900) 100%), url('/images/museum/museum-hero.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}>
         {/* Background gradient orbs */}
         <div style={{
@@ -132,25 +141,21 @@ export default function Museum() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px' }}>🏛️</span>
+          <span style={{ display: 'block', marginBottom: '16px' }}><Icon name="museum" size={56} /></span>
           <h1 style={{
-            fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)',
-            fontWeight: '900', color: '#fff', margin: '0 0 12px',
+            fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
+            fontWeight: '900', color: '#fff', margin: '0 0 8px', letterSpacing: '0.5px',
           }}>
-            Digital Museum
+            Bharat Sangrahalaya
           </h1>
           <p style={{
-            fontFamily: 'var(--font-body)', fontSize: '1.05rem',
-            color: 'rgba(255,255,255,0.5)', maxWidth: '520px',
-            margin: '0 auto 32px', lineHeight: 1.7,
+            fontSize: 'clamp(1rem, 2vw, 1.15rem)',
+            color: 'rgba(255, 255, 255, 0.75)',
+            margin: 0,
+            fontWeight: '500',
           }}>
-            Walk through four eras of Indian history. Read artifacts in
-            Historical or Story mode, listen to narrations, and collect a
-            <span style={{ color: '#FF6B2B', fontWeight: '600' }}> Heritage Stamp</span> per era completed.
+            Interactive Digital Museum of Indian History & Heritage
           </p>
-
-          {/* Stamps collected indicator */}
-
         </motion.div>
       </div>
 
@@ -197,11 +202,11 @@ export default function Museum() {
                     fontWeight: '700', color: '#fff',
                     fontFamily: 'var(--font-body)',
                   }}>
-                    🪬 Stamped
+                    <Icon name="stamp" size={14} /> Stamped
                   </div>
                 )}
 
-                <div style={{ fontSize: '2.8rem', marginBottom: '16px' }}>{era.emoji}</div>
+                <div style={{ marginBottom: '16px' }}><Icon name={era.icon} size={44} /></div>
 
                 <h2 style={{
                   fontFamily: 'var(--font-display)', fontSize: '1.25rem',
@@ -284,7 +289,7 @@ export default function Museum() {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🏆</div>
+            <div style={{ marginBottom: '8px' }}><Icon name="trophy" size={32} /></div>
             <div style={{
               fontFamily: 'var(--font-display)', fontSize: '1.1rem',
               fontWeight: '700', color: '#fbbf24',

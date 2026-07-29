@@ -1,12 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Howl, Howler } from 'howler'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import galleryData from '../../data/gallery.json'
 import DayNightSlider from './DayNightSlider.jsx'
 import PhotoCard from './PhotoCard.jsx'
+import Icon from '../../components/Icon.jsx'
 
-const CATEGORIES = ['All', 'Heritage', 'Nature', 'Wildlife', 'Food', 'Festivals']
+const CATEGORIES = ['Heritage', 'Nature', 'Wildlife', 'Food', 'Festivals']
+
+const CATEGORY_META = {
+  Heritage: { icon: 'museum', color: '#f59e0b', description: 'Monuments, architecture, and living history.' },
+  Nature: { icon: 'nature', color: '#4ade80', description: 'Landscapes shaped by light, water, and time.' },
+  Wildlife: { icon: 'wildlife', color: '#fbbf24', description: 'India’s wild places and their inhabitants.' },
+  Food: { icon: 'food', color: '#fb923c', description: 'Regional flavours served with a sense of place.' },
+  Festivals: { icon: 'celebration', color: '#f472b6', description: 'Colour, light, and celebrations across Bharat.' },
+}
 
 const AMBIENT_SOUNDS = {
   Heritage: 'https://actions.google.com/sounds/v1/ambiences/warm_afternoon_outdoors.ogg',
@@ -17,23 +26,16 @@ const AMBIENT_SOUNDS = {
 }
 
 export default function Gallery() {
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [isMuted, setIsMuted] = useState(true)
+  const [activeCategory, setActiveCategory] = useState('Heritage')
   const { passport, addToWishlist, removeFromWishlist } = usePassport()
-
-  const photos = activeCategory === 'All'
-    ? galleryData
-    : galleryData.filter((photo) => photo.category === activeCategory)
+  const activeMeta = CATEGORY_META[activeCategory]
+  const photos = galleryData.filter((photo) => photo.category === activeCategory)
 
   const currentHowlRef = useRef(null)
 
-  // Mute/Unmute toggle
-  useEffect(() => {
-    Howler.mute(isMuted)
-  }, [isMuted])
-
   // Handle category change crossfade
   useEffect(() => {
+    Howler.mute(false)
     const src = AMBIENT_SOUNDS[activeCategory]
     const oldHowl = currentHowlRef.current
 
@@ -59,7 +61,7 @@ export default function Gallery() {
       // though _src is an internal Howler property, we can assign it securely:
       newHowl._src = src 
       newHowl.play()
-      newHowl.fade(0, 1.0, 1000)
+      newHowl.fade(0, 0.18, 1000)
     }
 
     currentHowlRef.current = newHowl
@@ -96,6 +98,11 @@ export default function Gallery() {
       <div style={{
         position: 'relative', padding: '72px 24px 48px',
         textAlign: 'center', overflow: 'hidden',
+        minHeight: '390px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        backgroundImage: "linear-gradient(180deg, rgba(15,14,23,0.34) 0%, rgba(15,14,23,0.62) 58%, var(--color-deep-900) 100%), url('/images/gallery/gallery-hero.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -107,145 +114,61 @@ export default function Gallery() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span style={{ fontSize: '3rem', display: 'block', marginBottom: '12px' }}>🖼️</span>
+          <span style={{ display: 'block', marginBottom: '12px' }}><Icon name="gallery" size={48} /></span>
           <h1
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
               fontWeight: '900',
               color: '#fff',
-              margin: '0 0 12px',
+              margin: '0 0 8px',
+              letterSpacing: '0.5px',
             }}
           >
-            Interactive Photo Gallery
+            Bharat Chitrashala
           </h1>
           <p
             style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '1rem',
-              color: 'rgba(255,255,255,0.5)',
-              maxWidth: '480px',
-              margin: '0 auto 24px',
-              lineHeight: 1.7,
+              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
+              color: 'rgba(255, 255, 255, 0.75)',
+              margin: 0,
+              fontWeight: '500',
             }}
           >
-            Discover India&apos;s visual soul - Heritage, Nature, Wildlife, Food, and Festivals.
-            Toggle <span style={{ color: '#fbbf24', fontWeight: '600' }}>Day/Night</span> views, and
-            <span style={{ color: '#f472b6', fontWeight: '600' }}> bookmark</span> destinations to your Passport.
+            Visual Heritage & Interactive Gallery of India
           </p>
-
-          <button
-            onClick={() => setIsMuted((muted) => !muted)}
-            aria-label={isMuted ? 'Unmute ambient sound' : 'Mute ambient sound'}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '999px',
-              padding: '6px 16px',
-              color: 'rgba(255,255,255,0.5)',
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.82rem',
-              cursor: 'pointer',
-            }}
-          >
-            {isMuted ? '🔇 Sound Off' : '🔊 Sound On'}
-          </button>
         </motion.div>
       </div>
 
-      <div
-        style={{
-          position: 'sticky',
-          top: '64px',
-          zIndex: 100,
-          background: 'rgba(15,14,23,0.9)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-          padding: '0 24px',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            display: 'flex',
-            gap: '4px',
-            overflowX: 'auto',
-            padding: '12px 0',
-            scrollbarWidth: 'none',
-          }}
-        >
-          {CATEGORIES.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              aria-pressed={activeCategory === category}
-              style={{
-                padding: '7px 18px',
-                borderRadius: '10px',
-                border: 'none',
-                background: activeCategory === category
-                  ? 'linear-gradient(135deg, var(--color-terracotta-500), var(--color-saffron-500))'
-                  : 'rgba(255,255,255,0.06)',
-                color: activeCategory === category ? '#fff' : 'rgba(255,255,255,0.55)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.87rem',
-                fontWeight: activeCategory === category ? '700' : '400',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.2s',
-              }}
-            >
-              {category === 'All' && '✨ '}
-              {category === 'Heritage' && '🏛️ '}
-              {category === 'Nature' && '🌿 '}
-              {category === 'Wildlife' && '🐯 '}
-              {category === 'Food' && '🍛 '}
-              {category === 'Festivals' && '🎊 '}
-              {category}
-            </motion.button>
-          ))}
+      <nav aria-label="Gallery categories" style={{ position: 'sticky', top: '64px', zIndex: 100, background: 'rgba(15,14,23,0.92)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', gap: '10px', justifyContent: 'center', overflowX: 'auto', scrollbarWidth: 'none' }}>
+          {CATEGORIES.map((category) => {
+            const meta = CATEGORY_META[category]
+            const selected = activeCategory === category
+            return (
+              <button key={category} type="button" onClick={() => setActiveCategory(category)} aria-pressed={selected} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: '44px', padding: '9px 18px', borderRadius: '11px', border: `1px solid ${selected ? `${meta.color}66` : 'rgba(255,255,255,0.08)'}`, background: selected ? `${meta.color}22` : 'rgba(255,255,255,0.04)', color: selected ? '#fff' : 'rgba(255,255,255,0.58)', fontFamily: 'var(--font-body)', fontSize: '0.86rem', fontWeight: selected ? '700' : '500', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}>
+                <Icon name={meta.icon} size={16} /> {category}
+              </button>
+            )
+          })}
         </div>
-      </div>
+      </nav>
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '20px',
-              alignItems: 'stretch',
-            }}
-          >
-            {photos.map((photo, index) => (
-              <PhotoCard
-                key={photo.id}
-                photo={photo}
-                index={index}
-                isWishlisted={isWishlisted(photo)}
-                onToggleWishlist={() => toggleWishlist(photo)}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {photos.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '60px', color: 'rgba(255,255,255,0.3)' }}>
-            No photos in this category yet.
+      <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '72px 24px 96px' }}>
+        <section aria-labelledby={`gallery-${activeCategory.toLowerCase()}`}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '20px', marginBottom: '24px', paddingBottom: '16px', borderBottom: `1px solid ${activeMeta.color}33` }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: activeMeta.color, marginBottom: '8px' }}><Icon name={activeMeta.icon} size={20} /><span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase', fontWeight: '700' }}>Gallery section</span></div>
+              <h2 id={`gallery-${activeCategory.toLowerCase()}`} style={{ margin: 0, color: '#fff', fontFamily: 'var(--font-display)', fontSize: 'clamp(1.55rem, 3vw, 2.1rem)', fontWeight: '800' }}>{activeCategory}</h2>
+              <p style={{ margin: '8px 0 0', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>{activeMeta.description}</p>
+            </div>
+            <span style={{ flexShrink: 0, color: activeMeta.color, fontFamily: 'var(--font-body)', fontSize: '0.78rem' }}>{photos.length} {photos.length === 1 ? 'story' : 'stories'}</span>
           </div>
-        )}
-      </div>
+          <motion.div key={activeCategory} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'stretch' }}>
+            {photos.map((photo, index) => <PhotoCard key={photo.id} photo={photo} index={index} isWishlisted={isWishlisted(photo)} onToggleWishlist={() => toggleWishlist(photo)} />)}
+          </motion.div>
+        </section>
+      </main>
     </div>
   )
 }
@@ -400,7 +323,7 @@ function LegacyPhotoCard({ photo, index, isWishlisted, onToggleWishlist }) {
             transition: 'all 0.2s',
           }}
         >
-          {isWishlisted ? '❤️' : '🤍'}
+          <Icon name="heart" size={17} />
         </motion.button>
       </motion.div>
 

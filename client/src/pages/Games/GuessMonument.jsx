@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useXP } from '../../hooks/useXP.js'
 import ALL_MONUMENTS from '../../data/monuments.json'
+import Icon from '../../components/Icon.jsx'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -59,7 +60,7 @@ export default function GuessMonument({ onBack, onComplete }) {
 
   if (!difficulty) {
     return (
-      <GameShell title="Guess the Monument" emoji="🏛️" onBack={onBack} progress={0} total={TOTAL_ROUNDS} score={0}>
+      <GameShell title="Guess the Monument" icon="museum" onBack={onBack} progress={0} total={TOTAL_ROUNDS} score={0}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,9 +95,9 @@ export default function GuessMonument({ onBack, onComplete }) {
   }
 
   if (finished) {
-    return <GameComplete title="Guess the Monument" score={score} total={TOTAL_ROUNDS} onBack={onBack} onReplay={() => {
+    return <GameComplete title="Smarak Pehchan" score={score} total={TOTAL_ROUNDS} onBack={onBack} onReplay={() => {
       setDifficulty(null); setFinished(false); setCurrent(0); setScore(0); setSelected(null); setShowResult(false); setShowHint(false)
-    }} emoji="🏛️" />
+    }} icon="museum" />
   }
 
   const isHard = difficulty === 'hard'
@@ -104,7 +105,7 @@ export default function GuessMonument({ onBack, onComplete }) {
   const blurAmount = (isHard && !showResult) ? 'blur(15px)' : 'none'
 
   return (
-    <GameShell title="Guess the Monument" emoji="🏛️" onBack={onBack} progress={current} total={TOTAL_ROUNDS} score={score}>
+    <GameShell title="Smarak Pehchan" icon="museum" onBack={onBack} progress={current} total={TOTAL_ROUNDS} score={score}>
       <AnimatePresence mode="wait">
         <motion.div
           key={q.id}
@@ -186,7 +187,7 @@ export default function GuessMonument({ onBack, onComplete }) {
                     cursor: 'pointer', textDecoration: 'underline',
                   }}
                 >
-                  💡 Need a hint?
+                  <Icon name="hint" size={16} /> Need a hint?
                 </button>
               )}
               {(isEasy || showHint) && (
@@ -203,7 +204,7 @@ export default function GuessMonument({ onBack, onComplete }) {
                     color: '#fbbf24',
                   }}
                 >
-                  💡 {q.hint}
+                  <Icon name="hint" size={16} /> {q.hint}
                 </motion.div>
               )}
             </div>
@@ -263,7 +264,7 @@ function DifficultyButton({ title, desc, onClick, color }) {
 }
 
 /* ── Shared UI helpers ──────────────────────────────────────── */
-export function GameShell({ title, emoji, onBack, progress, total, score, children }) {
+export function GameShell({ title, icon = 'games', onBack, progress, total, score, children }) {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)', padding: '40px 24px 80px' }}>
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -285,7 +286,7 @@ export function GameShell({ title, emoji, onBack, progress, total, score, childr
             fontFamily: 'var(--font-display)', fontSize: '1rem',
             fontWeight: '700', color: '#fff',
           }}>
-            {emoji} {title}
+            <Icon name={icon} size={22} /> {title}
           </div>
           <div style={{
             fontFamily: 'var(--font-body)', fontSize: '0.85rem',
@@ -313,7 +314,7 @@ export function GameShell({ title, emoji, onBack, progress, total, score, childr
   )
 }
 
-export function GameComplete({ title, score, total, onBack, onReplay, emoji }) {
+export function GameComplete({ title, score, total, onBack, onReplay, icon = 'games' }) {
   const pct = Math.round((score / total) * 100)
   let msg = 'Keep exploring India!'
   if (pct >= 80) msg = 'Outstanding knowledge of India!'
@@ -332,7 +333,7 @@ export function GameComplete({ title, score, total, onBack, onReplay, emoji }) {
           maxWidth: '420px', width: '100%', textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: '4rem', marginBottom: '16px' }}>{pct >= 80 ? '🏆' : pct >= 50 ? '🎖️' : '🌱'}</div>
+        <div style={{ marginBottom: '16px' }}><Icon name={pct >= 80 ? 'trophy' : pct >= 50 ? 'medal' : 'nature'} size={56} /></div>
         <div style={{
           fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '900',
           background: 'linear-gradient(135deg, #FF6B2B, #fbbf24)',
@@ -342,7 +343,7 @@ export function GameComplete({ title, score, total, onBack, onReplay, emoji }) {
           {score}/{total}
         </div>
         <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: '700', color: '#fff', marginBottom: '8px' }}>
-          {emoji} {title} Complete!
+          <Icon name={icon} size={22} /> {title} Complete!
         </div>
         <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', marginBottom: '32px' }}>
           {msg}

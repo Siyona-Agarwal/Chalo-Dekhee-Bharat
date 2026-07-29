@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { usePassport } from '../../context/PassportContext.jsx'
 import { useXP } from '../../hooks/useXP.js'
@@ -7,41 +7,12 @@ import badges from '../../data/badges.json'
 import GuessMonument from './GuessMonument.jsx'
 import FindState from './FindState.jsx'
 import MatchFestival from './MatchFestival.jsx'
+import Icon from '../../components/Icon.jsx'
 
 const GAMES = [
-  {
-    id: 'guess-monument',
-    title: 'Guess the Monument',
-    emoji: '🏛️',
-    description: 'An image appears — can you name the monument? Multiple-choice, 3 chances.',
-    color: '#FF6B2B',
-    gradient: 'linear-gradient(135deg, rgba(255,107,43,0.15), rgba(245,158,11,0.06))',
-    border: 'rgba(255,107,43,0.3)',
-    xpPerCorrect: 20,
-    badgeId: 'badge-006',
-  },
-  {
-    id: 'find-state',
-    title: 'Find the State',
-    emoji: '🗺️',
-    description: 'A state name appears — click the correct region on India\'s map. 10 rounds.',
-    color: '#a78bfa',
-    gradient: 'linear-gradient(135deg, rgba(167,139,250,0.15), rgba(56,189,248,0.06))',
-    border: 'rgba(167,139,250,0.3)',
-    xpPerCorrect: 15,
-    badgeId: 'badge-007',
-  },
-  {
-    id: 'match-festival',
-    title: 'Match Festivals to States',
-    emoji: '🎊',
-    description: 'Click a festival then its matching state to pair them all. Quick and colourful!',
-    color: '#f472b6',
-    gradient: 'linear-gradient(135deg, rgba(244,114,182,0.15), rgba(251,191,36,0.06))',
-    border: 'rgba(244,114,182,0.3)',
-    xpPerCorrect: 15,
-    badgeId: 'badge-008',
-  },
+  { id: 'guess-monument', title: 'Smarak Pehchan', icon: 'museum', description: 'Identify an Indian monument from the image and clues.', color: '#ff6b2b', image: '/games/monument-1.jpg', badgeId: 'badge-006-hard', xpPerCorrect: 20 },
+  { id: 'find-state', title: 'Pradesh Khoj', icon: 'map', description: 'Locate the named state on India’s map.', color: '#a78bfa', image: '/images/games/pradesh-khoj-bg.png', badgeId: 'badge-007-hard', xpPerCorrect: 15 },
+  { id: 'match-festival', title: 'Utsav Sangam', icon: 'celebration', description: 'Match Indian festivals to their home states.', color: '#f472b6', image: '/images/games/utsav-sangam-bg.png', badgeId: 'badge-008-hard', xpPerCorrect: 15 },
 ]
 
 export default function Games() {
@@ -49,181 +20,48 @@ export default function Games() {
   const { passport, addBadge } = usePassport()
   const { addXP } = useXP()
   const navigate = useNavigate()
-
   const earnedBadgeIds = new Set(passport.badges.map(b => b.id))
 
   const handleGameComplete = (gameId, score, total, difficulty = null) => {
-    const game = GAMES.find(g => g.id === gameId)
-    if (!game) return
-
-    let targetBadgeId = game.badgeId
-    if (difficulty) {
-      if (gameId === 'guess-monument') targetBadgeId = `badge-006-${difficulty}`
-      else if (gameId === 'find-state') targetBadgeId = `badge-007-${difficulty}`
-      else if (gameId === 'match-festival') targetBadgeId = `badge-008-${difficulty}`
-    }
-
-    // Award completion badge if not already earned and score is 100%
-    if (targetBadgeId && !earnedBadgeIds.has(targetBadgeId) && score === total) {
-      const badge = badges.find(b => b.id === targetBadgeId)
-      if (badge) {
-        addBadge(badge)
-        addXP(badge.xpReward, `Badge: ${badge.name}`)
-      }
+    const game = GAMES.find(item => item.id === gameId)
+    if (!game || score !== total) return
+    const targetBadgeId = difficulty ? `badge-${gameId === 'guess-monument' ? '006' : gameId === 'find-state' ? '007' : '008'}-${difficulty}` : game.badgeId
+    if (!earnedBadgeIds.has(targetBadgeId)) {
+      const badge = badges.find(item => item.id === targetBadgeId)
+      if (badge) { addBadge(badge); addXP(badge.xpReward, `Badge: ${badge.name}`) }
     }
   }
 
-  if (activeGame === 'guess-monument') {
-    return <GuessMonument onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('guess-monument', s, t, diff)} />
-  }
-  if (activeGame === 'find-state') {
-    return <FindState onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('find-state', s, t, diff)} />
-  }
-  if (activeGame === 'match-festival') {
-    return <MatchFestival onBack={() => setActiveGame(null)} onComplete={(s, t, diff) => handleGameComplete('match-festival', s, t, diff)} />
-  }
+  if (activeGame === 'guess-monument') return <GuessMonument onBack={() => setActiveGame(null)} onComplete={(s, t, d) => handleGameComplete('guess-monument', s, t, d)} />
+  if (activeGame === 'find-state') return <FindState onBack={() => setActiveGame(null)} onComplete={(s, t, d) => handleGameComplete('find-state', s, t, d)} />
+  if (activeGame === 'match-festival') return <MatchFestival onBack={() => setActiveGame(null)} onComplete={(s, t, d) => handleGameComplete('match-festival', s, t, d)} />
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-deep-900)' }} className="indian-motif-bg">
-      {/* Hero */}
-      <div style={{
-        position: 'relative', padding: '72px 24px 56px', textAlign: 'center', overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 30% 50%, rgba(167,139,250,0.10) 0%, transparent 55%), radial-gradient(ellipse at 70% 30%, rgba(244,114,182,0.08) 0%, transparent 50%)',
-        }} />
+      <header style={{ position: 'relative', minHeight: '390px', padding: '72px 24px 56px', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden', backgroundImage: "linear-gradient(180deg, rgba(15,14,23,0.34), rgba(15,14,23,0.64) 58%, var(--color-deep-900) 100%), url('/images/games/games-hero.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-          <span style={{ fontSize: '3rem', display: 'block', marginBottom: '12px' }}>🎮</span>
-          <h1 style={{
-            fontFamily: 'var(--font-display)', fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
-            fontWeight: '900', color: '#fff', margin: '0 0 12px',
-          }}>
-            Explorer Mini-Games
-          </h1>
-          <p style={{
-            fontFamily: 'var(--font-body)', fontSize: '1rem',
-            color: 'rgba(255,255,255,0.5)', maxWidth: '460px',
-            margin: '0 auto 16px', lineHeight: 1.7,
-          }}>
-            Test your knowledge of India's monuments, states, and festivals.
-            Earn <span style={{ color: '#fbbf24', fontWeight: '600' }}>XP</span> for every correct answer
-            and unlock <span style={{ color: '#fbbf24', fontWeight: '600' }}>badges</span> on completion.
-          </p>
+          <Icon name="games" size={48} />
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.1rem, 4.5vw, 3.2rem)', fontWeight: '900', color: '#fff', margin: '14px 0 8px' }}>Digital Akhada</h1>
+          <p style={{ color: 'rgba(255,255,255,0.75)', margin: 0 }}>Play, explore, and earn XP across India.</p>
         </motion.div>
-      </div>
+      </header>
 
-      {/* Game cards */}
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px 80px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {GAMES.map((game, i) => {
-            const badgeEarned = earnedBadgeIds.has(game.badgeId)
-            return (
-              <motion.div
-                key={game.id}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ x: 6 }}
-                onClick={() => setActiveGame(game.id)}
-                role="button"
-                tabIndex={0}
-                aria-label={`Play ${game.title}`}
-                onKeyDown={(e) => e.key === 'Enter' && setActiveGame(game.id)}
-                style={{
-                  background: game.gradient,
-                  border: `1px solid ${game.border}`,
-                  borderRadius: '18px',
-                  padding: '28px 32px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '24px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <div style={{
-                  fontSize: '2.8rem', flexShrink: 0,
-                  width: '64px', height: '64px',
-                  background: `${game.color}22`,
-                  border: `1px solid ${game.border}`,
-                  borderRadius: '14px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {game.emoji}
-                </div>
-
-                <div style={{ flex: 1 }}>
-                  <h2 style={{
-                    fontFamily: 'var(--font-display)', fontSize: '1.2rem',
-                    fontWeight: '800', color: '#fff', margin: '0 0 6px',
-                  }}>
-                    {game.title}
-                    {badgeEarned && <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>🏅</span>}
-                  </h2>
-                  <p style={{
-                    fontFamily: 'var(--font-body)', fontSize: '0.87rem',
-                    color: 'rgba(255,255,255,0.55)', margin: '0 0 12px', lineHeight: 1.6,
-                  }}>
-                    {game.description}
-                  </p>
-                  <div style={{
-                    fontFamily: 'var(--font-body)', fontSize: '0.78rem',
-                    color: game.color, fontWeight: '600',
-                  }}>
-                    +{game.xpPerCorrect} XP per correct answer · Badge on completion
-                  </div>
-                </div>
-
-                <div style={{
-                  fontFamily: 'var(--font-display)', fontSize: '1.2rem',
-                  color: game.color, flexShrink: 0,
-                }}>
-                  →
-                </div>
-
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0,
-                  height: '2px', background: `linear-gradient(90deg, ${game.color}, transparent)`,
-                }} />
-              </motion.div>
-            )
-          })}
+      <main style={{ maxWidth: '1080px', margin: '0 auto', padding: '58px 24px 96px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '22px' }}>
+          {GAMES.map((game, index) => (
+            <motion.article key={game.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.08 }} role="button" tabIndex={0} onClick={() => setActiveGame(game.id)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') setActiveGame(game.id) }} style={{ minHeight: '430px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', borderRadius: '24px', border: `1px solid ${game.color}66`, backgroundImage: `linear-gradient(180deg, rgba(10,10,18,0.04) 18%, rgba(10,10,18,0.94) 88%), url("${game.image}")`, backgroundSize: 'cover', backgroundPosition: 'center', cursor: 'pointer', boxShadow: '0 20px 50px rgba(0,0,0,0.22)' }}>
+              <div style={{ position: 'relative', padding: '26px 24px 24px' }}>
+                <Icon name={game.icon} size={30} />
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', color: '#fff', margin: '12px 0 8px' }}>{game.title}</h2>
+                <p style={{ color: 'rgba(255,255,255,0.72)', margin: '0 0 16px', lineHeight: 1.5, fontSize: '0.9rem' }}>{game.description}</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: game.color, fontSize: '0.78rem', fontWeight: '700' }}><span>+{game.xpPerCorrect} XP / answer</span><span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>Play <Icon name="arrowRight" size={16} /></span></div>
+              </div>
+            </motion.article>
+          ))}
         </div>
 
-        {/* Quick stats */}
-        {passport.badges.some(b => ['badge-006','badge-007','badge-008'].includes(b.id)) && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            style={{
-              marginTop: '32px',
-              background: 'rgba(251,191,36,0.06)',
-              border: '1px solid rgba(251,191,36,0.15)',
-              borderRadius: '14px', padding: '20px 24px',
-              textAlign: 'center',
-            }}
-          >
-            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🏅</div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: '700', color: '#fbbf24' }}>
-              {passport.badges.filter(b => ['badge-006','badge-007','badge-008'].includes(b.id)).length}/3 Game Badges Earned
-            </div>
-            <button
-              onClick={() => navigate('/passport')}
-              style={{
-                marginTop: '10px', padding: '6px 16px', borderRadius: '8px',
-                border: '1px solid rgba(251,191,36,0.3)', background: 'transparent',
-                color: '#fbbf24', fontFamily: 'var(--font-body)', fontSize: '0.82rem',
-                cursor: 'pointer',
-              }}
-            >
-              View in Passport →
-            </button>
-          </motion.div>
-        )}
-      </div>
+        {passport.badges.some(b => ['badge-006-hard', 'badge-007-hard', 'badge-008-hard'].includes(b.id)) && <div style={{ marginTop: '32px', textAlign: 'center', color: '#fbbf24' }}><Icon name="medal" size={22} /> {passport.badges.filter(b => ['badge-006-hard', 'badge-007-hard', 'badge-008-hard'].includes(b.id)).length}/3 Game Badges Earned <button type="button" onClick={() => navigate('/passport')} style={{ marginLeft: '12px', color: '#fbbf24', background: 'none', border: 'none', textDecoration: 'underline', cursor: 'pointer' }}>View Passport</button></div>}
+      </main>
     </div>
   )
 }

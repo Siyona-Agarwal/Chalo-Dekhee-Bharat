@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePassport } from '../context/PassportContext.jsx'
+import Icon from './Icon.jsx'
 
 export default function XPToast() {
   const { toasts } = usePassport()
@@ -49,7 +50,7 @@ export default function XPToast() {
               border: '1px solid rgba(255,255,255,0.2)',
             }}
           >
-            <span style={{ fontSize: '1.2rem' }}>✨</span>
+            <Icon name="sparkles" size={20} />
             <span>{toast.message}</span>
           </motion.div>
         ))}

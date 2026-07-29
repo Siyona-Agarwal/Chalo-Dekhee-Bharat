@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Icon from '../../components/Icon.jsx'
 
 export default function ArtifactCard({ artifact, era, isViewed, onClick }) {
   return (
@@ -91,7 +92,7 @@ export default function ArtifactCard({ artifact, era, isViewed, onClick }) {
           fontSize: '0.78rem', fontFamily: 'var(--font-body)',
           color: era.color, fontWeight: '600',
         }}>
-          <span>📜</span> Historical · <span>📖</span> Story Mode
+          <Icon name="artifact" size={14} /> Historical · <Icon name="story" size={14} /> Story Mode
         </div>
       </div>
     </motion.div>

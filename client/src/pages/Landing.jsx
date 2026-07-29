@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Icon from '../components/Icon.jsx'
 import { motion } from 'framer-motion'
 import { usePassport } from '../context/PassportContext.jsx'
 import indiaMapData from '../data/indiaMapData.js'
@@ -81,9 +82,34 @@ export default function Landing() {
               }}
             >
               <span style={{ fontSize: '0.85rem', color: '#FF6B2B', fontWeight: '600', fontFamily: 'var(--font-body)' }}>
-                🇮🇳 Your Interactive Passport to Incredible India
+                <Icon name="passport" size={16} /> Your Interactive Passport to Incredible India
               </span>
             </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+                fontWeight: '900',
+                lineHeight: 1.1,
+                margin: '0 0 20px',
+                color: '#fff',
+              }}
+            >
+              चलो देखें{' '}
+              <span style={{
+                background: 'linear-gradient(135deg, #FF6B2B, #fbbf24)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                भारत!
+              </span>
+            </motion.h1>
 
             {/* Headline */}
             <motion.h1
@@ -123,8 +149,8 @@ export default function Landing() {
                 maxWidth: '480px',
               }}
             >
-              Walk through ancient eras in our Digital Museum, marvel at India's
-              natural beauty in the Photo Gallery, test your knowledge in Mini-Games,
+              Walk through ancient eras in Bharat Sangrahalaya, marvel at India's
+              natural beauty in Bharat Chitrashala, test your knowledge in Digital Akhada,
               and let AI craft your perfect itinerary — all while building your
               personal Digital Passport.
             </motion.p>
@@ -137,10 +163,10 @@ export default function Landing() {
               style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '40px' }}
             >
               {[
-                { icon: '🏛️', label: 'Digital Museum' },
-                { icon: '🖼️', label: 'Photo Gallery' },
-                { icon: '🎮', label: 'Mini-Games' },
-                { icon: '🤖', label: 'AI Planner' },
+                { icon: 'museum', label: 'Bharat Sangrahalaya' },
+                { icon: 'gallery', label: 'Bharat Chitrashala' },
+                { icon: 'games', label: 'Digital Akhada' },
+                { icon: 'sparkles', label: 'Safar Saathi' },
               ].map(({ icon, label }) => (
                 <div
                   key={label}
@@ -155,7 +181,7 @@ export default function Landing() {
                     fontFamily: 'var(--font-body)',
                   }}
                 >
-                  <span role="img" aria-hidden="true">{icon}</span>
+                  <Icon name={icon} size={16} />
                   {label}
                 </div>
               ))}
@@ -186,7 +212,7 @@ export default function Landing() {
                   letterSpacing: '0.01em',
                 }}
               >
-                🚀 Start Your Journey
+                <Icon name="rocket" size={18} /> Start Your Journey
               </motion.button>
 
               {hasStarted && (
@@ -207,7 +233,7 @@ export default function Landing() {
                     cursor: 'pointer',
                   }}
                 >
-                  📖 My Passport
+                  <Icon name="passport" size={18} /> My Passport
                 </motion.button>
               )}
             </motion.div>
@@ -270,7 +296,7 @@ export default function Landing() {
                 ))}
 
                 {/* Featured location pins */}
-                {FEATURED_SPOTS.map(({ id, label, x, y, emoji }) => (
+                {FEATURED_SPOTS.map(({ id, label, x, y, icon }) => (
                   <motion.g
                     key={id}
                     initial={{ opacity: 0, scale: 0 }}
@@ -278,7 +304,7 @@ export default function Landing() {
                     transition={{ delay: 0.6 + id * 0.1, type: 'spring', stiffness: 200 }}
                   >
                     <circle cx={x} cy={y} r="35" fill="rgba(15,14,23,0.85)" stroke="rgba(255,107,43,0.5)" strokeWidth="3" />
-                    <text x={x} y={y + 12} textAnchor="middle" fontSize="30">{emoji}</text>
+                    <text x={x} y={y + 12} textAnchor="middle" fontSize="12">{icon}</text>
                     {/* Pulse ring */}
                     <motion.circle
                       cx={x} cy={y} r="45"
@@ -330,6 +356,42 @@ export default function Landing() {
           </p>
         </motion.div>
 
+      </section>
+
+      {/* Journey Steps Section */}
+      <section style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '80px 24px',
+      }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{ textAlign: 'center', marginBottom: '60px' }}
+        >
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
+            fontWeight: '800',
+            color: '#fff',
+            margin: '0 0 16px',
+          }}>
+            Your Journey, Your Passport
+          </h2>
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '1.05rem',
+            color: 'rgba(255,255,255,0.5)',
+            maxWidth: '560px',
+            margin: '0 auto',
+            lineHeight: 1.7,
+          }}>
+            Every page you explore adds stamps, XP, and badges to your Digital Passport — creating a unique record of your virtual India journey.
+          </p>
+        </motion.div>
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -337,23 +399,23 @@ export default function Landing() {
         }}>
           {[
             {
-              step: '01', icon: '🏛️', title: 'Explore the Museum',
-              desc: 'Walk through Ancient, Medieval, Freedom Movement, and Modern eras. Collect Heritage Stamps as you complete each era.',
+              step: '01', icon: 'museum', title: 'Explore the Museum',
+              desc: 'Walk through Prachin Bharat, Madhyakalin Bharat, Swatantrata Sangram, and Adhunik Bharat eras. Collect Heritage Stamps as you complete each era.',
               color: '#FF6B2B', to: '/museum',
             },
             {
-              step: '02', icon: '🖼️', title: 'Browse the Gallery',
+              step: '02', icon: 'gallery', title: 'Browse the Gallery',
               desc: 'Discover Heritage, Nature, Wildlife, Food, and Festival photos. Bookmark destinations to your wishlist.',
               color: '#f59e0b', to: '/gallery',
             },
             {
-              step: '03', icon: '🎮', title: 'Play Mini-Games',
-              desc: 'Guess the Monument, Find the State on a map, or Match Festivals to States — earn XP and badges for every win.',
+              step: '03', icon: 'games', title: 'Digital Akhada',
+              desc: 'Smarak Pehchan, Pradesh Khoj, and Utsav Sangam — earn XP and badges for every win.',
               color: '#a78bfa', to: '/games',
             },
             {
-              step: '04', icon: '🤖', title: 'AI Travel Planner',
-              desc: 'Let AI craft a personalized itinerary based on your exploration history, wishlist, and travel preferences.',
+              step: '04', icon: 'sparkles', title: 'Safar Saathi',
+              desc: 'Your intelligent journey companion — let AI craft a personalised itinerary based on your Passport, stamps, and wishlist.',
               color: '#38bdf8', to: '/planner',
             },
           ].map(({ step, icon, title, desc, color, to }, i) => (
@@ -397,7 +459,7 @@ export default function Landing() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '1.5rem', marginBottom: '16px',
               }}>
-                <span role="img" aria-hidden="true">{icon}</span>
+                <Icon name={icon} size={28} />
               </div>
 
               <h3 style={{

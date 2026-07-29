@@ -88,7 +88,7 @@ export default function FindState({ onBack, onComplete }) {
 
   if (!difficulty) {
     return (
-      <GameShell title="Find the State" emoji="🗺️" onBack={onBack} progress={0} total={TOTAL_ROUNDS} score={0}>
+      <GameShell title="Pradesh Khoj" icon="map" onBack={onBack} progress={0} total={TOTAL_ROUNDS} score={0}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,19 +123,19 @@ export default function FindState({ onBack, onComplete }) {
   }
 
   if (finished) {
-    return <GameComplete title="Find the State" score={score} total={TOTAL_ROUNDS} onBack={onBack} onReplay={() => {
+    return <GameComplete title="Pradesh Khoj" score={score} total={TOTAL_ROUNDS} onBack={onBack} onReplay={() => {
       setDifficulty(null)
       setFinished(false)
       setCurrent(0)
       setScore(0)
       setClicked(null)
-    }} emoji="🗺️" />
+    }} icon="map" />
   }
 
   const target = rounds[current]
 
   return (
-    <GameShell title="Find the State" emoji="🗺️" onBack={onBack} progress={current} total={TOTAL_ROUNDS} score={score}>
+    <GameShell title="Pradesh Khoj" icon="map" onBack={onBack} progress={current} total={TOTAL_ROUNDS} score={score}>
       <AnimatePresence mode="wait">
         <motion.div
           key={target.id}
@@ -249,10 +249,10 @@ export default function FindState({ onBack, onComplete }) {
               }}
             >
               {clicked === target.id
-                ? `🎯 Correct! +15 XP`
+                ? `Correct! +15 XP`
                 : difficulty === 'hard' 
-                  ? `😅 Oops! ${target.capital} is the capital of ${target.label}. The correct state is in green.`
-                  : `😅 Oops! The correct location is marked in green.`}
+                  ? `Oops! ${target.capital} is the capital of ${target.label}. The correct state is in green.`
+                  : `Oops! The correct location is marked in green.`}
             </motion.div>
           )}
         </motion.div>

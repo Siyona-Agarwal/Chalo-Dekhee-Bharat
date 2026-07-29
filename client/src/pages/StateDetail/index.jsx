@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import statePages from '../../data/statePages.json'
 import indiaMapData from '../../data/indiaMapData.js'
+import Icon from '../../components/Icon.jsx'
 
 const AttractionCard = ({ attr, i }) => {
   return (
@@ -14,7 +15,7 @@ const AttractionCard = ({ attr, i }) => {
       style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}
     >
       <h3 style={{ margin: '0 0 5px', color: '#fff' }}>{attr.name}</h3>
-      <p style={{ margin: '0 0 15px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>📍 {attr.city}</p>
+      <p style={{ margin: '0 0 15px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}><Icon name="location" size={14} /> {attr.city}</p>
       
       <p style={{ 
         margin: 0, 
@@ -153,7 +154,7 @@ export default function StateDetail() {
 
       {hasExplored && (
         <div style={{ maxWidth: '800px', margin: '0 auto 40px', padding: '15px 24px', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', textAlign: 'center' }}>
-          <span style={{ fontSize: '1.2rem', marginRight: '10px' }}>🌟</span>
+          <Icon name="star" size={20} />
           <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>You've already explored this area!</span>
           <p style={{ margin: '5px 0 0', fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)' }}>{stateData.passportTieIn}</p>
         </div>
@@ -173,14 +174,14 @@ export default function StateDetail() {
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px' }}>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <span style={{ fontSize: '2rem' }}>🌡️</span>
+                <Icon name="thermometer" size={32} />
                 <div>
                   <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', fontWeight: 'bold' }}>Best Time</div>
                   <div style={{ fontWeight: '500' }}>{stateData.bestTimeToVisit}</div>
                 </div>
               </div>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <span style={{ fontSize: '2rem' }}>🎉</span>
+                <Icon name="celebration" size={32} />
                 <div>
                   <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', fontWeight: 'bold' }}>Festival</div>
                   <div style={{ fontWeight: '500' }}>{stateData.relatedFestival}</div>
@@ -189,7 +190,7 @@ export default function StateDetail() {
             </div>
 
             <div>
-              <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '10px' }}>Signature Foods 🍲</div>
+              <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '10px' }}><Icon name="food" size={16} /> Signature Foods</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                 {stateData.signatureFood.map((food, i) => (
                   <span key={i} style={{ background: 'rgba(251,191,36,0.15)', color: '#fbbf24', padding: '6px 12px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: '500', border: '1px solid rgba(251,191,36,0.3)' }}>
@@ -201,7 +202,7 @@ export default function StateDetail() {
           </div>
           
           <div style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.2)' }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', color: '#a78bfa', marginTop: 0 }}>Hidden Gem 💎</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', color: '#a78bfa', marginTop: 0 }}><Icon name="gem" size={20} /> Hidden Gem</h2>
             <h3 style={{ margin: '0 0 10px' }}>{stateData.hiddenGem.name}</h3>
             <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{stateData.hiddenGem.description}</p>
           </div>

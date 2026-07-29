@@ -3,14 +3,15 @@ import { NavLink, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Show, UserButton } from '@clerk/react'
 import PassportWidget from './PassportWidget.jsx'
+import Icon from './Icon.jsx'
 
 const NAV_LINKS = [
-  { to: '/',          label: 'Home',      icon: '🏠' },
-  { to: '/museum',    label: 'Museum',    icon: '🏛️' },
-  { to: '/gallery',   label: 'Gallery',   icon: '🖼️' },
-  { to: '/games',     label: 'Games',     icon: '🎮' },
-  { to: '/planner',   label: 'Planner',   icon: '🗺️' },
-  { to: '/passport',  label: 'Passport',  icon: '📖' },
+  { to: '/',          label: 'Home',          icon: 'home' },
+  { to: '/museum',    label: 'Sangrahalaya',  icon: 'museum' },
+  { to: '/gallery',   label: 'Chitrashala',   icon: 'gallery' },
+  { to: '/games',     label: 'Akhada',        icon: 'games' },
+  { to: '/planner',   label: 'Saathi',        icon: 'map' },
+  { to: '/passport',  label: 'Passport',      icon: 'passport' },
 ]
 
 export default function Navbar() {
@@ -47,7 +48,7 @@ export default function Navbar() {
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: '1.6rem' }}>🇮🇳</span>
+        <Icon name="museum" size={28} strokeWidth={1.5} title="India" />
         <div>
           <div style={{
             fontFamily: 'var(--font-display)',
@@ -102,7 +103,7 @@ export default function Navbar() {
               gap: '5px',
             })}
           >
-            <span role="img" aria-hidden="true">{icon}</span>
+            <Icon name={icon} size={16} />
             {label}
           </NavLink>
         ))}
@@ -149,7 +150,7 @@ export default function Navbar() {
         }}
         className="show-mobile"
       >
-        {menuOpen ? '✕' : '☰'}
+        <Icon name={menuOpen ? 'close' : 'menu'} size={24} />
       </button>
 
       {/* Mobile dropdown menu */}
@@ -197,7 +198,7 @@ export default function Navbar() {
                   gap: '10px',
                 })}
               >
-                <span role="img" aria-hidden="true">{icon}</span>
+                <Icon name={icon} size={18} />
                 {label}
               </NavLink>
             ))}

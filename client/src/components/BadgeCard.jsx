@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Icon from './Icon.jsx'
 
 export default function BadgeCard({ badge, earned = false, size = 'normal' }) {
   const isSmall = size === 'small'
@@ -34,7 +35,7 @@ export default function BadgeCard({ badge, earned = false, size = 'normal' }) {
         filter: earned ? 'none' : 'grayscale(1)',
         flexShrink: 0,
       }}>
-        {badge.icon}
+        <Icon name={badge.icon} size={isSmall ? 26 : 36} />
       </div>
 
       <div>

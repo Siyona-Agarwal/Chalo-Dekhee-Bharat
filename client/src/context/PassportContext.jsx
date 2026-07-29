@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useCallback, useState } from 'react'
+import React, { createContext, useContext, useCallback, useEffect, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage.js'
+import allBadges from '../data/badges.json'
 
 // ── XP Level Thresholds ──────────────────────────────────────────────────────
 const LEVELS = [
@@ -51,6 +52,14 @@ export const PassportContext = createContext(null)
 export function PassportProvider({ children }) {
   const [passport, setPassport] = useLocalStorage('passport_v1', DEFAULT_PASSPORT)
 
+  useEffect(() => {
+    const supportedIds = new Set(allBadges.map(badge => badge.id))
+    setPassport(prev => {
+      const badges = (prev.badges || []).filter(badge => supportedIds.has(badge.id))
+      return badges.length === (prev.badges || []).length ? prev : { ...prev, badges }
+    })
+  }, [setPassport])
+
   // Toast queue: [{ id, message, xp }]
   const [toasts, setToasts] = useState([])
 
@@ -72,12 +81,21 @@ export function PassportProvider({ children }) {
   const addBadge = useCallback((badge) => {
     setPassport(prev => {
       if (prev.badges.some(b => b.id === badge.id)) return prev
+      const nextBadges = [...prev.badges, { ...badge, earnedAt: new Date().toISOString() }]
+      const completionIds = ['badge-005', 'badge-006-hard', 'badge-007-hard', 'badge-008-hard', 'badge-009', 'badge-010', 'badge-011']
+      const finalBadge = allBadges.find(item => item.id === 'badge-012')
+      const earnsFinalBadge = badge.id !== 'badge-012'
+        && completionIds.every(id => nextBadges.some(item => item.id === id))
+        && !nextBadges.some(item => item.id === 'badge-012')
+
       return {
         ...prev,
-        badges: [...prev.badges, { ...badge, earnedAt: new Date().toISOString() }],
+        badges: earnsFinalBadge && finalBadge
+          ? [...nextBadges, { ...finalBadge, earnedAt: new Date().toISOString() }]
+          : nextBadges,
       }
     })
-    pushToast(`🏅 Badge Unlocked: ${badge.name}!`)
+    pushToast(`Badge Unlocked: ${badge.name}!`)
   }, [setPassport, pushToast])
 
   const addStamp = useCallback((stamp) => {
@@ -88,18 +106,35 @@ export function PassportProvider({ children }) {
         stamps: [...prev.stamps, { ...stamp, earnedAt: new Date().toISOString() }],
       }
     })
-    pushToast(`🪬 Heritage Stamp: ${stamp.name}!`)
+    pushToast(`Heritage Stamp: ${stamp.name}!`)
   }, [setPassport, pushToast])
 
   const addToWishlist = useCallback((destination) => {
     setPassport(prev => {
       if (prev.wishlist.some(d => d.id === destination.id)) return prev
+      const nextWishlist = [...prev.wishlist, destination]
+      const earnedIds = new Set(prev.badges.map(b => b.id))
+      const unlocks = []
+      const wishlistBadge = allBadges.find(b => b.id === 'badge-009')
+      const culinaryBadge = allBadges.find(b => b.id === 'badge-011')
+      if (nextWishlist.length >= 5 && !earnedIds.has('badge-009') && wishlistBadge) unlocks.push(wishlistBadge)
+      if (nextWishlist.filter(item => item.category === 'Food').length >= 3 && !earnedIds.has('badge-011') && culinaryBadge) unlocks.push(culinaryBadge)
+      const nextBadges = [...prev.badges, ...unlocks.map(badge => ({ ...badge, earnedAt: new Date().toISOString() }))]
+      const completionIds = ['badge-005', 'badge-006-hard', 'badge-007-hard', 'badge-008-hard', 'badge-009', 'badge-010', 'badge-011']
+      const finalBadge = allBadges.find(item => item.id === 'badge-012')
+      const earnsFinalBadge = finalBadge
+        && completionIds.every(id => nextBadges.some(item => item.id === id))
+        && !nextBadges.some(item => item.id === 'badge-012')
+
       return {
         ...prev,
-        wishlist: [...prev.wishlist, destination],
+        wishlist: nextWishlist,
+        badges: earnsFinalBadge
+          ? [...nextBadges, { ...finalBadge, earnedAt: new Date().toISOString() }]
+          : nextBadges,
       }
     })
-    pushToast(`❤️ Added to Wishlist: ${destination.title}`)
+    pushToast(`Added to Wishlist: ${destination.title}`)
   }, [setPassport, pushToast])
 
   const removeFromWishlist = useCallback((destinationId) => {
@@ -143,7 +178,7 @@ export function PassportProvider({ children }) {
 
   const resetPassport = useCallback(() => {
     setPassport(DEFAULT_PASSPORT)
-    pushToast('🔄 Passport Reset')
+    pushToast('Passport Reset')
   }, [setPassport, pushToast])
 
   // ── Derived State ──────────────────────────────────────────────────────────

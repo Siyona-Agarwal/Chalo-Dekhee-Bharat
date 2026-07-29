@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useXP } from '../../hooks/useXP.js'
 import festivalsData from '../../data/festivals.json'
 import { GameShell, GameComplete } from './GuessMonument.jsx'
@@ -120,7 +120,7 @@ export default function MatchFestival({ onBack, onComplete }) {
 
   if (!difficulty) {
     return (
-      <GameShell title="Match Festivals to States" emoji="🎊" onBack={onBack} progress={0} total={6} score={0}>
+      <GameShell title="Utsav Sangam" icon="celebration" onBack={onBack} progress={0} total={6} score={0}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -158,7 +158,7 @@ export default function MatchFestival({ onBack, onComplete }) {
   }
 
   if (finished) {
-    return <GameComplete title="Match Festivals" score={score} total={PAIR_COUNT} onBack={onBack} onReplay={() => {
+    return <GameComplete title="Utsav Sangam" score={score} total={PAIR_COUNT} onBack={onBack} onReplay={() => {
       setDifficulty(null)
       setFinished(false)
       setScore(0)
@@ -166,11 +166,11 @@ export default function MatchFestival({ onBack, onComplete }) {
       setSelectedLeft(null)
       setSelectedRight(null)
       setTimeLeft(45)
-    }} emoji="🎊" />
+    }} icon="celebration" />
   }
 
   return (
-    <GameShell title="Match Festivals to States" emoji="🎊" onBack={onBack}
+    <GameShell title="Utsav Sangam" icon="celebration" onBack={onBack}
       progress={matched.size} total={PAIR_COUNT} score={matched.size}>
 
       {difficulty === 'hard' && (
@@ -187,7 +187,7 @@ export default function MatchFestival({ onBack, onComplete }) {
             fontSize: '1.2rem',
             animation: timeLeft <= 10 ? 'pulse 1s infinite' : 'none'
           }}>
-            ⏱️ {timeLeft}s
+            {timeLeft}s
           </div>
           <style>{`
             @keyframes pulse {
@@ -221,7 +221,7 @@ export default function MatchFestival({ onBack, onComplete }) {
             fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#f472b6',
           }}
         >
-          🎊 {pairs.find(p => p.festivalId === selectedLeft)?.festivalName} → now click its state!
+          {pairs.find(p => p.festivalId === selectedLeft)?.festivalName} → now click its state!
         </motion.div>
       )}
 

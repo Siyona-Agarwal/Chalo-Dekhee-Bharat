@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ArtifactCard from './ArtifactCard.jsx'
+import Icon from '../../components/Icon.jsx'
 
 export default function EraRoom({
   era,
@@ -91,7 +92,7 @@ export default function EraRoom({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div style={{ fontSize: '3rem', marginBottom: '12px' }}>{era.emoji}</div>
+            <div style={{ marginBottom: '12px' }}><Icon name={era.icon} size={48} /></div>
             <h1 style={{
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
               fontWeight: '900', color: '#fff', margin: '0 0 6px',
@@ -120,7 +121,7 @@ export default function EraRoom({
                 fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.4)',
               }}>
                 <span>{progress.viewed} of {progress.total} artifacts explored</span>
-                {hasStamp && <span style={{ color: era.color }}>🪬 Stamp Collected!</span>}
+                {hasStamp && <span style={{ color: era.color }}><Icon name="stamp" size={14} /> Stamp Collected!</span>}
               </div>
               <div style={{
                 height: '6px', background: 'rgba(255,255,255,0.08)',
@@ -337,7 +338,7 @@ function ArtifactModal({ artifact, era, onClose }) {
                     transition: 'all 0.2s',
                   }}
                 >
-                  {m === 'historical' ? '📜 Historical' : '📖 Story Mode'}
+                  {m === 'historical' ? <><Icon name="artifact" size={15} /> Historical</> : <><Icon name="story" size={15} /> Story Mode</>}
                 </button>
               ))}
             </div>
@@ -360,7 +361,7 @@ function ArtifactModal({ artifact, era, onClose }) {
                   cursor: 'pointer',
                 }}
               >
-                {isSpeaking ? '⏹ Stop' : '🔊 Listen'}
+                {isSpeaking ? <><Icon name="close" size={15} /> Stop</> : <><Icon name="speaker" size={15} /> Listen</>}
               </motion.button>
             )}
           </div>
@@ -372,7 +373,7 @@ function ArtifactModal({ artifact, era, onClose }) {
             textTransform: 'uppercase', letterSpacing: '0.1em',
             marginBottom: '10px',
           }}>
-            {mode === 'historical' ? '📜 Historical Account' : '📖 Folklore & Legend'}
+            {mode === 'historical' ? <><Icon name="artifact" size={16} /> Historical Account</> : <><Icon name="story" size={16} /> Folklore & Legend</>}
           </div>
 
           {/* Text */}
