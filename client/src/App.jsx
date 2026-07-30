@@ -34,7 +34,14 @@ function AppRoutes() {
           <Route path="/museum" element={<Museum />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/planner" element={<Planner />} />
+          <Route
+            path="/planner"
+            element={(
+              <RequireAuth>
+                <Planner />
+              </RequireAuth>
+            )}
+          />
           <Route
             path="/passport"
             element={(

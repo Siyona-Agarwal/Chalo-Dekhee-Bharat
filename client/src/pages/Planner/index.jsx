@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useAuth } from '@clerk/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import { useXP } from '../../hooks/useXP.js'
@@ -20,6 +21,7 @@ const PACES = ['Relaxed', 'Balanced', 'Packed']
 const initialForm = { origin: '', destination: '', month: 'Not sure yet', days: 3, travelers: 'Solo', budget: 'Comfort', style: ['Cultural'], interests: [], accommodation: 'Hotel', diet: 'No preference', pace: 'Balanced' }
 
 export default function Planner() {
+  const { getToken } = useAuth()
   const { passport, savePlannerResult, addBadge } = usePassport()
   const { addXP } = useXP()
   const [form, setForm] = useState(initialForm)
@@ -49,7 +51,7 @@ export default function Planner() {
         days: Number(form.days), travelers: form.travelers, budget: form.budget, style: form.style,
         interests: form.interests.slice(0, 10), accommodation: form.accommodation, diet: form.diet, pace: form.pace,
         passportContext: { xp: passport.xp, badges: passport.badges.map(b => b.name), stamps: passport.stamps.map(s => ({ name: s.name, eraId: s.eraId })), wishlist: passport.wishlist.map(w => ({ title: w.title, region: w.region })), visitedStates: passport.visitedStates },
-      })
+      }, getToken)
       setResult(data)
       savePlannerResult({ id: Date.now().toString(), destination: form.destination.trim(), days: Number(form.days), budget: form.budget, style: form.style.join(', '), generatedAt: new Date().toISOString(), summary: data.summary || '', fullPlan: data, formOptions: form })
       addXP(40, 'AI Itinerary Generated!')
@@ -59,7 +61,7 @@ export default function Planner() {
       }
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 250)
     } catch (err) {
-      setError(err.message === 'fetch failed' ? 'Could not reach the server. Is it running?' : (err.message || 'Something went wrong. Please try again.'))
+      setError(err.name === 'AbortError' ? 'The planner request timed out. Please try again.' : (err.message === 'fetch failed' ? 'Could not reach the server. Is it running?' : (err.message || 'Something went wrong. Please try again.')))
     } finally { setLoading(false) }
   }
 
@@ -69,8 +71,8 @@ export default function Planner() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <Icon name="compass" size={38} />
           <p style={{ margin: '16px 0 8px', color: 'var(--color-saffron-500)', fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase', fontWeight: 700 }}>AI journey builder</p>
-          <h1 style={{ margin: 0, color: '#fff', fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.4rem)', lineHeight: 1.05 }}>Safar Saathi</h1>
-          <p style={{ maxWidth: 430, margin: '14px 0 0', color: 'rgba(255,255,255,0.68)', lineHeight: 1.6 }}>A thoughtful India itinerary shaped around your time, taste, and Passport.</p>
+          <h1 style={{ margin: 0, color: '#ffffffff', fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.4rem)', lineHeight: 1.05 }}>Safar Saathi</h1>
+          <p style={{ maxWidth: 430, margin: '14px 0 0', color: 'rgba(255, 255, 255, 0.68)', lineHeight: 1.6 }}>A thoughtful India itinerary shaped around your time, taste, and Passport.</p>
         </motion.div>
       </header>
 
@@ -97,7 +99,7 @@ export default function Planner() {
             </div>
 
             {error && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} style={{ padding: '16px 20px', background: 'rgba(239,68,68,0.1)', color: '#fca5a5', borderRadius: 12, margin: '24px 0', border: '1px solid rgba(239,68,68,0.2)' }}><Icon name="weather" size={16} /> {error}</motion.div>}
-            
+
             <div style={{ margin: '32px 0 16px', height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <button type="button" onClick={handleGenerate} disabled={loading} style={{ ...primaryButtonStyle, opacity: loading ? 0.65 : 1 }}>{loading ? <><Icon name="hourglass" size={18} /> Building your route...</> : <><Icon name="sparkles" size={18} /> Build my itinerary</>}</button>
           </div>

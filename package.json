@@ -16,7 +16,6 @@
     "concurrently": "^8.2.2"
   },
   "dependencies": {
-    "@clerk/ui": "^1.26.0",
     "openai": "^6.49.0"
   }
 }

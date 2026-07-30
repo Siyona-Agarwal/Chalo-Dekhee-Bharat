@@ -63,6 +63,11 @@ export default function PhotoCard({ photo, index, isWishlisted, onToggleWishlist
               loading="lazy"
               style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
               onError={(event) => {
+                if (photo.fallbackImageUrl && event.currentTarget.dataset.fallbackApplied !== 'true') {
+                  event.currentTarget.dataset.fallbackApplied = 'true'
+                  event.currentTarget.src = photo.fallbackImageUrl
+                  return
+                }
                 event.currentTarget.src = `https://placehold.co/400x300/1a1825/FF6B2B?text=${encodeURIComponent(photo.title)}`
               }}
             />

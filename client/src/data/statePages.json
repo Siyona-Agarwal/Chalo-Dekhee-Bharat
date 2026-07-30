@@ -33,7 +33,7 @@
     },
     "relatedFestival": "Bihu Festival",
     "passportTieIn": "If you have stamps from Kaziranga National Park or the Brahmaputra River, you might be interested in visiting the nearby state of Meghalaya, which is home to the stunning Mawsynram Falls and the beautiful Mawlynnong Village.",
-    "heroImage": "/images/states/assam.png"
+    "heroImage": "/images/states/assam.jpg"
   },
   {
     "id": "goa",
@@ -69,7 +69,7 @@
     },
     "relatedFestival": "Shigmo",
     "passportTieIn": "If you have stamps from the Portuguese colonial era or a wishlist item for a colonial-era fort, they will appear here!",
-    "heroImage": "/images/states/goa.png"
+    "heroImage": "/images/states/goa.jpg"
   },
   {
     "id": "gujarat",
@@ -105,7 +105,7 @@
     },
     "relatedFestival": "Navratri",
     "passportTieIn": "If you have stamps or wishlist items for Gujarat, you might also be interested in visiting the nearby state of Maharashtra, which is home to the iconic Ajanta and Ellora Caves, a UNESCO World Heritage Site.",
-    "heroImage": "/images/states/gujarat.png"
+    "heroImage": "/images/states/gujarat.jpg"
   },
   {
     "id": "karnataka",
@@ -141,7 +141,7 @@
     },
     "relatedFestival": "The Dasara Festival",
     "passportTieIn": "If you have stamps or wishlist items for Hampi, Mysore Palace, or Bandipur National Park, they will appear here!",
-    "heroImage": "/images/states/karnataka.png"
+    "heroImage": "/images/states/karnataka.jpg"
   },
   {
     "id": "kerala",
@@ -177,7 +177,7 @@
     },
     "relatedFestival": "Onam",
     "passportTieIn": "If you have stamps from the Periyar Wildlife Sanctuary or the Athirappilly Waterfalls, you might want to consider visiting the nearby Munnar Tea Plantations or the Backwaters of Alleppey for a similar experience!",
-    "heroImage": "/images/states/kerala.png"
+    "heroImage": "/images/states/kerala.jpg"
   },
   {
     "id": "maharashtra",
@@ -213,7 +213,7 @@
     },
     "relatedFestival": "Ganesh Chaturthi",
     "passportTieIn": "If you have stamps or wishlist items for Maharashtra, they will appear here!",
-    "heroImage": "/images/states/maharashtra.png"
+    "heroImage": "/images/states/maharashtra.jpg"
   },
   {
     "id": "rajasthan",
@@ -249,7 +249,7 @@
     },
     "relatedFestival": "The Desert Festival",
     "passportTieIn": "If you have stamps or wishlist items for the Taj Mahal, you might be interested in visiting the stunning City Palace in Jaipur, which has a similar blend of Mughal and Rajput architecture.",
-    "heroImage": "/images/states/rajasthan.png"
+    "heroImage": "/images/states/rajasthan.jpg"
   },
   {
     "id": "tamilnadu",
@@ -286,7 +286,7 @@
     },
     "relatedFestival": "The Pongal festival",
     "passportTieIn": "If you have stamps from the Brihadeeswara Temple or the Meenakshi Amman Temple, you might be interested in visiting the other UNESCO World Heritage Sites in India, such as the Taj Mahal in Agra or the Hampi ruins in Karnataka.",
-    "heroImage": "/images/states/tamilnadu.png"
+    "heroImage": "/images/states/tamilnadu.jpg"
   },
   {
     "id": "up",
@@ -322,7 +322,7 @@
     },
     "relatedFestival": "The Kumbh Mela festival",
     "passportTieIn": "If you have stamps or wishlist items for the Taj Mahal, Varanasi, or the Red Fort, you might want to consider visiting Uttar Pradesh next!",
-    "heroImage": "/images/states/up.png"
+    "heroImage": "/images/states/up.jpg"
   },
   {
     "id": "westbengal",
@@ -358,7 +358,7 @@
     },
     "relatedFestival": "Durga Puja",
     "passportTieIn": "If you have stamps or wishlist items for Darjeeling, the Himalayan foothills, or the Sundarbans, you might want to consider visiting West Bengal next!",
-    "heroImage": "/images/states/westbengal.png"
+    "heroImage": "/images/states/westbengal.jpg"
   },
   {
     "id": "andaman",
@@ -393,7 +393,7 @@
     },
     "relatedFestival": "The Andaman and Nicobar Islands celebrate the annual 'Island Tourism Festival' in November",
     "passportTieIn": "If you have stamps from the Cellular Jail or the Ross Island, they will appear here!",
-    "heroImage": "/images/states/an.png"
+    "heroImage": "/images/states/an.jpg"
   },
   {
     "id": "ap",
@@ -428,7 +428,7 @@
     },
     "relatedFestival": "The Bonalu festival",
     "passportTieIn": "If you have stamps from the Ramoji Film City in Hyderabad, you might be interested in exploring the state's vibrant film industry and attending a movie shoot!",
-    "heroImage": "/images/states/ap.png"
+    "heroImage": "/images/states/ap.jpg"
   },
   {
     "id": "arunachal-pradesh",
@@ -464,7 +464,7 @@
     },
     "relatedFestival": "Losar",
     "passportTieIn": "If you have stamps from Tawang or Itanagar, you might be interested in visiting the other northeastern states of India, like Meghalaya or Nagaland!",
-    "heroImage": "/images/states/ar.png"
+    "heroImage": "/images/states/ar.jpg"
   },
   {
     "id": "bihar",
@@ -499,7 +499,7 @@
     },
     "relatedFestival": "Bodh Purnima",
     "passportTieIn": "If you have a stamp from Bodh Gaya, you might also want to visit the nearby Mahabodhi Temple, which is a UNESCO World Heritage Site and a major pilgrimage site for Buddhists.",
-    "heroImage": "/images/states/br.png"
+    "heroImage": "/images/states/br.jpg"
   },
   {
     "id": "chandigarh",
@@ -534,7 +534,7 @@
     },
     "relatedFestival": "Baisakhi",
     "passportTieIn": "If you have stamps or wishlist items for Punjab or Haryana, you might want to consider visiting Chandigarh, as it is the joint capital of both states and offers a unique blend of their cultures and traditions.",
-    "heroImage": "/images/states/ch.png"
+    "heroImage": "/images/states/ch.jpg"
   },
   {
     "id": "chhattisgarh",
@@ -569,7 +569,7 @@
     },
     "relatedFestival": "The Bastar Dussehra",
     "passportTieIn": "If you have stamps or wishlist items for the Sundarvan National Park, the Kanger Valley National Park, or the Tirthgarh Falls, they will appear here!",
-    "heroImage": "/images/states/ct.png"
+    "heroImage": "/images/states/ct.jpg"
   },
   {
     "id": "dnh",
@@ -604,7 +604,7 @@
     },
     "relatedFestival": "The Warli festival",
     "passportTieIn": "If you have stamps or wishlist items for Gujarat or Maharashtra, you may be interested in visiting Dadra and Nagar Haveli, as it is a union territory located between these two states.",
-    "heroImage": "/images/states/dn.png"
+    "heroImage": "/images/states/dn.jpg"
   },
   {
     "id": "dd",
@@ -639,7 +639,7 @@
     },
     "relatedFestival": "The Diu Festival",
     "passportTieIn": "If you have stamps from Portugal or Goa, you'll feel right at home in Daman and Diu, with its rich Portuguese history and cultural influences!",
-    "heroImage": "/images/states/dd.png"
+    "heroImage": "/images/states/dd.jpg"
   },
   {
     "id": "delhi",
@@ -675,7 +675,7 @@
     },
     "relatedFestival": "Diwali",
     "passportTieIn": "If you have stamps or wishlist items for the Red Fort, Qutub Minar, or India Gate, they will appear here! These iconic landmarks are a must-visit for any traveler to Delhi.",
-    "heroImage": "/images/states/dl.png"
+    "heroImage": "/images/states/dl.jpg"
   },
   {
     "id": "haryana",
@@ -721,7 +721,7 @@
     },
     "relatedFestival": "The Kurukshetra Mahotsav",
     "passportTieIn": "If you have stamps from the Taj Mahal in Agra or the Red Fort in Delhi, you'll love exploring the rich history and architecture of Haryana!",
-    "heroImage": "/images/states/hr.png"
+    "heroImage": "/images/states/hr.jpg"
   },
   {
     "id": "himachal",
@@ -757,7 +757,7 @@
     },
     "relatedFestival": "The Himachal Pradesh government celebrates the Himachal Day on April 15th",
     "passportTieIn": "If you have stamps or wishlist items for the Rohtang Pass, the Kullu Valley, or the Manali-Leh Highway, they will appear here! These are some of the most popular attractions in Himachal Pradesh.",
-    "heroImage": "/images/states/hp.png"
+    "heroImage": "/images/states/hp.jpg"
   },
   {
     "id": "jk",
@@ -793,7 +793,7 @@
     },
     "relatedFestival": "Baisakhi",
     "passportTieIn": "If you have a stamp from the iconic Attabad Lake in Pakistan-occupied Kashmir, you might be interested in visiting the similar yet distinct Dal Lake in Jammu and Kashmir!",
-    "heroImage": "/images/states/jk.png"
+    "heroImage": "/images/states/jk.jpg"
   },
   {
     "id": "jharkhand",
@@ -828,7 +828,7 @@
     },
     "relatedFestival": "Sarhul",
     "passportTieIn": "If you have stamps from the Hazaribagh National Park or the Parasnath Hill, you might be interested in visiting the nearby Dhanbad city, which is known for its coal mining history and the Bokaro Steel City, a major steel-producing hub in India.",
-    "heroImage": "/images/states/jh.png"
+    "heroImage": "/images/states/jh.jpg"
   },
   {
     "id": "lakshadweep",

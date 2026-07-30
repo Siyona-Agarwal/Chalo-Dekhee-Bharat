@@ -342,12 +342,12 @@ export default function Landing() {
         }}>
           {[
             {
-              step: '01', icon: 'museum', title: 'Explore the Museum',
+              step: '01', icon: 'museum', title: 'Bharat Sangrahalaya',
               desc: 'Walk through Prachin Bharat, Madhyakalin Bharat, Swatantrata Sangram, and Adhunik Bharat eras. Collect Heritage Stamps as you complete each era.',
               color: '#FF6B2B', to: '/museum',
             },
             {
-              step: '02', icon: 'gallery', title: 'Browse the Gallery',
+              step: '02', icon: 'gallery', title: 'Bharat Chitrashala',
               desc: 'Discover Heritage, Nature, Wildlife, Food, and Festival photos. Bookmark destinations to your wishlist.',
               color: '#f59e0b', to: '/gallery',
             },

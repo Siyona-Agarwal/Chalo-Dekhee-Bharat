@@ -18,14 +18,25 @@ const API_BASE = '/api'
  * @param {Object} payload.passportContext - { stamps, wishlist, visitedStates }
  * @returns {Promise<Object>} structured itinerary JSON
  */
-export async function generateItinerary(payload) {
-  const response = await fetch(`${API_BASE}/itinerary`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
+export async function generateItinerary(payload, getToken) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 60_000)
+  const headers = { 'Content-Type': 'application/json' }
 
-  if (!response.ok) {
+  try {
+    if (typeof getToken === 'function') {
+      const token = await getToken()
+      if (token) headers.Authorization = `Bearer ${token}`
+    }
+
+    const response = await fetch(`${API_BASE}/itinerary`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    })
+
+    if (!response.ok) {
     // Parse error message safely — never expose raw stack traces to UI
     let errorMsg = 'Failed to generate itinerary. Please try again.'
     try {
@@ -36,8 +47,11 @@ export async function generateItinerary(payload) {
     } catch {
       // ignore parse errors on error responses
     }
-    throw new Error(errorMsg)
-  }
+      throw new Error(errorMsg)
+    }
 
-  return response.json()
+    return response.json()
+  } finally {
+    clearTimeout(timeout)
+  }
 }
