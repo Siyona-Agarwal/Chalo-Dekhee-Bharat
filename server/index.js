@@ -46,16 +46,7 @@ if (clerkConfigured) {
   app.use((req, res, next) => next())
 }
 
-// ── Body parsing ────────────────────────────────────────────────────────────
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff')
-  res.setHeader('X-Frame-Options', 'DENY')
-  res.setHeader('Cache-Control', 'no-store')
-  res.setHeader('Content-Security-Policy', "default-src 'none'")
-  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-  next()
-})
-
+// ── API middleware ──────────────────────────────────────────────────────────
 app.use('/api', (req, res, next) => {
   if (req.method === 'POST' && req.path === '/itinerary') return rateLimiter(req, res, next)
   return next()

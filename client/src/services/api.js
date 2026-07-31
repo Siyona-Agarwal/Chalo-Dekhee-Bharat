@@ -1,6 +1,6 @@
 /**
  * API service module — all backend calls go through here.
- * The GROQ_API_KEY is NEVER exposed here; it lives on the Express server.
+ * The NVIDIA_API_KEY is never exposed here; it lives on the Express server.
  * All calls use the relative /api prefix (proxied by Vite in dev, same-origin in prod).
  */
 

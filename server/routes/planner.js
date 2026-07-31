@@ -320,39 +320,9 @@ router.post('/itinerary', requireAuthWhenConfigured, async (req, res) => {
     }
     return res.json(safeNormalized)
 
-    // Normalize days to UI-expected shape: { title, theme, activities[], meal }
-    const normalizedDays = itinerary.days.map((day) => {
-      const activities = []
-      if (day.morning)   activities.push({ time: 'Morning',   activity: day.morning.activity,   note: day.morning.tip   || day.morning.location })
-      if (day.afternoon) activities.push({ time: 'Afternoon', activity: day.afternoon.activity, note: day.afternoon.tip || day.afternoon.location })
-      if (day.evening)   activities.push({ time: 'Evening',   activity: day.evening.activity,   note: day.evening.tip   || day.evening.location })
-      // Fallback: if activities[] array already present from model
-      if (activities.length === 0 && Array.isArray(day.activities)) {
-        activities.push(...day.activities)
-      }
-      const meal = day.meals ? `${day.meals.breakfast || ''} · ${day.meals.lunch || ''} · ${day.meals.dinner || ''}`.replace(/^ · | · $/g, '') : null
-      return {
-        title: day.title || `Day ${day.day || ''}`.trim(),
-        theme: day.theme || '',
-        activities,
-        meal: meal || null,
-      }
-    })
-
-    const normalized = {
-      destination: itinerary.destination,
-      summary: itinerary.summary || `${days}-day ${style} itinerary for ${destination}`,
-      weatherNote: itinerary.weatherNote || itinerary.bestTimeToVisit || '',
-      packingList: itinerary.packingList || [],
-      personalizedNote: itinerary.personalizedNote || '',
-      days: normalizedDays,
-      estimatedTotalCost: itinerary.estimatedTotalCost,
-    }
-
-    return res.json(normalized)
 
   } catch (err) {
-    console.error('[Planner] OpenAI SDK error:', err.message)
+    console.error('[Planner] AI SDK error:', err.message)
     const isTimeout = err?.name === 'AbortError'
     return res.status(502).json({
       error: isTimeout

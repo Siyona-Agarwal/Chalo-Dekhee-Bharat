@@ -90,6 +90,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Keep Google's translator engine available without showing its default UI. */
+body > .skiptranslate,
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+#google_translate_element {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ── Scrollbar styling ── */
 ::-webkit-scrollbar {
   width: 6px;

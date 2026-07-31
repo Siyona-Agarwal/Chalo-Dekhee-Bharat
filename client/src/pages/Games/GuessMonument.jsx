@@ -14,6 +14,7 @@ function shuffle(arr) {
 }
 
 const TOTAL_ROUNDS = 10
+const PLAYABLE_MONUMENT_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17, 18, 19, 24, 26])
 
 export default function GuessMonument({ onBack, onComplete }) {
   const { addXP } = useXP()
@@ -22,7 +23,9 @@ export default function GuessMonument({ onBack, onComplete }) {
   
   const questions = useMemo(() => {
     if (!difficulty) return []
-    return shuffle(ALL_MONUMENTS).slice(0, TOTAL_ROUNDS)
+    return shuffle(ALL_MONUMENTS.filter(({ id }) => PLAYABLE_MONUMENT_IDS.has(id)))
+      .slice(0, TOTAL_ROUNDS)
+      .map((monument) => ({ ...monument, options: shuffle(monument.options) }))
   }, [difficulty])
 
   const [current, setCurrent] = useState(0)

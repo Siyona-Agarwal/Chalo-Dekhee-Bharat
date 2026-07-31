@@ -10,12 +10,11 @@
     "dev": "concurrently -n \"CLIENT,SERVER\" -c \"cyan,magenta\" \"npm run dev --workspace=client\" \"npm run dev --workspace=server\"",
     "dev:client": "npm run dev --workspace=client",
     "dev:server": "npm run dev --workspace=server",
-    "install:all": "npm install"
+    "build": "npm run build --workspace=client",
+    "start": "npm run start --workspace=server",
+    "check:server": "node --check server/index.js && node --check server/routes/planner.js && node --check server/middleware/auth.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
-  },
-  "dependencies": {
-    "openai": "^6.49.0"
   }
 }

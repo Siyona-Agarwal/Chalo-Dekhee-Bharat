@@ -44,7 +44,9 @@ export default function EraRoom({
           transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
           style={{
             position: 'absolute', inset: 0, pointerEvents: 'none',
-            background: `radial-gradient(ellipse at 20% 50%, ${era.color}22 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, ${era.color}10 0%, transparent 50%)`,
+            backgroundImage: `linear-gradient(180deg, rgba(7,13,27,0.38), rgba(7,13,27,0.94)), radial-gradient(ellipse at 20% 50%, ${era.color}22 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, ${era.color}10 0%, transparent 50%), url('${era.image}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         />
 

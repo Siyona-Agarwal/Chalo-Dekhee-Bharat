@@ -114,7 +114,7 @@ export default function Planner() {
 
         <AnimatePresence>{result && <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: 28 }}><ItineraryResult result={result} form={form} destInfo={destInfo} /></motion.div>}</AnimatePresence>
       </main>
-      <style>{`@media (max-width: 760px){.planner-layout{grid-template-columns:1fr!important}.planner-layout aside{position:static!important}.planner-layout input,.planner-layout select{min-height:44px}} @media (max-width: 520px){.planner-layout>div>div{grid-template-columns:1fr!important}.planner-layout>div>div:nth-of-type(2){grid-template-columns:repeat(2,minmax(0,1fr))!important}}`}</style>
+      <style>{`.planner-layout select option{color:#111;background:#fff} @media (max-width: 760px){.planner-layout{grid-template-columns:1fr!important}.planner-layout aside{position:static!important}.planner-layout input,.planner-layout select{min-height:44px}} @media (max-width: 520px){.planner-layout>div>div{grid-template-columns:1fr!important}.planner-layout>div>div:nth-of-type(2){grid-template-columns:repeat(2,minmax(0,1fr))!important}}`}</style>
     </div>
   )
 }

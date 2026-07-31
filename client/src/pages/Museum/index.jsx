@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePassport } from '../../context/PassportContext.jsx'
 import { useXP } from '../../hooks/useXP.js'
+import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import artifacts from '../../data/artifacts.json'
 import badges from '../../data/badges.json'
 import EraRoom from './EraRoom.jsx'
@@ -16,6 +17,7 @@ const ERAS = [
     color: '#f59e0b',
     gradient: 'linear-gradient(135deg, rgba(245,158,11,0.18), rgba(245,158,11,0.04))',
     border: 'rgba(245,158,11,0.3)',
+    image: '/images/museum/artifacts/anc-001.png',
     description: 'Indus Valley Civilisation, Vedic age, Maurya & Gupta empires — the golden foundations of India.',
     stamp: { eraId: 'ancient', name: 'Prachin Bharat Stamp' },
   },
@@ -27,6 +29,7 @@ const ERAS = [
     color: '#FF6B2B',
     gradient: 'linear-gradient(135deg, rgba(255,107,43,0.18), rgba(255,107,43,0.04))',
     border: 'rgba(255,107,43,0.3)',
+    image: '/images/museum/artifacts/med-001.png',
     description: 'Delhi Sultanate, Mughal splendour, Vijayanagara Empire — an era of conquest, commerce, and art.',
     stamp: { eraId: 'medieval', name: 'Madhyakalin Bharat Stamp' },
   },
@@ -38,6 +41,7 @@ const ERAS = [
     color: '#138808',
     gradient: 'linear-gradient(135deg, rgba(19,136,8,0.18), rgba(19,136,8,0.04))',
     border: 'rgba(19,136,8,0.3)',
+    image: '/images/museum/artifacts/freedom-001.png',
     description: "Resistance, sacrifice, and the long march toward independence — India's most defining chapter.",
     stamp: { eraId: 'freedom', name: 'Swatantrata Sangram Stamp' },
   },
@@ -49,6 +53,7 @@ const ERAS = [
     color: '#38bdf8',
     gradient: 'linear-gradient(135deg, rgba(56,189,248,0.18), rgba(56,189,248,0.04))',
     border: 'rgba(56,189,248,0.3)',
+    image: '/images/museum/artifacts/modern-001.png',
     description: "From the Green Revolution to ISRO's Moon mission — a new nation rising on ancient roots.",
     stamp: { eraId: 'modern', name: 'Adhunik Bharat Stamp' },
   },
@@ -60,24 +65,26 @@ export default function Museum() {
   const { addXP } = useXP()
 
   // Track which artifacts the user has viewed per era
-  const [viewedArtifacts, setViewedArtifacts] = useState({})
+  const [viewedArtifactIds, setViewedArtifactIds] = useLocalStorage('museum_viewed_artifacts_v1', {})
 
   const markArtifactViewed = (eraId, artifactId) => {
-    setViewedArtifacts(prev => ({
-      ...prev,
-      [eraId]: new Set([...(prev[eraId] || []), artifactId]),
-    }))
+    setViewedArtifactIds(prev => {
+      const current = Array.isArray(prev[eraId]) ? prev[eraId] : []
+      return current.includes(artifactId)
+        ? prev
+        : { ...prev, [eraId]: [...current, artifactId] }
+    })
   }
 
   const eraProgress = useMemo(() => {
     const result = {}
     for (const era of ERAS) {
       const eraArtifacts = artifacts.filter(a => a.era === era.id)
-      const viewed = viewedArtifacts[era.id]?.size || 0
+      const viewed = Array.isArray(viewedArtifactIds[era.id]) ? viewedArtifactIds[era.id].length : 0
       result[era.id] = { total: eraArtifacts.length, viewed }
     }
     return result
-  }, [viewedArtifacts])
+  }, [viewedArtifactIds])
 
   const hasStamp = (eraId) => passport.stamps.some(s => s.eraId === eraId)
 
@@ -104,7 +111,7 @@ export default function Museum() {
       <EraRoom
         era={activeEra}
         artifacts={artifacts.filter(a => a.era === activeEra.id)}
-        viewedArtifacts={viewedArtifacts[activeEra.id] || new Set()}
+        viewedArtifacts={new Set(viewedArtifactIds[activeEra.id] || [])}
         onArtifactViewed={(id) => markArtifactViewed(activeEra.id, id)}
         onComplete={() => handleEraComplete(activeEra)}
         onBack={() => setActiveEra(null)}
@@ -184,7 +191,9 @@ export default function Museum() {
                 aria-label={`Enter ${era.label} era room`}
                 onKeyDown={(e) => e.key === 'Enter' && setActiveEra(era)}
                 style={{
-                  background: era.gradient,
+                  backgroundImage: `linear-gradient(180deg, rgba(7,13,27,0.35), rgba(7,13,27,0.96)), url('${era.image}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                   border: `1px solid ${era.border}`,
                   borderRadius: '20px',
                   padding: '32px 28px',

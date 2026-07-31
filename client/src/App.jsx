@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { PassportProvider } from './context/PassportContext.jsx'
 import Navbar from './components/Navbar.jsx'
 import XPToast from './components/XPToast.jsx'
+import LanguageTranslator from './components/LanguageTranslator.jsx'
 
 import Landing from './pages/Landing.jsx'
 import Museum from './pages/Museum/index.jsx'
@@ -75,6 +76,7 @@ function AppRoutes() {
         </Routes>
       </main>
       {!isAuthRoute && <XPToast />}
+      {!isAuthRoute && <LanguageTranslator />}
     </>
   )
 }

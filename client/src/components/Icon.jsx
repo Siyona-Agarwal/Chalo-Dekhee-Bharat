@@ -49,6 +49,7 @@ const PATHS = {
   story: 'M5 5h11a3 3 0 0 1 3 3v11H8a3 3 0 0 1-3-3zM8 5v14',
   play: 'm9 6 9 6-9 6z',
   check: 'm5 12 4 4 10-10',
+  language: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zm0-18c2.2 2.4 3.3 5.4 3.3 9S14.2 18.6 12 21M12 3C9.8 5.4 8.7 8.4 8.7 12S9.8 18.6 12 21M3 12h18',
 }
 
 export default function Icon({ name, size = 20, strokeWidth = 1.8, className, title }) {
