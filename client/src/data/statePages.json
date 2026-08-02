@@ -252,7 +252,7 @@
     "heroImage": "/images/states/rajasthan.jpg"
   },
   {
-    "id": "tamilnadu",
+    "id": "tamil-nadu",
     "name": "Tamil Nadu",
     "tagline": "Where ancient temples meet modern charm",
     "topAttractions": [
@@ -289,7 +289,7 @@
     "heroImage": "/images/states/tamilnadu.jpg"
   },
   {
-    "id": "up",
+    "id": "uttar-pradesh",
     "name": "Uttar Pradesh",
     "tagline": "The Heart of India's Rich Heritage",
     "topAttractions": [
@@ -325,7 +325,7 @@
     "heroImage": "/images/states/up.jpg"
   },
   {
-    "id": "westbengal",
+    "id": "west-bengal",
     "name": "West Bengal",
     "tagline": "Where the Ganges meets the Bay of Bengal",
     "topAttractions": [
@@ -361,7 +361,7 @@
     "heroImage": "/images/states/westbengal.jpg"
   },
   {
-    "id": "andaman",
+    "id": "andaman-nicobar",
     "name": "Andaman and Nicobar Islands",
     "tagline": "Where the Indian Ocean meets the thrill of the unknown",
     "topAttractions": [
@@ -396,7 +396,7 @@
     "heroImage": "/images/states/an.jpg"
   },
   {
-    "id": "ap",
+    "id": "andhra-pradesh",
     "name": "Andhra Pradesh",
     "tagline": "Where Tradition Meets Modernity",
     "topAttractions": [
@@ -572,7 +572,7 @@
     "heroImage": "/images/states/ct.jpg"
   },
   {
-    "id": "dnh",
+    "id": "dadra-nagar-haveli",
     "name": "Dadra and Nagar Haveli",
     "tagline": "A tranquil haven of natural beauty and rich cultural heritage",
     "topAttractions": [
@@ -607,7 +607,7 @@
     "heroImage": "/images/states/dn.jpg"
   },
   {
-    "id": "dd",
+    "id": "daman-diu",
     "name": "Daman and Diu",
     "tagline": "A tranquil haven by the Arabian Sea",
     "topAttractions": [
@@ -724,7 +724,7 @@
     "heroImage": "/images/states/hr.jpg"
   },
   {
-    "id": "himachal",
+    "id": "himachal-pradesh",
     "name": "Himachal Pradesh",
     "tagline": "Nature's Paradise in the Himalayas",
     "topAttractions": [
@@ -760,7 +760,7 @@
     "heroImage": "/images/states/hp.jpg"
   },
   {
-    "id": "jk",
+    "id": "jammu-kashmir",
     "name": "Jammu and Kashmir",
     "tagline": "Paradise on Earth",
     "topAttractions": [

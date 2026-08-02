@@ -37,16 +37,18 @@ export async function generateItinerary(payload, getToken) {
     })
 
     if (!response.ok) {
-    // Parse error message safely — never expose raw stack traces to UI
-    let errorMsg = 'Failed to generate itinerary. Please try again.'
-    try {
-      const errorBody = await response.json()
-      if (typeof errorBody.error === 'string') {
-        errorMsg = errorBody.error
+      let errorMsg = ''
+      try {
+        const errorBody = await response.json()
+        if (typeof errorBody.error === 'string') {
+          errorMsg = errorBody.error
+        }
+      } catch {
+        // ignore JSON parse errors
       }
-    } catch {
-      // ignore parse errors on error responses
-    }
+      if (!errorMsg) {
+        errorMsg = `Server error (${response.status}: ${response.statusText || 'Failed to generate itinerary'})`
+      }
       throw new Error(errorMsg)
     }
 

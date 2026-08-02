@@ -7,7 +7,7 @@ const { requireAuthWhenConfigured } = require('../middleware/auth')
 
 const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1'
-const AI_TIMEOUT_MS = 45 * 1000
+const AI_TIMEOUT_MS = 60 * 1000
 
 const openai = new OpenAI({
   apiKey: NVIDIA_API_KEY,

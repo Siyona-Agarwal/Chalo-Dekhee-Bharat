@@ -33,6 +33,48 @@ const AttractionCard = ({ attr, i }) => {
   )
 }
 
+// Maps short 2-letter India SVG map codes → statePages.json IDs
+const MAP_CODE_TO_PAGE_ID = {
+  an: 'andaman-nicobar',
+  ap: 'andhra-pradesh',
+  ar: 'arunachal-pradesh',
+  as: 'assam',
+  br: 'bihar',
+  ch: 'chandigarh',
+  ct: 'chhattisgarh',
+  dn: 'dadra-nagar-haveli',
+  dd: 'daman-diu',
+  dl: 'delhi',
+  ga: 'goa',
+  gj: 'gujarat',
+  hr: 'haryana',
+  hp: 'himachal-pradesh',
+  jk: 'jammu-kashmir',
+  jh: 'jharkhand',
+  ka: 'karnataka',
+  kl: 'kerala',
+  la: 'jammu-kashmir',
+  ld: 'lakshadweep',
+  mp: 'madhya-pradesh',
+  mh: 'maharashtra',
+  mn: 'manipur',
+  ml: 'meghalaya',
+  mz: 'mizoram',
+  nl: 'nagaland',
+  or: 'odisha',
+  py: 'puducherry',
+  pb: 'punjab',
+  rj: 'rajasthan',
+  sk: 'sikkim',
+  tn: 'tamil-nadu',
+  tg: 'telangana',
+  tr: 'tripura',
+  up: 'uttar-pradesh',
+  uk: 'uttarakhand',
+  ut: 'uttarakhand',
+  wb: 'west-bengal',
+}
+
 export default function StateDetail() {
   const { stateId } = useParams()
   const navigate = useNavigate()
@@ -41,7 +83,9 @@ export default function StateDetail() {
   // Fallback to empty if state is not found
   const stateData = useMemo(() => {
     const decodedId = decodeURIComponent(stateId).toLowerCase()
-    return statePages.find(s => s.id === decodedId || s.name.toLowerCase() === decodedId) || null
+    // Try short map code → statePages ID mapping first, then direct match
+    const mappedId = MAP_CODE_TO_PAGE_ID[decodedId] || decodedId
+    return statePages.find(s => s.id === mappedId || s.id === decodedId || s.name.toLowerCase() === decodedId) || null
   }, [stateId])
 
   const hasExplored = useMemo(() => {

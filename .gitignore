@@ -3,3 +3,12 @@ dist/
 .env
 *.local
 .DS_Store
+
+# Python runtime files
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local stories data and uploaded user photos
+*.db
+uploads/

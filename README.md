@@ -14,6 +14,7 @@ The app includes:
 
 - Node.js 20.19+ (or Node.js 22.12+)
 - npm 10+
+- Python 3.10+
 - A Clerk application for sign-in/sign-up
 - An NVIDIA API key for the AI itinerary planner
 
@@ -43,7 +44,24 @@ npm install
 
 Because this is an npm workspace, the command installs both the React client and Express server dependencies.
 
-### 3. Configure the client
+### 3. Install the stories-service dependencies
+
+The Explorer Stories feature uses the FastAPI service in `python-service/`:
+
+```bash
+python -m venv .venv
+python -m pip install -r python-service/requirements.txt
+```
+
+On Windows PowerShell, activate the virtual environment before running the app:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation, run the commands with the Python executable from `.venv` directly instead.
+
+### 4. Configure the client
 
 Copy the client environment template:
 
@@ -61,11 +79,12 @@ Open `client/.env` and set the publishable key from your Clerk application:
 
 ```env
 VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_key_here
+VITE_STORIES_API_URL=http://localhost:3002
 ```
 
 The frontend cannot start without this value because Clerk provides the sign-in and sign-up UI.
 
-### 4. Configure the server
+### 5. Configure the Node server
 
 Copy the server environment template:
 
@@ -89,7 +108,23 @@ ALLOWED_ORIGIN=http://localhost:5173
 
 The AI planner returns a clear configuration error when `NVIDIA_API_KEY` is empty; the rest of the website remains available.
 
-### 5. Start the development app
+### 6. Configure the stories service
+
+Copy the Python service environment template:
+
+```bash
+cp python-service/.env.example python-service/.env
+```
+
+On Windows PowerShell, use:
+
+```powershell
+Copy-Item python-service/.env.example python-service/.env
+```
+
+The defaults are suitable for local development. The service creates `stories.db` and `uploads/` at runtime and seeds community stories automatically.
+
+### 7. Start the development app
 
 From the repository root:
 
@@ -97,19 +132,21 @@ From the repository root:
 npm run dev
 ```
 
-Open <http://localhost:5173> in your browser. The Express API runs at <http://localhost:3001> and the Vite development server proxies `/api` requests to it.
+Open <http://localhost:5173> in your browser. The Express API runs at <http://localhost:3001>, the stories service runs at <http://localhost:3002>, and the Vite development server proxies `/api` requests to the Node server.
 
 To run either service separately:
 
 ```bash
 npm run dev:client
 npm run dev:server
+npm run dev:python
 ```
 
 Verify the server is responding:
 
 ```bash
 curl http://localhost:3001/api/health
+curl http://localhost:3002/api/health
 ```
 
 Expected response:
@@ -151,6 +188,7 @@ npm run preview --workspace=client
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `VITE_CLERK_PUBLISHABLE_KEY` | Yes | Initializes Clerk in the browser |
+| `VITE_STORIES_API_URL` | No | Stories service URL; defaults to `http://localhost:3002` |
 
 ### Server: `server/.env`
 
@@ -163,6 +201,15 @@ npm run preview --workspace=client
 | `CLERK_SECRET_KEY` | No | — | Server-side Clerk secret |
 | `REQUIRE_AUTH` | No | `false` | Set to `true` to require Clerk auth when the server is configured |
 
+### Stories service: `python-service/.env`
+
+| Variable | Required | Default | Purpose |
+| --- | --- | --- | --- |
+| `CLERK_JWKS_URL` | No | — | Clerk JWKS endpoint; omit for local development mode |
+| `DATABASE_URL` | No | `sqlite:///./stories.db` | SQLAlchemy database URL |
+| `UPLOAD_DIR` | No | `./uploads` | Directory for uploaded story photos |
+| `ALLOWED_ORIGIN` | No | `http://localhost:5173` | Allowed frontend origin |
+
 Never put `NVIDIA_API_KEY` or `CLERK_SECRET_KEY` in client files. Vite exposes variables prefixed with `VITE_` to browser code.
 
 ## Project structure
@@ -174,11 +221,13 @@ client/public/          Website images, icons, and game assets
 server/                 Express API and AI itinerary route
 server/routes/planner.js
                          Validates requests and normalizes AI responses
+python-service/         FastAPI Explorer Stories service
+python-service/seeds.py Seed community stories on first startup
 ```
 
 ## Notes
 
 - Passport progress is stored in the browser with `localStorage`.
 - The AI key is read only by the Express server and is never sent to the client.
-- `.env` files, build output, and dependencies are ignored by Git.
+- `.env` files, build output, Python caches, local SQLite databases, uploads, and dependencies are ignored by Git.
 - All images currently under `client/public` are referenced by the application data or components and are intentionally retained.

@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { usePassport } from '../context/PassportContext.jsx'
 import indiaMapData from '../data/indiaMapData.js'
+
+import MapMarkerModal from '../components/MapMarkerModal.jsx'
+import statePins from '../data/statePins.json'
+import { useUser, useAuth } from '@clerk/react'
+import { getUserStories } from '../services/storiesApi.js'
 
 const FEATURED_SPOTS = [
 ]
@@ -11,8 +16,35 @@ const FEATURED_SPOTS = [
 export default function Landing() {
   const navigate = useNavigate()
   const { passport } = usePassport()
+  const { user, isSignedIn } = useUser()
+  const { getToken } = useAuth()
+
+  const [selectedState, setSelectedState] = useState(null)
+  const [hoveredState, setHoveredState] = useState(null)
+  const [userStoryStateIds, setUserStoryStateIds] = useState([])
 
   const hasStarted = (passport.xp || 0) > 0 || passport.stamps.length > 0
+
+  // Fetch states where the signed-in user has posted adventure stories
+  useEffect(() => {
+    if (!isSignedIn || !user?.id) {
+      setUserStoryStateIds([])
+      return
+    }
+    let isMounted = true
+    getToken()
+      .then((token) => getUserStories(user.id, token))
+      .then((stories) => {
+        if (isMounted && Array.isArray(stories)) {
+          const uniqueStates = Array.from(new Set(stories.map((s) => s.stateId)))
+          setUserStoryStateIds(uniqueStates)
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch user story pins:', err)
+      })
+    return () => { isMounted = false }
+  }, [isSignedIn, user?.id, getToken])
 
   return (
     <div style={{ minHeight: '100vh', overflow: 'hidden', background: 'var(--color-deep-900)' }}>
@@ -224,13 +256,53 @@ export default function Landing() {
             style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           >
             <div style={{ position: 'relative', width: '100%', maxWidth: '420px' }}>
-
-              {/* Glow behind map */}
-              <div style={{
-                position: 'absolute', inset: '-20px',
-                background: 'radial-gradient(ellipse, rgba(255,107,43,0.2) 0%, transparent 70%)',
-                pointerEvents: 'none',
-              }} />
+              {/* Floating Tooltip Pill */}
+              <AnimatePresence>
+                {hoveredState && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      zIndex: 10,
+                      background: 'rgba(15, 12, 28, 0.92)',
+                      border: '1px solid rgba(255, 107, 43, 0.4)',
+                      boxShadow: '0 4px 20px rgba(255, 107, 43, 0.25)',
+                      borderRadius: '999px',
+                      padding: '6px 14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      backdropFilter: 'blur(8px)',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    <span style={{ color: '#FF6B2B', fontSize: '0.85rem' }}>📍</span>
+                    <span style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '0.85rem',
+                      fontWeight: '700',
+                      color: '#ffffff',
+                    }}>
+                      {hoveredState.name}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.7rem',
+                      color: 'rgba(255,255,255,0.5)',
+                      borderLeft: '1px solid rgba(255,255,255,0.15)',
+                      paddingLeft: '8px',
+                    }}>
+                      Click pin to view stories
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <svg
                 viewBox={indiaMapData.viewBox}
@@ -248,11 +320,13 @@ export default function Landing() {
                   <motion.path
                     key={id}
                     d={path}
-                    fill="rgba(255,107,43,0.08)"
-                    stroke="rgba(255,107,43,0.35)"
-                    strokeWidth={2}
+                    fill={selectedState === id ? 'rgba(255,107,43,0.6)' : 'rgba(255,107,43,0.08)'}
+                    stroke={selectedState === id ? 'rgba(255,255,255,1)' : 'rgba(255,107,43,0.35)'}
+                    strokeWidth={selectedState === id ? 3 : 2}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
+                    onMouseEnter={() => setHoveredState({ id, name })}
+                    onMouseLeave={() => setHoveredState(null)}
                     whileHover={{
                       fill: 'rgba(255,107,43,0.6)',
                       stroke: 'rgba(255,255,255,1)',
@@ -264,13 +338,66 @@ export default function Landing() {
                       filter: 'drop-shadow(12px 20px 10px rgba(0,0,0,0.6)) drop-shadow(0px 0px 8px rgba(255,107,43,0.8))'
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    onClick={() => navigate(`/state/${encodeURIComponent(name.toLowerCase())}`)}
+                    onClick={() => setSelectedState(id)}
                     style={{ cursor: 'pointer', transformOrigin: 'center center' }}
                     aria-label={name}
                   >
-                    <title>{name}</title>
+                    <title>{name} — Click to view stories & photos</title>
                   </motion.path>
                 ))}
+
+                {/* Custom User Adventure Pin Markers */}
+                {userStoryStateIds.map((stateId) => {
+                  const pin = statePins[stateId]
+                  if (!pin) return null
+                  const stateObj = indiaMapData.locations.find(l => l.id === stateId)
+                  const name = stateObj?.name || stateId
+                  return (
+                    <motion.g
+                      key={`user-pin-${stateId}`}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.3 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                      onMouseEnter={() => setHoveredState({ id: stateId, name })}
+                      onMouseLeave={() => setHoveredState(null)}
+                      onClick={() => setSelectedState(stateId)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {/* Pulse outer ring */}
+                      <motion.circle
+                        cx={pin.cx}
+                        cy={pin.cy}
+                        r="18"
+                        fill="none"
+                        stroke="#FF6B2B"
+                        strokeWidth="1.5"
+                        animate={{ r: [14, 28, 14], opacity: [0.9, 0, 0.9] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                      />
+                      {/* Pin base */}
+                      <circle
+                        cx={pin.cx}
+                        cy={pin.cy}
+                        r="11"
+                        fill="#FF6B2B"
+                        stroke="#ffffff"
+                        strokeWidth="2.5"
+                      />
+                      <text
+                        x={pin.cx}
+                        y={pin.cy + 4}
+                        textAnchor="middle"
+                        fontSize="9"
+                        fill="#ffffff"
+                        style={{ pointerEvents: 'none', userSelect: 'none' }}
+                      >
+                        📍
+                      </text>
+                    </motion.g>
+                  )
+                })}
 
                 {/* Featured location pins */}
                 {FEATURED_SPOTS.map(({ id, label, x, y, icon }) => (
@@ -278,6 +405,7 @@ export default function Landing() {
                     key={id}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.25 }}
                     transition={{ delay: 0.6 + id * 0.1, type: 'spring', stiffness: 200 }}
                   >
                     <circle cx={x} cy={y} r="35" fill="rgba(15,14,23,0.85)" stroke="rgba(255,107,43,0.5)" strokeWidth="3" />
@@ -298,6 +426,14 @@ export default function Landing() {
           </motion.div>
         </div>
       </section>
+
+      {/* Explorer Stories Modal */}
+      {selectedState && (
+        <MapMarkerModal
+          stateId={selectedState}
+          onClose={() => setSelectedState(null)}
+        />
+      )}
 
 
 

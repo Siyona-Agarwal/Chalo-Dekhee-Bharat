@@ -7,14 +7,10 @@
     <meta name="theme-color" content="#FF6B2B" />
 
     <!-- Strict Content Security Policy -->
-    <!-- TODO(security): Move CSP to server-side headers before production deployment.
-         Current meta-tag CSP is a defense-in-depth measure; server-side CSP is authoritative. -->
     <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://*.protect.clerk.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://img.clerk.com; media-src 'self' https://actions.google.com data: blob:; connect-src 'self' http://localhost:3001 https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.protect.clerk.com https://translate.google.com https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://*.protect.clerk.com https://translate.google.com; object-src 'none';" />
+      content="default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://*.protect.clerk.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http://localhost:3002 https://img.clerk.com; media-src 'self' https://actions.google.com data: blob:; connect-src 'self' http://localhost:3001 http://localhost:3002 https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.protect.clerk.com https://translate.google.com https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://*.protect.clerk.com https://translate.google.com; object-src 'none';" />
 
     <!-- Google Fonts: Inter + Outfit -->
-    <!-- NOTE: Loaded from Google CDN. Pin exact version via URL params; update periodically. -->
-    <!-- TODO(security): Add SRI hashes once font URLs are stabilized for production. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -1,0 +1,733 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MapMarkerModal.css
+   Explorer Stories modal — glassmorphism dark cinema aesthetic
+   Design tokens match the existing site palette (--color-deep-900, #FF6B2B)
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ────────────────────────────────────────────────────────────── */
+.mmm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(8, 6, 18, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .mmm-backdrop {
+    align-items: center;
+    padding: 24px;
+  }
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.mmm-panel {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  border-radius: 28px 28px 0 0;
+  background: linear-gradient(
+    160deg,
+    rgba(22, 18, 42, 0.97) 0%,
+    rgba(15, 12, 28, 0.99) 100%
+  );
+  border: 1px solid rgba(255, 107, 43, 0.18);
+  border-bottom: none;
+  box-shadow:
+    0 -8px 60px rgba(255, 107, 43, 0.12),
+    0 0 120px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .mmm-panel {
+    border-radius: 24px;
+    border-bottom: 1px solid rgba(255, 107, 43, 0.18);
+    max-height: 88vh;
+  }
+}
+
+/* ── Hero Banner ─────────────────────────────────────────────────────────── */
+.mmm-hero {
+  position: relative;
+  height: 180px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .mmm-hero { height: 220px; }
+}
+
+.mmm-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.55) saturate(1.2);
+  transition: filter 0.4s ease;
+}
+
+.mmm-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 12, 28, 0.1) 0%,
+    rgba(15, 12, 28, 0.9) 100%
+  );
+}
+
+.mmm-hero-content {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  right: 60px;
+}
+
+.mmm-state-name {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
+}
+
+.mmm-state-tagline {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Close Button ────────────────────────────────────────────────────────── */
+.mmm-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.15s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.mmm-close:hover {
+  background: rgba(255, 107, 43, 0.4);
+  transform: scale(1.08);
+}
+
+.mmm-close:focus-visible {
+  outline: 2px solid #FF6B2B;
+  outline-offset: 2px;
+}
+
+/* ── Tab Bar ─────────────────────────────────────────────────────────────── */
+.mmm-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+.mmm-tab {
+  position: relative;
+  padding: 14px 20px 13px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.mmm-tab:hover { color: rgba(255, 255, 255, 0.75); }
+
+.mmm-tab.active { color: #FF6B2B; }
+
+.mmm-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(90deg, #FF6B2B, #fbbf24);
+}
+
+/* ── Scrollable body ─────────────────────────────────────────────────────── */
+.mmm-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 20px 24px 28px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 107, 43, 0.3) transparent;
+}
+
+.mmm-body::-webkit-scrollbar { width: 4px; }
+.mmm-body::-webkit-scrollbar-track { background: transparent; }
+.mmm-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 43, 0.3);
+  border-radius: 4px;
+}
+
+/* ── Gallery Tab ─────────────────────────────────────────────────────────── */
+.mmm-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.mmm-photo-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mmm-photo-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(255, 107, 43, 0.2);
+}
+
+.mmm-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.mmm-photo-card:hover img { transform: scale(1.06); }
+
+.mmm-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.mmm-photo-card:hover .mmm-photo-overlay { opacity: 1; }
+
+.mmm-photo-title {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+
+.mmm-photo-region {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.mmm-wishlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 0.2s ease, transform 0.15s ease;
+  backdrop-filter: blur(4px);
+}
+
+.mmm-wishlist-btn:hover { transform: scale(1.15); }
+.mmm-wishlist-btn.wishlisted { color: #f43f5e; }
+
+.mmm-no-photos {
+  text-align: center;
+  padding: 48px 24px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+}
+
+/* ── Stories Tab ─────────────────────────────────────────────────────────── */
+.mmm-stories-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mmm-stories-count {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.mmm-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FF6B2B, #f59e0b);
+  border: none;
+  color: #fff;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.mmm-add-btn:hover { opacity: 0.9; transform: scale(1.03); }
+.mmm-add-btn:active { transform: scale(0.97); }
+
+.mmm-sign-in-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+/* ── Story Card ──────────────────────────────────────────────────────────── */
+.mmm-story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mmm-story-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.mmm-story-card:hover {
+  border-color: rgba(255, 107, 43, 0.22);
+}
+
+.mmm-story-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mmm-story-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 107, 43, 0.12);
+  border: 1px solid rgba(255, 107, 43, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mmm-story-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.mmm-story-author {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.mmm-story-date {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 1px;
+}
+
+.mmm-story-seeded-badge {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 107, 43, 0.12);
+  border: 1px solid rgba(255, 107, 43, 0.2);
+  color: rgba(255, 107, 43, 0.8);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mmm-story-delete-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  color: rgba(244, 63, 94, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mmm-story-delete-btn:hover {
+  background: rgba(244, 63, 94, 0.25);
+  color: #f43f5e;
+}
+
+.mmm-story-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.65;
+  margin: 0 0 10px;
+}
+
+.mmm-story-photo {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 4px;
+  display: block;
+}
+
+.mmm-no-stories {
+  text-align: center;
+  padding: 40px 24px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.mmm-no-stories-emoji {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ── Loading State ───────────────────────────────────────────────────────── */
+.mmm-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+}
+
+.mmm-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 107, 43, 0.2);
+  border-top-color: #FF6B2B;
+  border-radius: 50%;
+  animation: mmm-spin 0.75s linear infinite;
+}
+
+@keyframes mmm-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Add Story Form ──────────────────────────────────────────────────────── */
+.mmm-form {
+  background: rgba(255, 107, 43, 0.04);
+  border: 1px solid rgba(255, 107, 43, 0.18);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.mmm-form-title {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 16px;
+}
+
+.mmm-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  .mmm-form-row { grid-template-columns: 1fr; }
+}
+
+.mmm-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.mmm-form-label {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mmm-form-input,
+.mmm-form-textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mmm-form-input::placeholder,
+.mmm-form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.mmm-form-input:focus,
+.mmm-form-textarea:focus {
+  border-color: rgba(255, 107, 43, 0.5);
+  background: rgba(255, 107, 43, 0.05);
+}
+
+.mmm-form-textarea {
+  resize: none;
+  min-height: 90px;
+  line-height: 1.55;
+}
+
+.mmm-char-count {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: right;
+  margin-top: 2px;
+}
+
+.mmm-char-count.warn { color: #f59e0b; }
+.mmm-char-count.over { color: #f43f5e; }
+
+/* ── Emoji Picker ────────────────────────────────────────────────────────── */
+.mmm-emoji-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mmm-emoji-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.mmm-emoji-btn:hover { background: rgba(255, 107, 43, 0.15); transform: scale(1.1); }
+.mmm-emoji-btn.selected {
+  background: rgba(255, 107, 43, 0.25);
+  border-color: rgba(255, 107, 43, 0.5);
+}
+
+/* ── Photo Upload ────────────────────────────────────────────────────────── */
+.mmm-upload-area {
+  border: 1.5px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.mmm-upload-area:hover {
+  border-color: rgba(255, 107, 43, 0.4);
+  background: rgba(255, 107, 43, 0.04);
+}
+
+.mmm-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.mmm-upload-label {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.mmm-upload-preview {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-top: 8px;
+}
+
+/* ── Form Actions ────────────────────────────────────────────────────────── */
+.mmm-form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.mmm-cancel-btn {
+  padding: 9px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mmm-cancel-btn:hover { background: rgba(255, 255, 255, 0.09); }
+
+.mmm-submit-btn {
+  padding: 9px 22px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #FF6B2B, #f59e0b);
+  border: none;
+  color: #fff;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.mmm-submit-btn:hover:not(:disabled) { opacity: 0.9; transform: scale(1.02); }
+.mmm-submit-btn:active:not(:disabled) { transform: scale(0.97); }
+.mmm-submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.mmm-form-error {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  color: #f43f5e;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ── Visit State Button ──────────────────────────────────────────────────── */
+.mmm-visit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.mmm-visit-btn:hover {
+  background: rgba(255, 107, 43, 0.1);
+  border-color: rgba(255, 107, 43, 0.3);
+  color: #FF6B2B;
+}
+
+/* ── Drag handle (mobile) ────────────────────────────────────────────────── */
+.mmm-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .mmm-handle { display: none; }
+}
